@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071025" />
+  <title>Airdrop Testnet — Agus Hambali</title>
+  <meta name="description" content="Temukan airdrop testnet kripto terbaru dan terverifikasi di Agus Hambali Crypto Dashboard." />
+  <meta name="keywords" content="airdrop testnet, kripto Indonesia, testnet gratis, airdrop kripto" />
+  <meta property="og:title" content="Airdrop Testnet — Agus Hambali" />
+  <meta property="og:description" content="Daftar airdrop testnet terbaru untuk mendapatkan token gratis." />
+  <meta property="og:image" content="/assets/logo.webp" />
+  <meta property="og:url" content="https://agushambali33-gcbk.vercel.app/testnet" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/assets/logo.webp" />
+  <script src="https://cdn.tailwindcss.com"></script> <!-- Ganti dengan /styles.css setelah build -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* Same as index.html style */
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="container mx-auto px-4 py-6 max-w-6xl">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass p-4 rounded-lg flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <img src="/assets/logo.webp" alt="Agus Hambali" class="w-10 h-10 rounded-full ring-2 ring-[var(--primary)]">
+        <div>
+          <h1 class="text-lg font-bold">Agus Hambali</h1>
+          <p class="text-sm text-[var(--text-secondary)]">Airdrop Hunter & Crypto Explorer</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex gap-4">
+        <a href="/" class="px-3 py-2 rounded hover:bg-[var(--glass-bg)]">Home</a>
+        <a href="/testnet" class="px-3 py-2 rounded hover:bg-[var(--glass-bg)]">Testnet</a>
+        <a href="#prices" class="px-3 py-2 rounded hover:bg-[var(--glass-bg)]">Prices</a>
+        <a href="#tutorials" class="px-3 py-2 rounded hover:bg-[var(--glass-bg)]">Tutorials</a>
+        <a href="#contact" class="px-3 py-2 rounded hover:bg-[var(--glass-bg)]">Contact</a>
+        <select id="themeSelect" class="px-3 py-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </nav>
+    </header>
+
+    <!-- Testnet Section -->
+    <section id="testnet" class="glass p-6 mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="category-title">Testnet Airdrop Terbaru</h2>
+        <button id="addTestnet" class="btn bg-[var(--primary)] text-[var(--bg-primary)]">+ Tambah Testnet</button>
+      </div>
+      <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <input id="searchTestnet" type="text" placeholder="Cari testnet..." class="flex-1 p-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]">
+        <select id="filterStatusTestnet" class="p-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]">
+          <option value="">Semua Status</option>
+          <option value="Open">Open</option>
+          <option value="Pending">Pending</option>
+          <option value="Closed">Closed</option>
+        </select>
+      </div>
+      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm text-[var(--text-secondary)] pb-20">
+      <p>© 2025 Agus Hambali — Dibuat dengan Passion</p>
+      <p class="mt-2">Donasi (ETH/BSC): <span class="font-mono text-[var(--primary)]">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span></p>
+    </footer>
+  </div>
+
+  <!-- Testnet Modal -->
+  <div id="testnetModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div class="glass p-6 rounded-lg w-full max-w-md">
+      <h3 class="category-title mb-4">Tambah/Edit Testnet</h3>
+      <form id="testnetForm" class="grid gap-4">
+        <input name="name" placeholder="Nama Proyek" class="p-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]" required>
+        <input name="url" placeholder="URL" type="url" class="p-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]" required>
+        <input name="social" placeholder="Link Sosial" type="url" class="p-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]">
+        <select name="status" class="p-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]">
+          <option value="Open">Open</option>
+          <option value="Pending">Pending</option>
+          <option value="Closed">Closed</option>
+        </select>
+        <input name="deadline" placeholder="Deadline (YYYY-MM-DD)" type="date" class="p-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]">
+        <textarea name="howToJoin" placeholder="Cara Join" rows="3" class="p-2 rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]"></textarea>
+        <div class="flex gap-4">
+          <button type="submit" class="btn bg-[var(--primary)] text-[var(--bg-primary)]">Simpan</button>
+          <button type="button" id="closeModalTestnet" class="btn bg-[var(--glass-bg)] text-[var(--text-primary)]">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Theme Management
+    document.getElementById('themeSelect').addEventListener('change', (e) => {
+      document.documentElement.setAttribute('data-theme', e.target.value);
+      localStorage.setItem('theme', e.target.value);
+    });
+
+    // Testnet Management
+    const TESTNET_KEY = 'testnet_air';
+    const DEFAULT_TESTNET = [
+      { name: 'Monad Testnet', type: 'Testnet', url: 'https://monad.xyz', social: 'https://twitter.com/monad_xyz', status: 'Open', deadline: '2025-12-31', verified: true, howToJoin: 'Join testnet, jalankan node, dan interact dengan dApps.' },
+      { name: 'Mitosis Testnet', type: 'Testnet', url: 'https://mitosis.org', social: 'https://t.me/mitosis', status: 'Open', deadline: '2025-11-15', verified: false, howToJoin: 'Claim faucet, add liquidity, dan test cross-chain.' },
+      { name: 'Berachain Testnet', type: 'Testnet', url: 'https://berachain.com', social: 'https://discord.gg/berachain', status: 'Pending', deadline: '2025-10-30', verified: true, howToJoin: 'Mint NFT Bong Bear, jalankan node, dan farm poin.' },
+      { name: 'Zama Testnet', type: 'Testnet', url: 'https://zama.ai', social: 'https://discord.gg/zama', status: 'Open', deadline: '2025-12-01', verified: true, howToJoin: 'Test confidential smart contracts di portal.zama.ai.' },
+      { name: 'Meganet Testnet', type: 'Testnet', url: 'https://meganet.io', social: 'https://twitter.com/meganet', status: 'Pending', deadline: '2026-01-15', verified: false, howToJoin: 'Dapatkan Meganet Passport NFT dan kumpulkan poin.' },
+      { name: 'X1 Network Testnet', type: 'Testnet', url: 'https://x1network.io', social: 'https://t.me/x1network', status: 'Closed', deadline: '2025-09-01', verified: true, howToJoin: 'Bridge token ke X1 testnet dan lakukan swap.' }
+    ];
+
+    function getTestnets() {
+      const raw = localStorage.getItem(TESTNET_KEY);
+      return raw ? JSON.parse(raw) : DEFAULT_TESTNET;
+    }
+
+    function setTestnets(testnets) {
+      localStorage.setItem(TESTNET_KEY, JSON.stringify(testnets));
+    }
+
+    function renderTestnets() {
+      const testnets = getTestnets();
+      const cardContainer = document.getElementById('testnetCards');
+      cardContainer.innerHTML = '';
+
+      const filtered = testnets.filter(a => {
+        const search = document.getElementById('searchTestnet').value.toLowerCase();
+        const status = document.getElementById('filterStatusTestnet').value;
+        return a.name.toLowerCase().includes(search) && (!status || a.status === status);
+      });
+
+      filtered.sort((a, b) => {
+        if (a.status === 'Open' && b.status !== 'Open') return -1;
+        if (a.status !== 'Open' && b.status === 'Open') return 1;
+        return new Date(a.deadline) - new Date(b.deadline);
+      });
+
+      filtered.forEach((a, i) => {
+        const isSoon = a.deadline && new Date(a.deadline) <= new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+        const card = document.createElement('div');
+        card.className = 'glass p-4 rounded-lg';
+        card.innerHTML = `
+          <div class="flex justify-between items-center">
+            <div>
+              <h4 class="font-semibold">${a.name}${a.verified ? ' <span class="text-xs bg-[var(--primary)] text-[var(--bg-primary)] px-2 py-1 rounded">Verified</span>' : ''}</h4>
+              <p class="text-sm text-[var(--text-secondary)]">${a.type} • ${a.status}${isSoon ? ' <span class="deadline-warning">Deadline Soon!</span>' : ''}</p>
+            </div>
+            <button data-i="${i}" class="btn bg-[var(--primary)] text-[var(--bg-primary)] text-xs">Details</button>
+          </div>`;
+        card.querySelector('button').addEventListener('click', () => {
+          document.getElementById('testnetModal').innerHTML = `
+            <div class="glass p-6 rounded-lg w-full max-w-md">
+              <h3 class="category-title mb-4">${a.name}</h3>
+              <p><strong>Status:</strong> ${a.status}</p>
+              <p><strong>Deadline:</strong> ${a.deadline || '-'}</p>
+              <p><strong>Link:</strong> <a href="${a.url}" target="_blank" class="text-[var(--primary)]">${a.url}</a></p>
+              <p><strong>Social:</strong> <a href="${a.social}" target="_blank" class="text-[var(--primary)]">${a.social}</a></p>
+              <p><strong>Cara Join:</strong> ${a.howToJoin || 'Ikuti panduan di situs resmi.'}</p>
+              <button id="closeModalTestnet" class="btn bg-[var(--glass-bg)] text-[var(--text-primary)] mt-4 w-full">Close</button>
+            </div>`;
+          document.getElementById('testnetModal').classList.remove('hidden');
+          document.getElementById('closeModalTestnet').addEventListener('click', () => {
+            document.getElementById('testnetModal').classList.add('hidden');
+          });
+        });
+        cardContainer.appendChild(card);
+      });
+    }
+
+    document.getElementById('addTestnet')?.addEventListener('click', () => {
+      document.getElementById('testnetForm').reset();
+      document.getElementById('testnetModal').classList.remove('hidden');
+    });
+
+    document.getElementById('testnetForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const newTestnet = {
+        name: formData.get('name'),
+        type: 'Testnet',
+        url: formData.get('url'),
+        social: formData.get('social'),
+        status: formData.get('status'),
+        deadline: formData.get('deadline') || '-',
+        verified: false,
+        howToJoin: formData.get('howToJoin') || 'Ikuti panduan di situs resmi.',
+      };
+      if (!newTestnet.url.startsWith('http')) return alert('Invalid URL');
+      const testnets = getTestnets();
+      testnets.unshift(newTestnet);
+      setTestnets(testnets);
+      renderTestnets();
+      document.getElementById('testnetModal').classList.add('hidden');
+    });
+
+    document.getElementById('searchTestnet')?.addEventListener('input', renderTestnets);
+    document.getElementById('filterStatusTestnet')?.addEventListener('change', renderTestnets);
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTestnets();
+    });
+  </script>
+</body>
+</html>

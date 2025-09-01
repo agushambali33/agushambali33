@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0F172A" />
+  <title>Agus Hambali — Airdrop Finder</title>
+  <meta name="description" content="Temukan airdrop kripto terbaik dengan Agus Hambali. Live prices, tutorial, dan komunitas terpercaya!" />
+  <meta name="keywords" content="crypto airdrop, airdrop Indonesia, testnet, quest, kripto" />
+  <meta property="og:title" content="Agus Hambali Airdrop Finder" />
+  <meta property="og:description" content="Temukan airdrop kripto terbaik dengan live prices dan tutorial!" />
+  <meta property="og:image" content="/assets/logo.webp" />
+  <meta property="og:url" content="https://agushambali33-gcbk.vercel.app/" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/assets/logo.webp" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1E3A8A; /* Biru tua langit */
+      --secondary: #9333EA; /* Ungu neon lembut */
+      --text-primary: #E0E7FF; /* Biru pucat */
+      --text-secondary: #94A3B8; /* Abu-abu muda */
+      --bg-primary: #0F172A; /* Biru gelap pekat */
+      --bg-secondary: #1E293B; /* Biru sedang gelap */
+      --glass-bg: rgba(30, 41, 59, 0.8); /* Glass dengan efek nebula */
+      --glass-border: rgba(147, 51, 234, 0.1); /* Ungu transparan */
+      --shadow: 0 8px 32px -12px rgba(30, 64, 175, 0.5); /* Bayangan nebula */
+    }
+
+    [data-theme="light"] {
+      --primary: #3B82F6;
+      --secondary: #A855F7;
+      --text-primary: #1E293B;
+      --text-secondary: #64748B;
+      --bg-primary: #F1F5F9;
+      --bg-secondary: #E2E8F0;
+      --glass-bg: rgba(255, 255, 255, 0.9);
+      --shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      font-size: 16px;
+      background: linear-gradient(to bottom right, var(--bg-primary), var(--bg-secondary));
+      color: var(--text-primary);
+    }
+
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3); /* Cyan accent shadow */
+    }
+
+    .category-title {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .deadline-warning {
+      color: #F472B6; /* Pink lembut untuk warning */
+      font-weight: bold;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        font-size: 14px;
+      }
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .btn {
+        padding: 0.6rem 1.2rem;
+      }
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-6xl">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8">
+      <div class="flex items-center gap-4">
+        <img src="/assets/logo.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full ring-2 ring-[var(--primary)] shadow-md">
+        <div>
+          <h1 class="text-xl font-bold">Agus Hambali</h1>
+          <p class="text-sm text-[var(--text-secondary)]">Airdrop Hunter & Crypto Explorer</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex gap-6">
+        <a href="#airdrops" class="px-4 py-2 rounded-lg hover:bg-[var(--glass-bg)] transition">Airdrops</a>
+        <a href="/testnet.html" class="px-4 py-2 rounded-lg hover:bg-[var(--glass-bg)] transition">Testnet</a>
+        <a href="#prices" class="px-4 py-2 rounded-lg hover:bg-[var(--glass-bg)] transition">Prices</a>
+        <a href="#tutorials" class="px-4 py-2 rounded-lg hover:bg-[var(--glass-bg)] transition">Tutorials</a>
+        <a href="#contact" class="px-4 py-2 rounded-lg hover:bg-[var(--glass-bg)] transition">Contact</a>
+        <select id="themeSelect" class="px-4 py-2 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] focus:outline-none">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="text-center mb-12">
+      <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] mb-4">
+        Temukan Airdrop Kripto Terbaik
+      </h1>
+      <p class="mt-4 text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">Bergabung dengan komunitas Agus Hambali untuk airdrop terverifikasi, live prices, dan panduan kripto!</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <!-- Social Buttons with Elegant Icons -->
+        <a href="https://twitter.com/agushambali33" target="_blank" class="btn bg-[var(--primary)] text-[var(--bg-primary)] p-3 rounded-full flex items-center justify-center w-12 h-12 hover:bg-[var(--secondary)] transition">
+          <i class="fab fa-twitter text-lg"></i>
+        </a>
+        <a href="https://t.me/agushambali33" target="_blank" class="btn bg-[var(--primary)] text-[var(--bg-primary)] p-3 rounded-full flex items-center justify-center w-12 h-12 hover:bg-[var(--secondary)] transition">
+          <i class="fab fa-telegram-plane text-lg"></i>
+        </a>
+        <a href="https://discord.com/users/agushambali33" target="_blank" class="btn bg-[var(--primary)] text-[var(--bg-primary)] p-3 rounded-full flex items-center justify-center w-12 h-12 hover:bg-[var(--secondary)] transition">
+          <i class="fab fa-discord text-lg"></i>
+        </a>
+        <button id="installPWA" class="btn bg-[var(--secondary)] text-white hidden p-3 rounded-full">Install App</button>
+      </div>
+    </section>
+
+    <!-- Airdrops Overview -->
+    <section id="airdrops" class="glass p-6 mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="category-title">Airdrop Terbaru</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-lg transition-shadow">
+          <div>
+            <h4 class="font-semibold text-lg">Gensyn Testnet</h4>
+            <p class="text-sm text-[var(--text-secondary)] mt-1">Testnet • Active</p>
+          </div>
+          <a href="/testnet.html" class="btn bg-[var(--primary)] text-[var(--bg-primary)] text-sm mt-4">Detail</a>
+        </div>
+        <div class="glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-lg transition-shadow">
+          <div>
+            <h4 class="font-semibold text-lg">Succinct Testnet</h4>
+            <p class="text-sm text-[var(--text-secondary)] mt-1">Testnet • Active</p>
+          </div>
+          <a href="/testnet.html" class="btn bg-[var(--primary)] text-[var(--bg-primary)] text-sm mt-4">Detail</a>
+        </div>
+        <div class="glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-lg transition-shadow">
+          <div>
+            <h4 class="font-semibold text-lg">Ritual Testnet</h4>
+            <p class="text-sm text-[var(--text-secondary)] mt-1">Testnet • Upcoming</p>
+          </div>
+          <a href="/testnet.html" class="btn bg-[var(--primary)] text-[var(--bg-primary)] text-sm mt-4">Detail</a>
+        </div>
+      </div>
+      <a href="/testnet.html" class="btn bg-[var(--secondary)] text-white mt-6 block w-fit mx-auto">Lihat Semua Testnet</a>
+    </section>
+
+    <!-- Prices -->
+    <section id="prices" class="glass p-6 mb-12">
+      <h2 class="category-title mb-6">Live Prices</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass p-6 rounded-xl bg-gradient-to-br from-[#22D3EE]/50 to-[#1E3A8A]/50 text-[var(--bg-primary)] hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-xl">Bitcoin (BTC)</h3>
+          <p class="mt-3 text-3xl font-mono" id="btcPrice">—</p>
+          <p id="btcChange" class="text-sm mt-3">—</p>
+        </div>
+        <div class="glass p-6 rounded-xl bg-gradient-to-br from-[#9333EA]/50 to-[#6B21A8]/50 text-white hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-xl">Ethereum (ETH)</h3>
+          <p class="mt-3 text-3xl font-mono" id="ethPrice">—</p>
+          <p id="ethChange" class="text-sm mt-3">—</p>
+        </div>
+        <div class="glass p-6 rounded-xl bg-gradient-to-br from-[#22D3EE]/50 to-[#0EA5E9]/50 text-[var(--bg-primary)] hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-xl">Solana (SOL)</h3>
+          <p class="mt-3 text-3xl font-mono" id="solPrice">—</p>
+          <p id="solChange" class="text-sm mt-3">—</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tutorials -->
+    <section id="tutorials" class="glass p-6 mb-12">
+      <h2 class="category-title mb-6">Panduan Kripto</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="/testnet/gensyn" class="glass p-5 rounded-xl hover:bg-[var(--bg-secondary)] transition flex flex-col justify-between h-full hover:shadow-lg">
+          <h3 class="font-semibold text-lg">Cara Join Gensyn Testnet</h3>
+          <p class="text-sm text-[var(--text-secondary)] mt-2">Panduan lengkap dengan install node.</p>
+        </a>
+        <a href="/testnet/succinct" class="glass p-5 rounded-xl hover:bg-[var(--bg-secondary)] transition flex flex-col justify-between h-full hover:shadow-lg">
+          <h3 class="font-semibold text-lg">Cara Join Succinct Testnet</h3>
+          <p class="text-sm text-[var(--text-secondary)] mt-2">Tips untuk testnet EVM.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="glass p-6 mb-16">
+      <h2 class="category-title mb-6">Hubungi Saya</h2>
+      <form action="https://formsubmit.co/akunpremiumaing@gmail.com" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="Pesan dari Airdrop Finder" />
+        <div>
+          <label class="text-sm text-[var(--text-secondary)] block mb-2">Nama</label>
+          <input name="name" class="w-full p-3 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" required />
+        </div>
+        <div>
+          <label class="text-sm text-[var(--text-secondary)] block mb-2">Email</label>
+          <input name="email" type="email" class="w-full p-3 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" required />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm text-[var(--text-secondary)] block mb-2">Pesan</label>
+          <textarea name="message" rows="5" class="w-full p-3 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" required></textarea>
+        </div>
+        <div class="md:col-span-2 flex gap-4 justify-center md:justify-start">
+          <button type="submit" class="btn bg-[var(--primary)] text-[var(--bg-primary)]">Kirim</button>
+          <a href="https://t.me/agushambali33" target="_blank" class="btn bg-[var(--secondary)] text-white">Telegram</a>
+        </div>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm text-[var(--text-secondary)] pb-8">
+      <p>© 2025 Agus Hambali — Dibuat dengan Passion</p>
+      <p class="mt-3">Donasi (ETH/BSC): <span class="font-mono text-[var(--secondary)] break-all">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span></p>
+    </footer>
+  </div>
+
+  <!-- Bottom Nav (Mobile) -->
+  <div class="fixed bottom-4 left-0 right-0 max-w-md mx-auto px-4 md:hidden z-50">
+    <div class="glass p-3 rounded-full flex justify-around items-center">
+      <a href="#airdrops" class="flex flex-col items-center p-2 hover:bg-[var(--glass-bg)] rounded-full transition">
+        <i class="fas fa-gift text-lg"></i>
+        <span class="text-xs mt-1">Airdrops</span>
+      </a>
+      <a href="/testnet.html" class="flex flex-col items-center p-2 hover:bg-[var(--glass-bg)] rounded-full transition">
+        <i class="fas fa-network-wired text-lg"></i>
+        <span class="text-xs mt-1">Testnet</span>
+      </a>
+      <a href="#prices" class="flex flex-col items-center p-2 hover:bg-[var(--glass-bg)] rounded-full transition">
+        <i class="fas fa-chart-line text-lg"></i>
+        <span class="text-xs mt-1">Prices</span>
+      </a>
+      <a href="#contact" class="flex flex-col items-center p-2 hover:bg-[var(--glass-bg)] rounded-full transition">
+        <i class="fas fa-envelope text-lg"></i>
+        <span class="text-xs mt-1">Contact</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Theme Management
+    const themeSelect = document.getElementById('themeSelect');
+    themeSelect.addEventListener('change', (e) => {
+      document.documentElement.setAttribute('data-theme', e.target.value);
+      localStorage.setItem('theme', e.target.value);
+    });
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeSelect.value = savedTheme;
+
+    // PWA Install
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('installPWA').classList.remove('hidden');
+    });
+
+    document.getElementById('installPWA').addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') console.log('PWA installed');
+        deferredPrompt = null;
+      }
+    });
+
+    // Load Prices
+    async function loadPrices() {
+      try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true');
+        const data = await res.json();
+        document.getElementById('btcPrice').textContent = `$${data.bitcoin.usd.toLocaleString()}`;
+        document.getElementById('btcChange').textContent = `${data.bitcoin.usd_24h_change.toFixed(2)}% (24h)`;
+        document.getElementById('btcChange').className = data.bitcoin.usd_24h_change >= 0 ? 'text-green-300 text-sm mt-3' : 'text-red-300 text-sm mt-3';
+        document.getElementById('ethPrice').textContent = `$${data.ethereum.usd.toLocaleString()}`;
+        document.getElementById('ethChange').textContent = `${data.ethereum.usd_24h_change.toFixed(2)}% (24h)`;
+        document.getElementById('ethChange').className = data.ethereum.usd_24h_change >= 0 ? 'text-green-300 text-sm mt-3' : 'text-red-300 text-sm mt-3';
+        document.getElementById('solPrice').textContent = `$${data.solana.usd.toLocaleString()}`;
+        document.getElementById('solChange').textContent = `${data.solana.usd_24h_change.toFixed(2)}% (24h)`;
+        document.getElementById('solChange').className = data.solana.usd_24h_change >= 0 ? 'text-green-300 text-sm mt-3' : 'text-red-300 text-sm mt-3';
+      } catch {
+        document.getElementById('btcPrice').textContent = 'Error';
+        document.getElementById('ethPrice').textContent = 'Error';
+        document.getElementById('solPrice').textContent = 'Error';
+      }
+    }
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPrices();
+    });
+
+    // Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
+</body>
+</html>

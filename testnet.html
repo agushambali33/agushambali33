@@ -10,7 +10,7 @@
   <meta property="og:title" content="Airdrop Testnets — Agus Hambali" />
   <meta property="og:description" content="List of latest testnet airdrops for free tokens." />
   <meta property="og:image" content="/assets/profile.webp" />
-  <meta property="og:url" content="https://agushambali33-gcbk.vercel.app/testnet" />
+  <meta property="og:url" content="https://agushambali.vercel.app/testnet" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" href="/assets/profile.webp" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +23,8 @@
       font-size: 16px;
       background: #F0F9FF;
       color: #1E293B;
+      margin: 0;
+      padding: 0;
     }
 
     .glass {
@@ -33,18 +35,30 @@
     }
 
     .btn {
-      padding: 0.75rem 1.5rem;
+      padding: 0.5rem 1rem;
       border-radius: 0.75rem;
       font-weight: 500;
       font-size: 14px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       background: #0EA5E9;
       color: #FFFFFF;
+      border: none;
     }
 
     .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-tab {
+      background: #FFFFFF;
+      color: #0EA5E9;
+      border: 1px solid #0EA5E9;
+    }
+
+    .btn-tab.tab-active {
+      background: #0EA5E9;
+      color: #FFFFFF;
     }
 
     .category-title {
@@ -55,72 +69,82 @@
       font-weight: 700;
     }
 
-    .tab-active {
+    .input-field {
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      border: 1px solid #D1D5DB;
+      background: #FFFFFF;
+      width: 100%;
+    }
+
+    .select-field {
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      border: 1px solid #D1D5DB;
+      background: #FFFFFF;
+      width: 100%;
+    }
+
+    .card {
+      background: #FFFFFF;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Default shadow for separation */
+      margin-bottom: 1rem;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+      transform: translateY(-2px);
+    }
+
+    .verified {
       background: #0EA5E9;
       color: #FFFFFF;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      margin-left: 0.5rem;
     }
 
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #0EA5E9;
-      border-radius: 4px;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        font-size: 14px;
-      }
+    @media (min-width: 640px) {
       .container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        max-width: 640px;
       }
-      .btn {
-        padding: 0.6rem 1.2rem;
+      .tabs {
+        flex-direction: row;
       }
-      .grid {
-        grid-template-columns: 1fr !important;
-      }
-      .flex.flex-row {
-        flex-direction: column !important;
+      .filters {
+        flex-direction: row;
+        gap: 1rem;
       }
     }
   </style>
 </head>
-<body class="min-h-screen">
-  <div class="container mx-auto px-4 py-8 max-w-6xl">
+<body class="min-h-screen p-4">
+  <div class="container mx-auto">
     <!-- Header -->
-    <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8">
-      <div class="flex items-center gap-4">
-        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md">
-        <div>
-          <h1 class="text-xl font-bold">Agus Hambali</h1>
-          <p class="text-sm text-gray-600">Airdrop Hunter & Crypto Explorer</p>
-        </div>
+    <header class="glass p-4 rounded-xl flex items-center gap-4 mb-6">
+      <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md">
+      <div>
+        <h1 class="text-xl font-bold">Agus Hambali</h1>
+        <p class="text-sm text-gray-600">Airdrop Hunter & Crypto Explorer</p>
       </div>
-      <nav class="hidden md:flex gap-6">
-        <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/50 transition">Home</a>
-        <a href="/testnet.html" class="px-4 py-2 rounded-lg hover:bg-white/50 transition">Testnet</a>
-        <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/50 transition">Prices</a>
-        <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/50 transition">Tutorials</a>
-        <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/50 transition">Contact</a>
-      </nav>
     </header>
 
     <!-- Testnet Section -->
-    <section id="testnet" class="glass p-6 mb-12">
+    <section class="glass p-6 mb-6 rounded-xl">
       <h2 class="category-title mb-6">Latest Testnet Airdrops</h2>
-      <div class="flex flex-col md:flex-row gap-6 mb-6">
-        <div class="flex flex-wrap gap-4 border-b border-gray-200 pb-4 md:pb-0 md:border-b-0">
-          <button data-tab="all" class="btn tab-active text-sm">All</button>
-          <button data-tab="active" class="btn text-sm bg-white text-[#0EA5E9] border border-[#0EA5E9]">Active</button>
-          <button data-tab="ended" class="btn text-sm bg-white text-[#0EA5E9] border border-[#0EA5E9]">Ended</button>
+      <div class="tabs flex flex-col gap-4 mb-6">
+        <div class="flex gap-2">
+          <button data-tab="all" class="btn btn-tab tab-active">All</button>
+          <button data-tab="active" class="btn btn-tab">Active</button>
+          <button data-tab="ended" class="btn btn-tab">Ended</button>
         </div>
-        <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-          <input id="searchTestnet" type="text" placeholder="Search testnets..." class="flex-1 p-3 rounded-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]">
-          <select id="filterCategory" class="p-3 rounded-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]">
+        <div class="filters flex flex-col gap-4">
+          <input id="searchTestnet" type="text" placeholder="Search testnets..." class="input-field">
+          <select id="filterCategory" class="select-field">
             <option value="">All Categories</option>
             <option value="Testnet">Testnet</option>
             <option value="Social">Social</option>
@@ -128,7 +152,7 @@
           </select>
         </div>
       </div>
-      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="testnetCards" class="space-y-4"></div>
     </section>
 
     <!-- Footer -->
@@ -138,42 +162,49 @@
     </footer>
   </div>
 
-  <!-- Testnet Modal -->
-  <div id="testnetModal" class="hidden fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4">
-    <div class="glass p-6 rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-      <h3 class="category-title mb-6" id="modalTitle"></h3>
-      <div id="modalContent" class="grid gap-4 text-sm text-gray-600"></div>
-      <button id="closeModal" class="btn mt-6 w-full" type="button">Close</button>
-    </div>
-  </div>
-
   <script>
-    // Testnet Data
+    // ❤️ Editable Testnet Data: Update this array with only basic info, details go in separate .html files ❤️
     const DEFAULT_TESTNET = [
-      { name: 'Gensyn Testnet', category: 'Testnet', funding: '$10M', participants: '50K+', status: 'Active', deadline: '2025-12-15', url: 'https://gensyn.ai', social: 'https://twitter.com/gensynai', verified: true, howToJoin: '1. Install Docker & Node.js (v18+). 2. Clone repo: `git clone https://github.com/gensyn/testnet.git`. 3. Run: `docker-compose up`. 4. Register wallet in Gensyn dashboard.', rewards: '1000 GEN tokens per node', systemReq: '4GB RAM, 20GB storage' },
-      { name: 'Succinct Testnet', category: 'Testnet', funding: '$5M', participants: '30K+', status: 'Active', deadline: '2025-11-30', url: 'https://succinct.xyz', social: 'https://t.me/succinct', verified: false, howToJoin: '1. Add EVM testnet to Metamask. 2. Claim tokens via faucet. 3. Test dApps on testnet.', rewards: '500 SUC tokens', systemReq: '2GB RAM, 10GB storage' },
-      { name: 'Ritual Testnet', category: 'Social', funding: '$8M', participants: '20K+', status: 'Active', deadline: '2025-10-10', url: 'https://ritual.net', social: 'https://discord.gg/ritual', verified: true, howToJoin: '1. Prepare Solana wallet (Phantom). 2. Wait for testnet announcement on Discord.', rewards: '800 RIT tokens', systemReq: '4GB RAM, 15GB storage' },
-      { name: 'Soundness Testnet', category: 'Node', funding: '$3M', participants: '15K+', status: 'Active', deadline: '2025-12-01', url: 'https://soundness.io', social: 'https://twitter.com/soundness', verified: false, howToJoin: '1. Install Cosmos SDK. 2. Join testnet via CLI: `soundnessd join-testnet`.', rewards: '300 SND tokens', systemReq: '8GB RAM, 30GB storage' },
-      { name: 'T3rn Testnet', category: 'Testnet', funding: '$6M', participants: '25K+', status: 'Ended', deadline: '2025-08-15', url: 'https://t3rn.io', social: 'https://t.me/t3rn', verified: true, howToJoin: 'Testnet ended, check mainnet for airdrop.', rewards: '400 T3RN tokens', systemReq: '4GB RAM, 20GB storage' },
-      { name: 'Ariachain Testnet', category: 'Social', funding: '$4M', participants: '10K+', status: 'Active', deadline: '2025-11-01', url: 'https://ariachain.org', social: 'https://discord.gg/ariachain', verified: false, howToJoin: '1. Register on official site. 2. Wait for invite code.', rewards: '500 ARIA tokens', systemReq: '2GB RAM, 10GB storage' },
-      { name: 'Intento Testnet', category: 'Node', funding: '$7M', participants: '35K+', status: 'Active', deadline: '2025-12-31', url: 'https://intento.network', social: 'https://twitter.com/intento', verified: true, howToJoin: '1. Add testnet to wallet. 2. Run node via Docker.', rewards: '600 INT tokens', systemReq: '6GB RAM, 25GB storage' },
-      { name: 'Dill Testnet', category: 'Node', funding: '$2M', participants: '8K+', status: 'Ended', deadline: '2025-09-01', url: 'https://dill.io', social: 'https://t.me/dill', verified: false, howToJoin: 'Testnet ended, monitor mainnet updates.', rewards: '200 DIL tokens', systemReq: '4GB RAM, 15GB storage' },
-      { name: 'ZkSync Testnet', category: 'Testnet', funding: '$50M', participants: '100K+', status: 'Active', deadline: '2025-12-31', url: 'https://zksync.io', social: 'https://twitter.com/zksync', verified: true, howToJoin: '1. Connect wallet to ZkSync testnet. 2. Claim test tokens from faucet. 3. Participate in quests and tasks.', rewards: 'ZK tokens based on activity', systemReq: 'Wallet like Metamask' }
+      { name: 'Helios Testnet', category: 'Testnet', funding: '$10M', participants: '50K+', status: 'Active', verified: true, slug: 'helios' },
+      { name: 'Succinct Testnet', category: 'Testnet', funding: '$5M', participants: '30K+', status: 'Active', verified: false, slug: 'succinct-testnet' },
+      { name: 'Ritual Testnet', category: 'Social', funding: '$8M', participants: '20K+', status: 'Active', verified: true, slug: 'ritual-testnet' },
+      { name: 'Soundness Testnet', category: 'Node', funding: '$3M', participants: '15K+', status: 'Active', verified: false, slug: 'soundness-testnet' },
+      { name: 'T3rn Testnet', category: 'Testnet', funding: '$6M', participants: '25K+', status: 'Ended', verified: true, slug: 't3rn-testnet' },
+      { name: 'Ariachain Testnet', category: 'Social', funding: '$4M', participants: '10K+', status: 'Active', verified: false, slug: 'ariachain-testnet' },
+      { name: 'Intento Testnet', category: 'Node', funding: '$7M', participants: '35K+', status: 'Active', verified: true, slug: 'intento-testnet' },
+      { name: 'Dill Testnet', category: 'Node', funding: '$2M', participants: '8K+', status: 'Ended', verified: false, slug: 'dill-testnet' },
+      { name: 'ZkSync Testnet', category: 'Testnet', funding: '$50M', participants: '100K+', status: 'Active', verified: true, slug: 'zksyncairdrop' },
+      { name: 'Quantum Testnet', category: 'Testnet', funding: '$12M', participants: '40K+', status: 'Active', verified: true, slug: 'quantum-testnet' }
     ];
 
+    // ❤️ Editable Base URL: Change this if your website's base URL changes ❤️
+    const BASE_URL = 'https://agushambali.vercel.app/testnet/';
+
+    // Function to get testnets from localStorage or use default
     function getTestnets() {
-      const raw = localStorage.getItem('testnet_air') || JSON.stringify(DEFAULT_TESTNET);
-      return JSON.parse(raw);
+      try {
+        const raw = localStorage.getItem('testnet_air') || JSON.stringify(DEFAULT_TESTNET);
+        return JSON.parse(raw);
+      } catch (e) {
+        console.error('Error parsing testnet data:', e);
+        return DEFAULT_TESTNET; // Fallback to default if error occurs
+      }
     }
 
+    // Function to save testnets to localStorage
     function setTestnets(testnets) {
-      localStorage.setItem('testnet_air', JSON.stringify(testnets));
+      try {
+        localStorage.setItem('testnet_air', JSON.stringify(testnets));
+      } catch (e) {
+        console.error('Error saving testnet data:', e);
+      }
     }
 
+    // Function to render testnet cards
     function renderTestnets(filter = '', tab = 'all', category = '') {
       const testnets = getTestnets();
       const cardContainer = document.getElementById('testnetCards');
-      cardContainer.innerHTML = '<div class="skeleton h-40 bg-white animate-pulse rounded-xl mb-4"></div>'.repeat(3);
+      cardContainer.innerHTML = '<div class="skeleton h-24 bg-white animate-pulse rounded-xl mb-4"></div>'.repeat(3);
 
       setTimeout(() => {
         cardContainer.innerHTML = '';
@@ -184,24 +215,35 @@
           return matchesSearch && matchesTab && matchesCategory;
         });
 
-        filtered.forEach((a, i) => {
+        if (filtered.length === 0) {
+          cardContainer.innerHTML = '<p class="text-center text-gray-600">No testnets found.</p>';
+          return;
+        }
+
+        filtered.forEach((a) => {
           const isSoon = a.deadline && new Date(a.deadline) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
           const card = document.createElement('div');
-          card.className = 'glass p-5 rounded-xl cursor-pointer transition flex flex-col justify-between h-full hover:shadow-md';
+          card.className = 'card cursor-pointer';
           card.innerHTML = `
-            <div class="flex flex-col gap-3">
-              <h4 class="font-bold text-lg">${a.name}${a.verified ? ' <span class="text-xs bg-[#0EA5E9] text-white px-2 py-1 rounded-full">Verified</span>' : ''}</h4>
+            <div class="flex flex-col gap-2">
+              <h4 class="font-bold text-lg">${a.name} ${a.verified ? '<span class="verified">Verified</span>' : ''}</h4>
               <p class="text-sm text-gray-600">${a.category} • ${a.status}${isSoon ? ' <span class="text-red-500 font-bold">Deadline Soon!</span>' : ''}</p>
               <p class="text-xs text-gray-600">Funding: $${a.funding} • Participants: ${a.participants}</p>
-            </div>`;
+            </div>
+          `;
           card.addEventListener('click', () => {
-            window.location.href = `/testnet/${a.name.toLowerCase().replace(/\s+/g, '-')}.html`;
+            if (a.slug) {
+              window.location.href = `${BASE_URL}${a.slug}.html`;
+            } else {
+              alert('No detail page available for this testnet.');
+            }
           });
           cardContainer.appendChild(card);
         });
       }, 500);
     }
 
+    // Tab switching
     document.querySelectorAll('[data-tab]').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('tab-active'));
@@ -210,21 +252,29 @@
       });
     });
 
+    // Search input with debounce
+    let debounceTimeout;
     document.getElementById('searchTestnet').addEventListener('input', (e) => {
-      renderTestnets(e.target.value, document.querySelector('.tab-active').dataset.tab, document.getElementById('filterCategory').value);
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => {
+        renderTestnets(e.target.value, document.querySelector('.tab-active').dataset.tab, document.getElementById('filterCategory').value);
+      }, 300);
     });
 
+    // Category filter
     document.getElementById('filterCategory').addEventListener('change', (e) => {
       renderTestnets(document.getElementById('searchTestnet').value, document.querySelector('.tab-active').dataset.tab, e.target.value);
     });
 
+    // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
       renderTestnets();
     });
 
+    // Register service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js');
+        navigator.serviceWorker.register('/sw.js').catch(err => console.error('Service Worker registration failed:', err));
       });
     }
   </script>

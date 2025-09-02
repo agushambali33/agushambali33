@@ -118,6 +118,15 @@
       background: #0EA5E9;
       border-radius: 4px;
     }
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
     @media (max-width: 768px) {
       .grid {
         grid-template-columns: 1fr !important;
@@ -353,7 +362,7 @@
     async function loadAirdrops() {
       try {
         const response = await fetch('/airdrops.json');
-        if (!response.ok) throw new Error('Failed to fetch airdrops.json');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         return data.airdrops || [];
       } catch (error) {
@@ -362,32 +371,36 @@
       }
     }
 
-    // Render Airdrops
+    // Render Airdrops with Skeleton Loading
     async function renderAirdrops() {
       const airdropGrid = document.getElementById('airdrop-grid');
       const errorMessage = document.getElementById('airdrop-error');
-      airdropGrid.innerHTML = ''; // Clear existing content
-      errorMessage.classList.add('hidden');
+      airdropGrid.innerHTML = '<div class="skeleton h-32 bg-white dark:bg-gray-800 animate-pulse rounded-xl mb-4"></div>'.repeat(3);
 
-      const airdrops = await loadAirdrops();
-      if (airdrops.length === 0) {
-        errorMessage.classList.remove('hidden');
-        return;
-      }
+      setTimeout(async () => {
+        const airdrops = await loadAirdrops();
+        airdropGrid.innerHTML = '';
+        errorMessage.classList.add('hidden');
 
-      airdrops.slice(0, 3).forEach((airdrop, index) => {
-        const airdropCard = document.createElement('div');
-        airdropCard.className = `glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-md transition ${AOS.attributes['data-aos']}`;
-        airdropCard.setAttribute('data-aos-delay', index * 100);
-        airdropCard.innerHTML = `
-          <div>
-            <h4 class="font-bold text-lg">${airdrop.name}</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">${airdrop.status}${airdrop.confirmed ? ' <span class="text-green-500">Confirmed</span>' : ''}</p>
-          </div>
-          <a href="${airdrop.link || '/testnet.html'}" class="btn text-sm mt-4">Detail</a>
-        `;
-        airdropGrid.appendChild(airdropCard);
-      });
+        if (airdrops.length === 0) {
+          airdropGrid.innerHTML = '<p class="text-center text-gray-600 dark:text-gray-300">No airdrops found.</p>';
+          return;
+        }
+
+        airdrops.slice(0, 3).forEach((airdrop, index) => {
+          const airdropCard = document.createElement('div');
+          airdropCard.className = `glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-md transition ${AOS.attributes['data-aos']}`;
+          airdropCard.setAttribute('data-aos-delay', index * 100);
+          airdropCard.innerHTML = `
+            <div>
+              <h4 class="font-bold text-lg">${airdrop.name}${airdrop.confirmed ? ' <span class="text-green-500">Confirmed</span>' : ''}</h4>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">${airdrop.status}</p>
+            </div>
+            <a href="${airdrop.link || '/testnet.html'}" class="btn text-sm mt-4">Detail</a>
+          `;
+          airdropGrid.appendChild(airdropCard);
+        });
+      }, 500);
     }
 
     // Load Prices and Charts

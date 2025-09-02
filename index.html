@@ -41,14 +41,18 @@
     body.dark .badge-green { background: #064E3B; color: #A7F3D0; }
     body.dark .badge-amber { background: #78350F; color: #FDE68A; }
     body.dark .badge-sky { background: #0C4A6E; color: #BAE6FD; }
-    .card { display: flex; flex-direction: column; height: 100%; gap: 0.75rem; padding: 1rem; border-radius: 1rem; background: rgba(255,255,255,0.95); border: 1px solid #E5E7EB; transition: all 0.2s ease; }
+    .card { display: flex; flex-direction: column; height: 100%; gap: 1rem; padding: 1.5rem; border-radius: 1rem; background: rgba(255,255,255,0.95); border: 1px solid #E5E7EB; transition: all 0.2s ease; }
     .card:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(14,165,233,0.2); }
     body.dark .card { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); }
-    .card-img { width: 64px; height: 64px; border-radius: 0.5rem; object-fit: cover; background: #E5E7EB; }
+    .card-header { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .card-img { width: 64px; height: 64px; border-radius: 0.75rem; object-fit: cover; background: #E5E7EB; flex-shrink: 0; }
     body.dark .card-img { background: #334155; }
+    .card-content { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
     .card-title { font-weight: 800; font-size: clamp(1rem, 2.5vw, 1.125rem); }
-    .card-desc { color: #475569; }
+    .card-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .card-desc { color: #475569; font-size: 0.875rem; line-clamp: 2; overflow: hidden; text-overflow: ellipsis; }
     body.dark .card-desc { color: #CBD5E1; }
+    .card-footer { margin-top: auto; display: flex; justify-content: flex-end; }
     .price-card { background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(34,211,238,0.1)); }
     body.dark .price-card { background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(34,211,238,0.2)); }
     .input-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; transition: all 0.2s ease; }
@@ -64,6 +68,8 @@
       body { font-size: 0.875rem; }
       .btn { padding: 0.65rem 1rem; }
       .card-img { width: 48px; height: 48px; }
+      .card-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .card-content { width: 100%; }
       header { justify-content: space-between; }
       .header-brand { flex: 1; text-align: center; }
     }
@@ -126,7 +132,7 @@
           <button data-tab="ended" class="btn btn-tab">Selesai</button>
         </div>
       </div>
-      <div id="airdrop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="airdrop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center"></div>
       <p id="airdrop-error" class="text-center text-red-500 hidden mt-4">
         Oops, gagal muat airdrop. <button id="retry-airdrops" class="underline">Coba lagi</button>
       </p>
@@ -163,26 +169,26 @@
     <!-- Tutorials -->
     <section id="tutorials" class="glass p-6 mb-12" data-aos="fade-up">
       <h2 class="category-title mb-6">Tutorial Cepat</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <a href="/testnet/helios.html" class="card">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
+        <a href="/testnet/helios.html" class="card max-w-md">
           <div class="card-header">
             <img src="/assets/helioslogo.webp" class="card-img" alt="Helios">
-            <div>
+            <div class="card-content">
               <div class="card-title">Cara Join Helios Testnet</div>
-              <div class="text-sm card-desc">Langkah-langkah + tips faucet & staking.</div>
+              <div class="card-desc">Langkah-langkah + tips faucet & staking.</div>
             </div>
           </div>
-          <div class="card-footer"><span class="btn">Buka Panduan</span></div>
+          <div class="card-footer"><span class="btn">Buka Panduan <i class="fas fa-arrow-right ml-1"></i></span></div>
         </a>
-        <a href="/testnet/succinct-testnet.html" class="card">
+        <a href="/testnet/succinct-testnet.html" class="card max-w-md">
           <div class="card-header">
             <img src="/assets/placeholder.webp" class="card-img" alt="Succinct">
-            <div>
+            <div class="card-content">
               <div class="card-title">Cara Join Succinct Testnet</div>
-              <div class="text-sm card-desc">Setup EVM & best practices.</div>
+              <div class="card-desc">Setup EVM & best practices.</div>
             </div>
           </div>
-          <div class="card-footer"><span class="btn">Buka Panduan</span></div>
+          <div class="card-footer"><span class="btn">Buka Panduan <i class="fas fa-arrow-right ml-1"></i></span></div>
         </a>
       </div>
     </section>
@@ -190,48 +196,48 @@
     <!-- Blog -->
     <section id="blog" class="glass p-6 mb-12" data-aos="fade-up">
       <h2 class="category-title mb-6">Blog & Panduan</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <a href="/blog/safety.html" class="card">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+        <a href="/blog/safety.html" class="card max-w-md">
           <div class="card-header">
             <img src="/assets/safety.webp" class="card-img" alt="Safety">
-            <div>
+            <div class="card-content">
               <div class="card-title">Airdrop Safety 101</div>
-              <div class="text-sm card-desc">Hindari phish & rug saat claim.</div>
+              <div class="card-desc">Hindari phish & rug saat claim.</div>
             </div>
           </div>
           <div class="card-meta">
             <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 5 menit</span>
             <span class="badge badge-amber">Tips</span>
           </div>
-          <div class="card-footer"><span class="btn">Baca</span></div>
+          <div class="card-footer"><span class="btn">Baca <i class="fas fa-arrow-right ml-1"></i></span></div>
         </a>
-        <a href="/blog/wallet-ops.html" class="card">
+        <a href="/blog/wallet-ops.html" class="card max-w-md">
           <div class="card-header">
             <img src="/assets/placeholder.webp" class="card-img" alt="Wallet">
-            <div>
+            <div class="card-content">
               <div class="card-title">Wallet Hygiene untuk Airdrop</div>
-              <div class="text-sm card-desc">Opsec ringan buat hunter.</div>
+              <div class="card-desc">Opsec ringan buat hunter.</div>
             </div>
           </div>
           <div class="card-meta">
             <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 6 menit</span>
             <span class="badge badge-green">Keamanan</span>
           </div>
-          <div class="card-footer"><span class="btn">Baca</span></div>
+          <div class="card-footer"><span class="btn">Baca <i class="fas fa-arrow-right ml-1"></i></span></div>
         </a>
-        <a href="/blog/testnet-checklist.html" class="card">
+        <a href="/blog/testnet-checklist.html" class="card max-w-md">
           <div class="card-header">
             <img src="/assets/placeholder.webp" class="card-img" alt="Checklist">
-            <div>
+            <div class="card-content">
               <div class="card-title">Checklist Harian Testnet</div>
-              <div class="text-sm card-desc">Rutinitas hemat waktu.</div>
+              <div class="card-desc">Rutinitas hemat waktu.</div>
             </div>
           </div>
           <div class="card-meta">
             <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 4 menit</span>
             <span class="badge badge-amber">Panduan</span>
           </div>
-          <div class="card-footer"><span class="btn">Baca</span></div>
+          <div class="card-footer"><span class="btn">Baca <i class="fas fa-arrow-right ml-1"></i></span></div>
         </a>
       </div>
     </section>
@@ -394,19 +400,19 @@
       const cat = a.category ? `<span class="badge badge-sky">${a.category}</span>` : '';
       const link = a.link || '/testnet.html';
       return `
-        <div class="card" data-aos="fade-up" data-aos-delay="${i * 80}">
+        <div class="card max-w-md" data-aos="fade-up" data-aos-delay="${i * 80}">
           <div class="card-header">
             <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
-            <div class="flex-1 min-w-0">
-              <div class="card-title truncate">${a.name}</div>
-              <div class="card-meta mt-1">${statusBadge} ${confirmed} ${cat}</div>
+            <div class="card-content">
+              <div class="card-title">${a.name}</div>
+              <div class="card-meta">${statusBadge} ${confirmed} ${cat}</div>
             </div>
           </div>
-          <p class="card-desc text-sm mt-1 line-clamp-2">
+          <p class="card-desc">
             ${a.description || `${a.funding || ''} • ${a.participants || ''}` || 'Tidak ada deskripsi.'}
           </p>
           <div class="card-footer">
-            <a href="${link}" class="btn text-sm">Detail</a>
+            <a href="${link}" class="btn text-sm">Lihat Detail <i class="fas fa-arrow-right ml-1"></i></a>
           </div>
         </div>
       `;
@@ -494,7 +500,7 @@
     });
 
     // Init
-    document.addEventNameListener('DOMContentLoaded', async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       await renderAirdrops();
       loadPrices();
     });

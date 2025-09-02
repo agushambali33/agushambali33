@@ -9,72 +9,178 @@
   <meta property="og:title" content="Crypto Safety 101 — Agus Hambali" />
   <meta property="og:description" content="Tips and tricks to protect your crypto journey. Avoid scams and stay safe." />
   <meta property="og:image" content="/assets/profile.webp" />
-  <meta property="og:url" content="https://agushambali.vercel.app/safety" />
+  <meta property="og:url" content="https://agushambali.vercel.app/blog/safety.html" />
   <meta property="og:type" content="article" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" href="/assets/profile.webp" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
-    body { font-family: 'Inter', sans-serif; line-height: 1.7; font-size: 16px; background: #F9FAFB; color: #1E293B; transition: background 0.3s, color 0.3s; }
-    body.dark { background: #1E293B; color: #F0F9FF; }
-    .glass { background: rgba(255,255,255,0.95); border-radius: 1rem; box-shadow: 0 4px 20px rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.05); }
-    body.dark .glass { background: rgba(30,41,59,0.95); border: 1px solid rgba(14,165,233,0.2); }
-    .category-title { background: linear-gradient(to right,#0EA5E9,#22D3EE); -webkit-background-clip: text; color: transparent; font-size: 2rem; font-weight: 700; text-align: center; }
-    .btn { padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 500; font-size: 14px; transition: transform .2s, box-shadow .2s; background: #0EA5E9; color: #FFF; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
-    article p { margin-bottom: 1rem; }
-    article h3 { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: #0EA5E9; }
-    body.dark article h3 { color: #22D3EE; }
-    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: #0EA5E9; color: white; padding: 10px; border-radius: 50%; display: none; }
+    :root { 
+      --primary: #0EA5E9; /* Biru untuk tombol dan link */
+      --secondary: #10B981; /* Hijau untuk aksen dan border */
+      --accent: #8B5CF6; /* Ungu untuk aksen */
+    }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      line-height: 1.7; 
+      font-size: clamp(0.875rem, 2.5vw, 1rem); 
+      background: #F8FAFC; 
+      color: #111827; 
+    }
+    h1, h2, h3 { 
+      font-family: 'Poppins', sans-serif; 
+      font-weight: 800; 
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.25rem); }
+    h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); font-weight: 700; color: var(--primary); margin: 1.5rem 0 0.75rem; }
+    .glass { 
+      background: #FFFFFF; 
+      backdrop-filter: blur(10px); 
+      border-radius: 1rem; 
+      border: 1px solid #D1D5DB; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+    }
+    .btn { 
+      padding: 0.75rem 1.5rem; 
+      border-radius: 0.75rem; 
+      font-weight: 600; 
+      font-size: clamp(0.875rem, 2vw, 0.925rem); 
+      background: var(--primary); 
+      color: #FFFFFF; 
+      transition: all 0.2s ease; 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 0.5rem; 
+    }
+    .btn:hover { 
+      transform: scale(1.05); 
+      box-shadow: 0 0 12px rgba(14,165,233,0.5); 
+    }
+    .category-title { 
+      background: linear-gradient(135deg, var(--primary), #22D3EE); 
+      -webkit-background-clip: text; 
+      color: transparent; 
+      font-size: clamp(2rem, 5vw, 2.5rem); 
+      font-weight: 800; 
+      text-align: center; 
+    }
+    article p { 
+      margin-bottom: 1.25rem; 
+      color: #374151; 
+      max-width: 100%; 
+      overflow-wrap: break-word; 
+      word-break: break-word; 
+    }
+    article ul { 
+      list-style: disc; 
+      padding-left: 1.5rem; 
+      margin-bottom: 1.25rem; 
+    }
+    article a { 
+      color: var(--primary); 
+      text-decoration: underline; 
+      transition: color 0.2s ease; 
+    }
+    article a:hover { 
+      color: #0284C7; 
+    }
+    .blog-meta { 
+      font-size: 0.875rem; 
+      color: #6B7280; 
+      margin-bottom: 1rem; 
+      display: flex; 
+      gap: 1rem; 
+      flex-wrap: wrap; 
+    }
+    #back-to-top { 
+      position: fixed; 
+      bottom: 20px; 
+      right: 20px; 
+      background: var(--primary); 
+      color: #FFFFFF; 
+      padding: 12px; 
+      border-radius: 50%; 
+      display: none; 
+      transition: all 0.2s ease; 
+    }
+    #back-to-top:hover { 
+      transform: scale(1.1); 
+      box-shadow: 0 0 12px rgba(14,165,233,0.5); 
+    }
+    .social-icon { 
+      background-color: rgba(14,165,233,0.15); 
+      color: var(--primary); 
+    }
+    @media (max-width: 640px) {
+      body { font-size: 0.875rem; }
+      .btn { padding: 0.65rem 1rem; }
+      .category-title { font-size: 1.75rem; }
+      h3 { font-size: 1.25rem; }
+      article p { margin-bottom: 1rem; }
+    }
+    @media (prefers-reduced-motion) {
+      .btn, #back-to-top { transition: none; }
+    }
   </style>
 </head>
 <body class="min-h-screen">
   <div class="container mx-auto px-4 py-8 max-w-4xl">
-    
     <!-- Header -->
     <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
       <div class="flex items-center gap-4">
         <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md">
         <div>
           <h1 class="text-xl font-bold">Agus Hambali</h1>
-          <p class="text-sm text-gray-700 dark:text-gray-300">Crypto Hunter & Explorer</p>
+          <p class="text-sm text-gray-700">Crypto Hunter & Explorer</p>
         </div>
       </div>
-      <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white">
-        <i class="fas fa-moon"></i>
-      </button>
+      <div class="flex items-center gap-4">
+        <a href="/" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 text-sky-600 hover:scale-105 transition"><i class="fas fa-home"></i></a>
+      </div>
     </header>
 
     <!-- Breadcrumb -->
-    <nav class="text-sm mb-4 text-gray-600 dark:text-gray-400" data-aos="fade-right">
-      <a href="/" class="hover:underline">Home</a> › Safety 101
+    <nav class="text-sm mb-4 text-gray-600" data-aos="fade-right">
+      <a href="/" class="hover:underline">Home</a> › <a href="/blog.html" class="hover:underline">Blog</a> › Safety 101
     </nav>
 
     <!-- Blog Content -->
-    <article class="glass p-6" data-aos="fade-up">
-      <h2 class="category-title mb-6">Crypto Safety 101</h2>
-      <p class="text-gray-700 dark:text-gray-300 mb-4">Entering the crypto world is exciting — but also risky. Scammers are everywhere. This guide will help you protect yourself, your wallets, and your assets.</p>
+    <article class="glass p-6 mb-12" data-aos="fade-up">
+      <h2 class="category-title mb-4">Crypto Safety 101</h2>
+      <div class="blog-meta">
+        <span><i class="fas fa-calendar-alt mr-1"></i> September 2, 2025</span>
+        <span><i class="fas fa-clock mr-1"></i> 5 min read</span>
+      </div>
+      <p class="font-medium">Entering the crypto world is exciting — but also risky. Scammers are everywhere. This guide will help you protect yourself, your wallets, and your assets.</p>
       
       <h3>1. Always Verify Links</h3>
-      <p>Many scams use fake websites that look like the real ones. Always double-check URLs before connecting your wallet.</p>
+      <p>Many scams use fake websites that mimic legitimate platforms. Always double-check URLs before connecting your wallet. For example, ensure the site starts with <a href="https://www.google.com/search?q=https" target="_blank">https://</a> and matches the official domain.</p>
       
       <h3>2. Protect Your Seed Phrase</h3>
-      <p>Never share your recovery phrase with anyone. Store it offline, preferably written down and kept safe.</p>
+      <p>Never share your recovery phrase with anyone — not even support teams. Store it offline, preferably written on paper and kept in a secure location like a safe.</p>
       
       <h3>3. Use Hardware Wallets</h3>
-      <p>For long-term holding, hardware wallets (like Ledger or Trezor) are the safest option.</p>
+      <p>For long-term holding, hardware wallets like <a href="https://www.ledger.com" target="_blank">Ledger</a> or <a href="https://trezor.io" target="_blank">Trezor</a> are the safest option to keep your assets offline.</p>
       
       <h3>4. Beware of Free Tokens</h3>
-      <p>Some "airdrops" are actually traps. Don’t interact with suspicious tokens in your wallet.</p>
+      <p>Some "airdrops" are traps designed to trick you into approving malicious contracts. Don’t interact with suspicious tokens in your wallet.</p>
       
       <h3>5. Enable 2FA</h3>
-      <p>On exchanges and accounts, always use Two-Factor Authentication (Google Authenticator, Authy).</p>
-      
-      <div class="mt-8 flex justify-center">
-        <a href="/" class="btn">← Back Home</a>
+      <p>Always use Two-Factor Authentication (2FA) on exchanges and accounts. Apps like <a href="https://authy.com" target="_blank">Authy</a> or Google Authenticator add an extra layer of security.</p>
+
+      <!-- Share -->
+      <p class="mt-6 font-semibold">Share this article:</p>
+      <div class="flex flex-wrap gap-3 mb-6">
+        <a href="https://twitter.com/intent/tweet?text=Learn how to stay safe in crypto with Agus Hambali's guide!&url=https://agushambali.vercel.app/blog/safety.html" target="_blank" class="btn bg-[#1DA1F2]"><i class="fab fa-twitter"></i> Twitter</a>
+        <a href="https://t.me/share/url?url=https://agushambali.vercel.app/blog/safety.html&text=Learn how to stay safe in crypto with Agus Hambali's guide!" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Telegram</a>
+      </div>
+
+      <div class="flex justify-center">
+        <a href="/blog.html" class="btn">← Back to Blog</a>
       </div>
     </article>
 
@@ -82,8 +188,14 @@
     <button id="back-to-top" class="shadow-lg"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Footer -->
-    <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8 mt-12" data-aos="fade-up">
+    <footer class="text-center text-sm text-gray-600 pb-8" data-aos="fade-up">
       <p>© 2025 Agus Hambali — Built with ❤️</p>
+      <p class="mt-3">Donation: <span class="font-mono text-sky-600 break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span> <span id="copy-message" class="text-emerald-500 hidden">Copied!</span></p>
+      <div class="mt-4 flex justify-center gap-4">
+        <a href="https://twitter.com/agushambali" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 text-sky-600"><i class="fab fa-twitter"></i></a>
+        <a href="https://discord.gg/your-discord" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 text-sky-600"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/your-telegram" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 text-sky-600"><i class="fab fa-telegram"></i></a>
+      </div>
     </footer>
   </div>
 
@@ -91,24 +203,30 @@
   <script>
     AOS.init({ duration: 800, once: true });
 
-    // Dark Mode Toggle
-    const themeToggle=document.getElementById('theme-toggle');
-    themeToggle.addEventListener('click',()=>{
-      document.body.classList.toggle('dark');
-      document.getElementById('html').classList.toggle('dark');
-      themeToggle.innerHTML=document.body.classList.contains('dark')?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
-      localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
-    });
-    if(localStorage.getItem('theme')==='dark'){
-      document.body.classList.add('dark');
-      document.getElementById('html').classList.add('dark');
-      themeToggle.innerHTML='<i class="fas fa-sun"></i>';
+    // Copy to Clipboard
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const msg = document.getElementById('copy-message');
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      });
     }
 
     // Back to Top
-    const backToTop=document.getElementById('back-to-top');
-    window.addEventListener('scroll',()=>{backToTop.style.display=window.scrollY>300?'block':'none'});
-    backToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
   </script>
 </body>
 </html>

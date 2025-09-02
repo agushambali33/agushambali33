@@ -375,7 +375,9 @@
               <div class="card-meta mt-1">${statusBadge} ${confirmed} ${cat}</div>
             </div>
           </div>
-          <p class="card-desc text-sm mt-1 line-clamp-2">${a.description || 'No description provided.'}</p>
+          <p class="card-desc text-sm mt-1 line-clamp-2">
+  ${a.description || `${a.funding || ''} • ${a.participants || ''}` || 'No description provided.'}
+</p>
           <div class="card-footer">
             <a href="${link}" class="btn text-sm">Detail</a>
           </div>

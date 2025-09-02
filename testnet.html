@@ -83,10 +83,12 @@
     body.dark .social-icon { background-color: rgba(34,211,238,0.2); color: #22D3EE; }
     .card-header { display: flex; gap: 1rem; align-items: center; }
     .card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .card-footer { margin-top: auto; display: flex; justify-content: flex-end; }
+    .card-footer { display: flex; justify-content: flex-end; }
     .card-stats { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .badge-stat { background: rgba(14,165,233,0.1); color: var(--primary); border: 1px solid rgba(14,165,233,0.3); }
     body.dark .badge-stat { background: rgba(34,211,238,0.2); color: #22D3EE; border: 1px solid rgba(34,211,238,0.3); }
+    .card-content { display: flex; flex-direction: column; gap: 0.5rem; }
+    .card-actions { display: flex; justify-content: space-between; align-items: center; }
     @media (max-width: 640px) {
       body { font-size: 0.875rem; }
       .btn { padding: 0.65rem 1rem; }
@@ -97,6 +99,7 @@
       .card-meta { justify-content: flex-start; }
       .card-stats { justify-content: flex-start; }
       .card-footer { justify-content: flex-end; width: 100%; }
+      .card-actions { flex-direction: row; justify-content: space-between; width: 100%; }
     }
     @media (max-width: 768px) {
       .tabs .filters { flex-direction: column; align-items: stretch; }
@@ -309,16 +312,18 @@
                 <div class="card-meta mt-1">${statusBadge} ${confirmed} ${cat} ${soonBadge}</div>
               </div>
             </div>
-            <div class="flex justify-between items-center">
-              <div class="card-stats">
-                <span class="badge badge-stat"><i class="fas fa-dollar-sign"></i> ${a.funding || 'N/A'}</span>
-                <span class="badge badge-stat"><i class="fas fa-users"></i> ${a.participants || 'N/A'}</span>
-              </div>
-              <div class="card-footer">
-                <a href="${link}" class="btn text-sm">Detail</a>
+            <div class="card-content">
+              <p class="card-desc text-sm mt-1 line-clamp-2">${a.description || 'Tidak ada deskripsi.'}</p>
+              <div class="card-actions">
+                <div class="card-stats">
+                  <span class="badge badge-stat"><i class="fas fa-dollar-sign"></i> ${a.funding || 'N/A'}</span>
+                  <span class="badge badge-stat"><i class="fas fa-users"></i> ${a.participants || 'N/A'}</span>
+                </div>
+                <div class="card-footer">
+                  <a href="${link}" class="btn text-sm">Detail</a>
+                </div>
               </div>
             </div>
-            <p class="card-desc text-sm mt-1 line-clamp-2">${a.description || 'Tidak ada deskripsi.'}</p>
           `;
           grid.appendChild(card);
         });

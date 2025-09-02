@@ -177,6 +177,7 @@
     <section id="airdrops" class="glass p-6 mb-12" data-aos="fade-up">
       <h2 class="category-title mb-6">Latest Airdrops</h2>
       <div id="airdrop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <p id="airdrop-error" class="text-center text-red-500 hidden">Failed to load airdrops. Please try again later or check the console for details.</p>
       <a href="/testnet.html" class="btn mt-6 block w-fit mx-auto">View All Airdrops</a>
     </section>
 
@@ -352,36 +353,42 @@
     async function loadAirdrops() {
       try {
         const response = await fetch('/airdrops.json');
+        if (!response.ok) throw new Error('Failed to fetch airdrops.json');
         const data = await response.json();
-        const airdropGrid = document.getElementById('airdrop-grid');
-        airdropGrid.innerHTML = ''; // Clear existing content
-
-        data.airdrops.slice(0, 3).forEach((airdrop, index) => {
-          const airdropCard = document.createElement('div');
-          airdropCard.className = `glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-md transition ${AOS.attributes['data-aos']}`;
-          airdropCard.setAttribute('data-aos-delay', index * 100);
-          airdropCard.innerHTML = `
-            <div>
-              <h4 class="font-bold text-lg">${airdrop.name}</h4>
-              <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">${airdrop.status}${airdrop.confirmed ? ' <span class="text-green-500">Confirmed</span>' : ''}</p>
-            </div>
-            <a href="${airdrop.link}" class="btn text-sm mt-4">Detail</a>
-          `;
-          airdropGrid.appendChild(airdropCard);
-        });
+        return data.airdrops || [];
       } catch (error) {
         console.error('Error loading airdrops:', error);
-        const airdropGrid = document.getElementById('airdrop-grid');
-        airdropGrid.innerHTML = '<p class="text-center text-red-500">Failed to load airdrops. Please try again later.</p>';
+        return [];
       }
     }
 
-    // PWA Install
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
+    // Render Airdrops
+    async function renderAirdrops() {
+      const airdropGrid = document.getElementById('airdrop-grid');
+      const errorMessage = document.getElementById('airdrop-error');
+      airdropGrid.innerHTML = ''; // Clear existing content
+      errorMessage.classList.add('hidden');
+
+      const airdrops = await loadAirdrops();
+      if (airdrops.length === 0) {
+        errorMessage.classList.remove('hidden');
+        return;
+      }
+
+      airdrops.slice(0, 3).forEach((airdrop, index) => {
+        const airdropCard = document.createElement('div');
+        airdropCard.className = `glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-md transition ${AOS.attributes['data-aos']}`;
+        airdropCard.setAttribute('data-aos-delay', index * 100);
+        airdropCard.innerHTML = `
+          <div>
+            <h4 class="font-bold text-lg">${airdrop.name}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">${airdrop.status}${airdrop.confirmed ? ' <span class="text-green-500">Confirmed</span>' : ''}</p>
+          </div>
+          <a href="${airdrop.link || '/testnet.html'}" class="btn text-sm mt-4">Detail</a>
+        `;
+        airdropGrid.appendChild(airdropCard);
+      });
+    }
 
     // Load Prices and Charts
     async function loadPrices() {
@@ -398,7 +405,7 @@
         document.getElementById('solChange').textContent = `${data.solana.usd_24h_change.toFixed(2)}% (24h)`;
         document.getElementById('solChange').className = data.solana.usd_24h_change >= 0 ? 'text-green-500 text-sm mt-3' : 'text-red-500 text-sm mt-3';
 
-        // Mock chart data (replace with real API data for production)
+        // Mock chart data
         const chartData = {
           labels: ['1h', '2h', '3h', '4h', '5h', '6h'],
           datasets: {
@@ -408,48 +415,19 @@
           }
         };
 
-        // Chart.js for Bitcoin
         new Chart(document.getElementById('btcChart'), {
           type: 'line',
-          data: {
-            labels: chartData.labels,
-            datasets: [{
-              data: chartData.datasets.bitcoin,
-              borderColor: '#F7931A',
-              tension: 0.4,
-              fill: false
-            }]
-          },
+          data: { labels: chartData.labels, datasets: [{ data: chartData.datasets.bitcoin, borderColor: '#F7931A', tension: 0.4, fill: false }] },
           options: { plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
         });
-
-        // Chart.js for Ethereum
         new Chart(document.getElementById('ethChart'), {
           type: 'line',
-          data: {
-            labels: chartData.labels,
-            datasets: [{
-              data: chartData.datasets.ethereum,
-              borderColor: '#3C3C3D',
-              tension: 0.4,
-              fill: false
-            }]
-          },
+          data: { labels: chartData.labels, datasets: [{ data: chartData.datasets.ethereum, borderColor: '#3C3C3D', tension: 0.4, fill: false }] },
           options: { plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
         });
-
-        // Chart.js for Solana
         new Chart(document.getElementById('solChart'), {
           type: 'line',
-          data: {
-            labels: chartData.labels,
-            datasets: [{
-              data: chartData.datasets.solana,
-              borderColor: '#00FFA3',
-              tension: 0.4,
-              fill: false
-            }]
-          },
+          data: { labels: chartData.labels, datasets: [{ data: chartData.datasets.solana, borderColor: '#00FFA3', tension: 0.4, fill: false }] },
           options: { plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
         });
       } catch {
@@ -469,8 +447,8 @@
     });
 
     // Initial Load
-    document.addEventListener('DOMContentLoaded', () => {
-      loadAirdrops();
+    document.addEventListener('DOMContentLoaded', async () => {
+      await renderAirdrops();
       loadPrices();
     });
 

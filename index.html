@@ -16,180 +16,452 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      font-size: 16px;
-      background: #F0F9FF;
-      color: #1E293B;
-      transition: background 0.3s, color 0.3s;
-    }
-    body.dark {
-      background: #1E293B;
-      color: #F0F9FF;
-    }
-    .glass {
-      background: rgba(255,255,255,0.95);
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(14,165,233,0.1);
-      border: 1px solid rgba(14,165,233,0.05);
-    }
-    body.dark .glass {
-      background: rgba(30,41,59,0.95);
-      border: 1px solid rgba(14,165,233,0.2);
-    }
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.75rem;
-      font-weight: 500;
-      font-size: 14px;
-      transition: transform .2s, box-shadow .2s;
-      background: #0EA5E9;
-      color: #FFF;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(14,165,233,0.3);
-    }
-    .category-title {
-      background: linear-gradient(to right,#0EA5E9,#22D3EE);
-      -webkit-background-clip: text;
-      color: transparent;
-      font-size: 1.8rem;
-      font-weight: 700;
-      text-align: center;
-    }
-    #back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #0EA5E9;
-      color: white;
-      padding: 10px;
-      border-radius: 50%;
-      display: none;
-    }
-    .skeleton {
-      background: linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    @media(max-width:640px){
-      body{font-size:14px}
-      .btn{padding:.6rem 1.2rem}
+    /* Base */
+    :root { color-scheme: light dark; }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 16px; background: #F9FAFB; color: #1E293B; transition: background .3s, color .3s; }
+    body.dark { background: #1E293B; color: #F0F9FF; }
+    .glass { background: rgba(255,255,255,0.95); border-radius: 1rem; box-shadow: 0 4px 20px rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.05); }
+    body.dark .glass { background: rgba(30,41,59,0.95); border: 1px solid rgba(14,165,233,0.20); }
+    .btn { padding: .75rem 1.25rem; border-radius: .75rem; font-weight: 600; font-size: .925rem; background: #0EA5E9; color: #fff; transition: transform .2s, box-shadow .2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(14,165,233,.35); }
+    .category-title { background: linear-gradient(to right,#0EA5E9,#22D3EE); -webkit-background-clip: text; color: transparent; font-size: 1.9rem; font-weight: 800; text-align: center; }
+    .badge { display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; font-weight:600; }
+    .badge-green { background:#DCFCE7; color:#047857; }
+    .badge-amber { background:#FEF3C7; color:#B45309; }
+    .badge-sky { background:#E0F2FE; color:#0369A1; }
+    body.dark .badge-green { background:#064E3B; color:#A7F3D0; }
+    body.dark .badge-amber { background:#78350F; color:#FDE68A; }
+    body.dark .badge-sky { background:#0C4A6E; color:#BAE6FD; }
+
+    /* Cards */
+    .card { display:flex; flex-direction:column; height:100%; gap:.75rem; padding:1rem; border-radius:1rem; background:rgba(255,255,255,.9); border:1px solid #E5E7EB; }
+    .card:hover { box-shadow:0 8px 24px rgba(2,132,199,.12); transform: translateY(-2px); }
+    body.dark .card { background:#334155; border-color:#475569; }
+    .card-header { display:flex; align-items:flex-start; gap:.75rem; }
+    .card-img { width:56px; height:56px; border-radius:.75rem; object-fit:cover; background:#E5E7EB; }
+    body.dark .card-img { background:#475569; }
+    .card-title { font-weight:800; font-size:1.05rem; line-height:1.2; }
+    .card-meta { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .card-desc { color:#475569; }
+    body.dark .card-desc { color:#CBD5E1; }
+    .card-footer { margin-top:auto; display:flex; justify-content:flex-end; }
+
+    /* Price tiles */
+    .price-card { background: linear-gradient(135deg, rgba(14,165,233,0.08), rgba(34,211,238,0.08)); }
+    body.dark .price-card { background: linear-gradient(135deg, rgba(14,165,233,0.18), rgba(34,211,238,0.18)); }
+
+    /* Utilities */
+    #back-to-top { position: fixed; bottom: 20px; right: 20px; background:#0EA5E9; color:white; padding:10px; border-radius:50%; display:none; }
+    .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e5e7eb 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    @media (max-width: 640px) {
+      body { font-size: 14px; }
+      .btn { padding:.65rem 1rem; }
     }
   </style>
 </head>
 <body class="min-h-screen">
   <div class="container mx-auto px-4 py-8 max-w-6xl">
-    
-    <!-- Header -->
-    <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
-      <div class="flex items-center gap-4">
-        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md">
-        <div>
-          <h1 class="text-xl font-bold">Agus Hambali</h1>
-          <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Crypto Explorer</p>
+    <!-- Header (simple, no home) -->
+    <header class="sticky top-0 z-50 glass p-4 rounded-xl mb-8 flex items-center justify-between" data-aos="fade-down">
+      <div class="flex items-center gap-3">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-10 h-10 rounded-full" loading="lazy">
+        <div class="leading-tight">
+          <p class="font-bold text-base">Agus Hambali</p>
+          <p class="text-xs text-gray-600 dark:text-gray-300">Airdrop Hunter & Explorer</p>
         </div>
       </div>
-      <div class="flex items-center gap-4">
-        <a href="/" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition"><i class="fas fa-home"></i></a>
-        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white transition"><i class="fas fa-moon"></i></button>
-      </div>
+      <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-700 dark:text-white hover:scale-105 transition" title="Toggle theme">
+        <i class="fas fa-moon"></i>
+      </button>
     </header>
 
     <!-- Hero -->
     <section class="text-center mb-12" data-aos="fade-up">
-      <h1 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#0EA5E9] to-[#22D3EE] mb-4">Discover Crypto Airdrops</h1>
-      <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Join Agus Hambali to hunt the best airdrops and testnets in the crypto world!</p>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-cyan-400">
+        Discover Crypto Airdrops
+      </h1>
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        Hunt verified airdrops & testnets. Learn fast, stay safe, earn more.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a href="#airdrops" class="btn">See Latest Airdrops</a>
+        <a href="/testnet.html" class="btn bg-cyan-500 hover:shadow-xl">Browse Testnets</a>
+      </div>
     </section>
 
-    <!-- Airdrops -->
+    <!-- Latest Airdrops -->
     <section id="airdrops" class="glass p-6 mb-12" data-aos="fade-up">
       <h2 class="category-title mb-6">Latest Airdrops</h2>
       <div id="airdrop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-      <p id="airdrop-error" class="text-center text-red-500 hidden">Failed to load airdrops.</p>
-      <a href="/testnet.html" class="btn mt-6 block w-fit mx-auto">View All Airdrops</a>
+      <p id="airdrop-error" class="text-center text-red-500 hidden mt-4">Failed to load airdrops. Check your <code>airdrops.json</code>.</p>
+      <div class="text-center mt-6">
+        <a href="/testnet.html" class="btn">View All</a>
+      </div>
+    </section>
+
+    <!-- Prices -->
+    <section id="prices" class="glass p-6 mb-12" data-aos="fade-up">
+      <h2 class="category-title mb-6">Live Crypto Prices</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="price-card glass p-6 rounded-xl">
+          <h3 class="font-bold text-xl">Bitcoin (BTC)</h3>
+          <p class="mt-3 text-3xl font-mono" id="btcPrice">—</p>
+          <p id="btcChange" class="text-sm mt-2">—</p>
+          <canvas id="btcChart" class="mt-4" height="80"></canvas>
+        </div>
+        <div class="price-card glass p-6 rounded-xl">
+          <h3 class="font-bold text-xl">Ethereum (ETH)</h3>
+          <p class="mt-3 text-3xl font-mono" id="ethPrice">—</p>
+          <p id="ethChange" class="text-sm mt-2">—</p>
+          <canvas id="ethChart" class="mt-4" height="80"></canvas>
+        </div>
+        <div class="price-card glass p-6 rounded-xl">
+          <h3 class="font-bold text-xl">Solana (SOL)</h3>
+          <p class="mt-3 text-3xl font-mono" id="solPrice">—</p>
+          <p id="solChange" class="text-sm mt-2">—</p>
+          <canvas id="solChart" class="mt-4" height="80"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tutorials (quick links) -->
+    <section id="tutorials" class="glass p-6 mb-12" data-aos="fade-up">
+      <h2 class="category-title mb-6">Quick Tutorials</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="/testnet/helios.html" class="card">
+          <div class="card-header">
+            <img src="/assets/helioslogo.webp" class="card-img" alt="Helios">
+            <div>
+              <div class="card-title">How to Join Helios Testnet</div>
+              <div class="text-sm card-desc">Step-by-step + faucet & staking tips.</div>
+            </div>
+          </div>
+          <div class="card-footer"><span class="btn">Open Guide</span></div>
+        </a>
+        <a href="/testnet/succinct-testnet.html" class="card">
+          <div class="card-header">
+            <img src="/assets/placeholder.webp" class="card-img" alt="Succinct">
+            <div>
+              <div class="card-title">How to Join Succinct Testnet</div>
+              <div class="text-sm card-desc">EVM setup & best practices.</div>
+            </div>
+          </div>
+          <div class="card-footer"><span class="btn">Open Guide</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Blog / Guides -->
+    <section id="blog" class="glass p-6 mb-12" data-aos="fade-up">
+      <h2 class="category-title mb-6">Blog & Guides</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="/blog/airdrop-safety.html" class="card">
+          <div class="card-header">
+            <img src="/assets/placeholder.webp" class="card-img" alt="Safety">
+            <div>
+              <div class="card-title">Airdrop Safety 101</div>
+              <div class="text-sm card-desc">Hindari phish & rug saat claim.</div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 5 min</span>
+            <span class="badge badge-amber">Tips</span>
+          </div>
+          <div class="card-footer"><span class="btn">Read</span></div>
+        </a>
+        <a href="/blog/wallet-ops.html" class="card">
+          <div class="card-header">
+            <img src="/assets/placeholder.webp" class="card-img" alt="Wallet">
+            <div>
+              <div class="card-title">Wallet Hygiene for Airdrops</div>
+              <div class="text-sm card-desc">Opsec ringan buat hunter.</div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 6 min</span>
+            <span class="badge badge-green">Security</span>
+          </div>
+          <div class="card-footer"><span class="btn">Read</span></div>
+        </a>
+        <a href="/blog/testnet-checklist.html" class="card">
+          <div class="card-header">
+            <img src="/assets/placeholder.webp" class="card-img" alt="Checklist">
+            <div>
+              <div class="card-title">Testnet Daily Checklist</div>
+              <div class="text-sm card-desc">Rutinitas hemat waktu.</div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 4 min</span>
+            <span class="badge badge-amber">Guide</span>
+          </div>
+          <div class="card-footer"><span class="btn">Read</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="glass p-6 mb-12" data-aos="fade-up">
+      <h2 class="category-title mb-6">About Me</h2>
+      <div class="flex flex-col md:flex-row gap-6 items-center">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-28 h-28 rounded-full shadow-md" loading="lazy">
+        <div class="text-gray-700 dark:text-gray-300">
+          <p>Hi! I’m Agus Hambali — <b>Airdrop Hunter</b> & <b>Crypto Explorer</b>. Fokus di testnet dan peluang legit, biar komunitas bisa earning dengan aman.</p>
+          <div class="mt-4 flex gap-3">
+            <a href="https://twitter.com/agushambali33" target="_blank" class="btn bg-[#1DA1F2]">Twitter</a>
+            <a href="https://t.me/agushambali33" target="_blank" class="btn bg-[#0088cc]">Telegram</a>
+            <a href="https://discord.com/users/agushambali33" target="_blank" class="btn bg-[#5865F2]">Discord</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="glass p-6 mb-12" data-aos="fade-up">
+      <h2 class="category-title mb-6">Stay Updated</h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-4">Subscribe untuk update airdrop & testnet terbaru.</p>
+      <form action="https://formsubmit.co/akunpremiumaing@gmail.com" method="POST" class="flex flex-col md:flex-row gap-4 justify-center">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="Newsletter Signup from Airdrop Finder" />
+        <input type="email" name="email" placeholder="Enter your email" class="w-full max-w-md p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800" required />
+        <button type="submit" class="btn">Subscribe</button>
+      </form>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="glass p-6 mb-16" data-aos="fade-up">
+      <h2 class="category-title mb-6">Contact Me</h2>
+      <form action="https://formsubmit.co/akunpremiumaing@gmail.com" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="Message from Airdrop Finder" />
+        <div>
+          <label class="text-sm text-gray-600 dark:text-gray-300 block mb-2">Name</label>
+          <input name="name" class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800" required />
+        </div>
+        <div>
+          <label class="text-sm text-gray-600 dark:text-gray-300 block mb-2">Email</label>
+          <input name="email" type="email" class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800" required />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm text-gray-600 dark:text-gray-300 block mb-2">Message</label>
+          <textarea name="message" rows="5" class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800" required></textarea>
+        </div>
+        <div class="md:col-span-2 flex gap-4 justify-center">
+          <button type="submit" class="btn">Send</button>
+          <a href="https://t.me/agushambali33" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Telegram</a>
+        </div>
+      </form>
     </section>
 
     <!-- Back to Top -->
-    <button id="back-to-top" class="shadow-lg"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" class="shadow-lg" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Footer -->
     <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8" data-aos="fade-up">
       <p>© 2025 Agus Hambali — Built with ❤️</p>
+      <p class="mt-3">
+        Donation 😹
+        <span class="font-mono text-sky-600 break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">
+          0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae
+        </span>
+        <span id="copy-message" class="text-emerald-500 hidden">Copied!</span>
+      </p>
+      <div class="mt-4 flex justify-center gap-4">
+        <a href="https://twitter.com/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-twitter"></i></a>
+        <a href="https://discord.com/users/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-telegram"></i></a>
+      </div>
     </footer>
+  </div>
 
+  <!-- Bottom Nav (Mobile) -->
+  <div class="fixed bottom-4 left-0 right-0 max-w-md mx-auto px-4 md:hidden z-50">
+    <div class="glass p-3 rounded-full flex justify-around items-center">
+      <a href="#airdrops" class="flex flex-col items-center p-2 rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-gift text-sky-600 dark:text-sky-300 text-lg"></i>
+        <span class="text-xs mt-1 text-gray-600 dark:text-gray-300">Airdrops</span>
+      </a>
+      <a href="/testnet.html" class="flex flex-col items-center p-2 rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-network-wired text-sky-600 dark:text-sky-300 text-lg"></i>
+        <span class="text-xs mt-1 text-gray-600 dark:text-gray-300">Testnet</span>
+      </a>
+      <a href="#prices" class="flex flex-col items-center p-2 rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-chart-line text-sky-600 dark:text-sky-300 text-lg"></i>
+        <span class="text-xs mt-1 text-gray-600 dark:text-gray-300">Prices</span>
+      </a>
+      <a href="#contact" class="flex flex-col items-center p-2 rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-envelope text-sky-600 dark:text-sky-300 text-lg"></i>
+        <span class="text-xs mt-1 text-gray-600 dark:text-gray-300">Contact</span>
+      </a>
+    </div>
   </div>
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 800, once: true });
 
-    // Dark mode toggle
-    const themeToggle=document.getElementById('theme-toggle');
-    themeToggle.addEventListener('click',()=>{
+    // Dark Mode Toggle (match Helios style)
+    const themeToggle = document.getElementById('theme-toggle');
+    function applyThemeIcon() {
+      themeToggle.innerHTML = document.body.classList.contains('dark')
+        ? '<i class="fas fa-sun"></i>'
+        : '<i class="fas fa-moon"></i>';
+    }
+    themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
       document.getElementById('html').classList.toggle('dark');
-      themeToggle.innerHTML=document.body.classList.contains('dark')?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
-      localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      applyThemeIcon();
     });
-    if(localStorage.getItem('theme')==='dark'){
+    if (localStorage.getItem('theme') === 'dark') {
       document.body.classList.add('dark');
       document.getElementById('html').classList.add('dark');
-      themeToggle.innerHTML='<i class="fas fa-sun"></i>';
+    }
+    applyThemeIcon();
+
+    // Copy to Clipboard (donation)
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const msg = document.getElementById('copy-message');
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      });
     }
 
-    // Back to top
-    const backToTop=document.getElementById('back-to-top');
-    window.addEventListener('scroll',()=>{backToTop.style.display=window.scrollY>300?'block':'none'});
-    backToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
+    // Back to Top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Load airdrops
-    async function loadAirdrops(){
-      try{
-        const res=await fetch('/airdrops.json');
-        if(!res.ok)throw new Error(`HTTP ${res.status}`);
-        const data=await res.json();
-        return data.airdrops||[];
-      }catch(e){
-        console.error('Error:',e);
+    // Airdrops loader
+    async function loadAirdrops() {
+      try {
+        const res = await fetch('/airdrops.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        return Array.isArray(data.airdrops) ? data.airdrops : [];
+      } catch (e) {
+        console.error('Load airdrops failed:', e);
         return [];
       }
     }
-    async function renderAirdrops(){
-      const grid=document.getElementById('airdrop-grid');
-      const error=document.getElementById('airdrop-error');
-      grid.innerHTML='<div class="skeleton h-32 rounded-xl mb-4"></div>'.repeat(3);
-      setTimeout(async()=>{
-        const airdrops=await loadAirdrops();
-        grid.innerHTML='';
-        if(airdrops.length===0){
-          error.classList.remove('hidden');
-          return;
-        }
-        error.classList.add('hidden');
-        airdrops.slice(0,3).forEach((airdrop,i)=>{
-          const card=document.createElement('div');
-          card.className="glass p-5 rounded-xl hover:shadow-md transition";
-          card.setAttribute("data-aos","fade-up");
-          card.setAttribute("data-aos-delay",i*100);
-          card.innerHTML=`
-            <h4 class="font-bold text-lg">${airdrop.name}${airdrop.confirmed?'<span class="text-green-500 ml-2">✔</span>':''}</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">${airdrop.status}</p>
-            <a href="${airdrop.link||'/testnet.html'}" class="btn text-sm mt-4">Detail</a>`;
-          grid.appendChild(card);
-        });
-      },500);
+
+    // Render a single card (no text overlap; button pinned bottom)
+    function airdropCardTpl(a, i) {
+      const confirmed = a.confirmed ? '<span class="badge badge-green"><i class="fa-solid fa-shield-check"></i> Confirmed</span>' : '';
+      const statusBadge = a.status === 'Active'
+        ? '<span class="badge badge-green">Active</span>'
+        : a.status === 'Ended'
+          ? '<span class="badge badge-amber">Ended</span>'
+          : '<span class="badge badge-sky">Upcoming</span>';
+      const img = a.image || '/assets/placeholder.webp';
+      const cat = a.category ? `<span class="badge badge-sky">${a.category}</span>` : '';
+      const link = a.link || '/testnet.html';
+
+      return `
+        <div class="card" data-aos="fade-up" data-aos-delay="${i * 80}">
+          <div class="card-header">
+            <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
+            <div class="flex-1 min-w-0">
+              <div class="card-title truncate">${a.name}</div>
+              <div class="card-meta mt-1">${statusBadge} ${confirmed} ${cat}</div>
+            </div>
+          </div>
+          <p class="card-desc text-sm mt-1 line-clamp-2">${a.description || 'No description provided.'}</p>
+          <div class="card-footer">
+            <a href="${link}" class="btn text-sm">Detail</a>
+          </div>
+        </div>
+      `;
     }
-    document.addEventListener('DOMContentLoaded',()=>{renderAirdrops()});
+
+    async function renderAirdrops() {
+      const grid = document.getElementById('airdrop-grid');
+      const errorEl = document.getElementById('airdrop-error');
+
+      // skeletons
+      grid.innerHTML = `
+        <div class="glass rounded-xl p-5 skeleton h-40"></div>
+        <div class="glass rounded-xl p-5 skeleton h-40"></div>
+        <div class="glass rounded-xl p-5 skeleton h-40"></div>
+      `;
+
+      const items = await loadAirdrops();
+      if (!items.length) {
+        grid.innerHTML = '';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      errorEl.classList.add('hidden');
+      const latest = items.slice(0, 6); // show 6 latest
+      grid.innerHTML = latest.map(airdropCardTpl).join('');
+    }
+
+    // Prices (simple)
+    async function loadPrices() {
+      try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true');
+        const d = await res.json();
+
+        const set = (idP, idC, val, chg) => {
+          document.getElementById(idP).textContent = `$${val.toLocaleString()}`;
+          const el = document.getElementById(idC);
+          el.textContent = `${chg.toFixed(2)}% (24h)`;
+          el.className = (chg >= 0 ? 'text-green-600' : 'text-red-500') + ' text-sm mt-2';
+        };
+
+        set('btcPrice', 'btcChange', d.bitcoin.usd, d.bitcoin.usd_24h_change);
+        set('ethPrice', 'ethChange', d.ethereum.usd, d.ethereum.usd_24h_change);
+        set('solPrice', 'solChange', d.solana.usd, d.solana.usd_24h_change);
+
+        // tiny spark charts (mock from current)
+        const mk = (ctx, base, color) => new Chart(ctx, {
+          type: 'line',
+          data: { labels: Array.from({length: 10}, (_,i)=>i+1),
+            datasets: [{ data: [0.99,0.995,1,1.01,1.008,1.004,1.012,1.006,1.0,1.003].map(m=>base*m),
+              borderColor: color, borderWidth: 2, fill:false, tension:0.35 }] },
+          options: { plugins: { legend: { display:false } }, scales: { x: { display:false }, y: { display:false } }, elements:{ point:{ radius:0 } }, animation:false }
+        });
+
+        mk(document.getElementById('btcChart'), d.bitcoin.usd, '#F7931A');
+        mk(document.getElementById('ethChart'), d.ethereum.usd, '#3C3C3D');
+        mk(document.getElementById('solChart'), d.solana.usd, '#00FFA3');
+      } catch (e) {
+        console.warn('Price load failed', e);
+      }
+    }
+
+    // Smooth anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Init
+    document.addEventListener('DOMContentLoaded', async () => {
+      await renderAirdrops();
+      loadPrices();
+    });
+
+    // Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.error('SW registration failed:', err));
+      });
+    }
   </script>
 </body>
 </html>

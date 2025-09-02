@@ -15,58 +15,61 @@
   <link rel="icon" href="/assets/profile.webp" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
-    /* Base */
-    :root { color-scheme: light dark; }
-    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 16px; background: #F9FAFB; color: #1E293B; transition: background .3s, color .3s; }
-    body.dark { background: #1E293B; color: #F0F9FF; }
-    .glass { background: rgba(255,255,255,0.95); border-radius: 1rem; box-shadow: 0 4px 20px rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.05); }
-    body.dark .glass { background: rgba(30,41,59,0.95); border: 1px solid rgba(14,165,233,0.20); }
-    .btn { padding: .75rem 1.25rem; border-radius: .75rem; font-weight: 600; font-size: .925rem; background: #0EA5E9; color: #fff; transition: transform .2s, box-shadow .2s; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(14,165,233,.35); }
-    .category-title { background: linear-gradient(to right,#0EA5E9,#22D3EE); -webkit-background-clip: text; color: transparent; font-size: 1.9rem; font-weight: 800; text-align: center; }
-    .badge { display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; font-weight:600; }
-    .badge-green { background:#DCFCE7; color:#047857; }
-    .badge-amber { background:#FEF3C7; color:#B45309; }
-    .badge-sky { background:#E0F2FE; color:#0369A1; }
-    body.dark .badge-green { background:#064E3B; color:#A7F3D0; }
-    body.dark .badge-amber { background:#78350F; color:#FDE68A; }
-    body.dark .badge-sky { background:#0C4A6E; color:#BAE6FD; }
-
-    /* Cards */
-    .card { display:flex; flex-direction:column; height:100%; gap:.75rem; padding:1rem; border-radius:1rem; background:rgba(255,255,255,.9); border:1px solid #E5E7EB; }
-    .card:hover { box-shadow:0 8px 24px rgba(2,132,199,.12); transform: translateY(-2px); }
-    body.dark .card { background:#334155; border-color:#475569; }
-    .card-header { display:flex; align-items:flex-start; gap:.75rem; }
-    .card-img { width:56px; height:56px; border-radius:.75rem; object-fit:cover; background:#E5E7EB; }
-    body.dark .card-img { background:#475569; }
-    .card-title { font-weight:800; font-size:1.05rem; line-height:1.2; }
-    .card-meta { display:flex; flex-wrap:wrap; gap:.5rem; }
-    .card-desc { color:#475569; }
-    body.dark .card-desc { color:#CBD5E1; }
-    .card-footer { margin-top:auto; display:flex; justify-content:flex-end; }
-
-    /* Price tiles */
-    .price-card { background: linear-gradient(135deg, rgba(14,165,233,0.08), rgba(34,211,238,0.08)); }
-    body.dark .price-card { background: linear-gradient(135deg, rgba(14,165,233,0.18), rgba(34,211,238,0.18)); }
-
-    /* Utilities */
-    #back-to-top { position: fixed; bottom: 20px; right: 20px; background:#0EA5E9; color:white; padding:10px; border-radius:50%; display:none; }
+    :root { color-scheme: light dark; --primary: #0EA5E9; --secondary: #10B981; --accent: #8B5CF6; }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: clamp(0.875rem, 2.5vw, 1rem); background: #FFFFFF; color: #1E293B; transition: all 0.3s ease; }
+    body.dark { background: #0F172A; color: #F0F9FF; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 800; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); }
+    h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+    .glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 1rem; border: 1px solid rgba(14,165,233,0.1); box-shadow: 0 4px 20px rgba(14,165,233,0.1); }
+    body.dark .glass { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); box-shadow: 0 0 12px rgba(34,211,238,0.2); }
+    .btn { padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; font-size: clamp(0.875rem, 2vw, 0.925rem); background: var(--primary); color: #fff; transition: all 0.2s ease; }
+    .btn:hover { transform: scale(1.05); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
+    body.dark .btn { box-shadow: 0 0 8px rgba(34,211,238,0.4); }
+    .btn-tab { background: #FFF; color: var(--primary); border: 1px solid var(--primary); }
+    body.dark .btn-tab { background: #1E293B; }
+    .btn-tab.tab-active { background: var(--primary); color: #FFF; }
+    .category-title { background: linear-gradient(135deg, var(--primary), #22D3EE); -webkit-background-clip: text; color: transparent; font-size: clamp(1.5rem, 4vw, 1.9rem); font-weight: 800; text-align: center; }
+    .badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .badge-green { background: #DCFCE7; color: #047857; }
+    .badge-amber { background: #FEF3C7; color: #B45309; }
+    .badge-sky { background: #E0F2FE; color: #0369A1; }
+    body.dark .badge-green { background: #064E3B; color: #A7F3D0; }
+    body.dark .badge-amber { background: #78350F; color: #FDE68A; }
+    body.dark .badge-sky { background: #0C4A6E; color: #BAE6FD; }
+    .card { display: flex; flex-direction: column; height: 100%; gap: 0.75rem; padding: 1rem; border-radius: 1rem; background: rgba(255,255,255,0.95); border: 1px solid #E5E7EB; transition: all 0.2s ease; }
+    .card:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(14,165,233,0.2); }
+    body.dark .card { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); }
+    .card-img { width: 64px; height: 64px; border-radius: 0.5rem; object-fit: cover; background: #E5E7EB; }
+    body.dark .card-img { background: #334155; }
+    .card-title { font-weight: 800; font-size: clamp(1rem, 2.5vw, 1.125rem); }
+    .card-desc { color: #475569; }
+    body.dark .card-desc { color: #CBD5E1; }
+    .price-card { background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(34,211,238,0.1)); }
+    body.dark .price-card { background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(34,211,238,0.2)); }
+    .input-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; transition: all 0.2s ease; }
+    body.dark .input-field { background: #1E293B; border: 1px solid #4B5563; color: #F0F9FF; }
     .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e5e7eb 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .hero-bg { background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(34,211,238,0.1)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="20" cy="20" r="2" fill="%230EA5E9"/><circle cx="60" cy="60" r="2" fill="%2322D3EE"/><circle cx="100" cy="100" r="2" fill="%2310B981"/><circle cx="140" cy="140" r="2" fill="%238B5CF6"/><circle cx="180" cy="180" r="2" fill="%230EA5E9"/></svg>'); background-size: cover; }
+    body.dark .hero-bg { background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(34,211,238,0.2)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="20" cy="20" r="2" fill="%2322D3EE"/><circle cx="60" cy="60" r="2" fill="%238B5CF6"/><circle cx="100" cy="100" r="2" fill="%2310B981"/><circle cx="140" cy="140" r="2" fill="%230EA5E9"/><circle cx="180" cy="180" r="2" fill="%2322D3EE"/></svg>'); }
+    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; padding: 12px; border-radius: 50%; display: none; transition: all 0.2s ease; }
+    #back-to-top:hover { transform: scale(1.1); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
+    @media (prefers-reduced-motion) { .btn, .card, #back-to-top { transition: none; } }
     @media (max-width: 640px) {
-      body { font-size: 14px; }
-      .btn { padding:.65rem 1rem; }
+      body { font-size: 0.875rem; }
+      .btn { padding: 0.65rem 1rem; }
+      .card-img { width: 48px; height: 48px; }
     }
   </style>
 </head>
 <body class="min-h-screen">
   <div class="container mx-auto px-4 py-8 max-w-6xl">
-    <!-- Header (simple, no home) -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 glass p-4 rounded-xl mb-8 flex items-center justify-between" data-aos="fade-down">
       <div class="flex items-center gap-3">
         <img src="/assets/profile.webp" alt="Agus Hambali" class="w-10 h-10 rounded-full" loading="lazy">
@@ -75,39 +78,65 @@
           <p class="text-xs text-gray-600 dark:text-gray-300">Airdrop Hunter & Explorer</p>
         </div>
       </div>
-      <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-700 dark:text-white hover:scale-105 transition" title="Toggle theme">
-        <i class="fas fa-moon"></i>
-      </button>
+      <div class="flex items-center gap-3">
+        <input id="searchAirdrop" type="text" placeholder="Cari airdrop..." class="input-field max-w-xs" aria-label="Cari airdrop">
+        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition" aria-label="Toggle tema gelap/terang">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="menu-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white md:hidden" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
     </header>
 
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-40 md:hidden">
+      <div class="flex flex-col items-center justify-center h-full gap-6">
+        <button id="menu-close" class="absolute top-4 right-4 text-sky-600 dark:text-sky-300"><i class="fas fa-times text-2xl"></i></button>
+        <a href="#airdrops" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Airdrops</a>
+        <a href="/testnet.html" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Testnet</a>
+        <a href="#prices" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Harga</a>
+        <a href="#contact" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Kontak</a>
+      </div>
+    </nav>
+
     <!-- Hero -->
-    <section class="text-center mb-12" data-aos="fade-up">
+    <section class="text-center mb-12 hero-bg py-12 rounded-xl" data-aos="fade-up">
       <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-cyan-400">
         Discover Airdrops
       </h1>
       <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-        Hunt verified airdrops & testnets. Learn fast, stay safe, earn more.
+        Hunt verified airdrops & testnets. Belajar cepat, aman, dan untung lebih.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <div class="mt-6 flex flex-wrap justify-center gap-3">
-  <a href="#about" class="btn">About Me</a>
-  <a href="/testnet.html" class="btn bg-cyan-500 hover:shadow-xl">Browse Testnets</a>
-</div>
+        <a href="#about" class="btn">Tentang Saya</a>
+        <a href="/testnet.html" class="btn bg-green-500 hover:shadow-xl">Lihat Testnet</a>
+      </div>
     </section>
 
     <!-- Latest Airdrops -->
     <section id="airdrops" class="glass p-6 mb-12" data-aos="fade-up">
-      <h2 class="category-title mb-6">Latest Airdrops</h2>
+      <h2 class="category-title mb-6">Airdrop Terbaru</h2>
+      <div class="flex flex-col gap-4 mb-6">
+        <div class="flex gap-2">
+          <button data-tab="all" class="btn btn-tab tab-active">Semua</button>
+          <button data-tab="active" class="btn btn-tab">Aktif</button>
+          <button data-tab="upcoming" class="btn btn-tab">Segera</button>
+          <button data-tab="ended" class="btn btn-tab">Selesai</button>
+        </div>
+      </div>
       <div id="airdrop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-      <p id="airdrop-error" class="text-center text-red-500 hidden mt-4">Failed to load airdrops. Check your <code>airdrops.json</code>.</p>
+      <p id="airdrop-error" class="text-center text-red-500 hidden mt-4">
+        Oops, gagal muat airdrop. <button id="retry-airdrops" class="underline">Coba lagi</button>
+      </p>
       <div class="text-center mt-6">
-        <a href="/testnet.html" class="btn">View All</a>
+        <a href="/testnet.html" class="btn">Lihat Semua</a>
       </div>
     </section>
 
     <!-- Prices -->
     <section id="prices" class="glass p-6 mb-12" data-aos="fade-up">
-      <h2 class="category-title mb-6">Live Crypto Prices</h2>
+      <h2 class="category-title mb-6">Harga Crypto Live</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="price-card glass p-6 rounded-xl">
           <h3 class="font-bold text-xl">Bitcoin (BTC)</h3>
@@ -130,36 +159,36 @@
       </div>
     </section>
 
-    <!-- Tutorials (quick links) -->
+    <!-- Tutorials -->
     <section id="tutorials" class="glass p-6 mb-12" data-aos="fade-up">
-      <h2 class="category-title mb-6">Quick Tutorials</h2>
+      <h2 class="category-title mb-6">Tutorial Cepat</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <a href="/testnet/helios.html" class="card">
           <div class="card-header">
             <img src="/assets/helioslogo.webp" class="card-img" alt="Helios">
             <div>
-              <div class="card-title">How to Join Helios Testnet</div>
-              <div class="text-sm card-desc">Step-by-step + faucet & staking tips.</div>
+              <div class="card-title">Cara Join Helios Testnet</div>
+              <div class="text-sm card-desc">Langkah-langkah + tips faucet & staking.</div>
             </div>
           </div>
-          <div class="card-footer"><span class="btn">Open Guide</span></div>
+          <div class="card-footer"><span class="btn">Buka Panduan</span></div>
         </a>
         <a href="/testnet/succinct-testnet.html" class="card">
           <div class="card-header">
             <img src="/assets/placeholder.webp" class="card-img" alt="Succinct">
             <div>
-              <div class="card-title">How to Join Succinct Testnet</div>
-              <div class="text-sm card-desc">EVM setup & best practices.</div>
+              <div class="card-title">Cara Join Succinct Testnet</div>
+              <div class="text-sm card-desc">Setup EVM & best practices.</div>
             </div>
           </div>
-          <div class="card-footer"><span class="btn">Open Guide</span></div>
+          <div class="card-footer"><span class="btn">Buka Panduan</span></div>
         </a>
       </div>
     </section>
 
-    <!-- Blog / Guides -->
+    <!-- Blog -->
     <section id="blog" class="glass p-6 mb-12" data-aos="fade-up">
-      <h2 class="category-title mb-6">Blog & Guides</h2>
+      <h2 class="category-title mb-6">Blog & Panduan</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <a href="/blog/safety.html" class="card">
           <div class="card-header">
@@ -170,49 +199,53 @@
             </div>
           </div>
           <div class="card-meta">
-            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 5 min</span>
+            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 5 menit</span>
             <span class="badge badge-amber">Tips</span>
           </div>
-          <div class="card-footer"><span class="btn">Read</span></div>
+          <div class="card-footer"><span class="btn">Baca</span></div>
         </a>
         <a href="/blog/wallet-ops.html" class="card">
           <div class="card-header">
             <img src="/assets/placeholder.webp" class="card-img" alt="Wallet">
             <div>
-              <div class="card-title">Wallet Hygiene for Airdrops</div>
+              <div class="card-title">Wallet Hygiene untuk Airdrop</div>
               <div class="text-sm card-desc">Opsec ringan buat hunter.</div>
             </div>
           </div>
           <div class="card-meta">
-            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 6 min</span>
-            <span class="badge badge-green">Security</span>
+            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 6 menit</span>
+            <span class="badge badge-green">Keamanan</span>
           </div>
-          <div class="card-footer"><span class="btn">Read</span></div>
+          <div class="card-footer"><span class="btn">Baca</span></div>
         </a>
         <a href="/blog/testnet-checklist.html" class="card">
           <div class="card-header">
             <img src="/assets/placeholder.webp" class="card-img" alt="Checklist">
             <div>
-              <div class="card-title">Testnet Daily Checklist</div>
+              <div class="card-title">Checklist Harian Testnet</div>
               <div class="text-sm card-desc">Rutinitas hemat waktu.</div>
             </div>
           </div>
           <div class="card-meta">
-            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 4 min</span>
-            <span class="badge badge-amber">Guide</span>
+            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 4 menit</span>
+            <span class="badge badge-amber">Panduan</span>
           </div>
-          <div class="card-footer"><span class="btn">Read</span></div>
+          <div class="card-footer"><span class="btn">Baca</span></div>
         </a>
       </div>
     </section>
 
     <!-- About -->
     <section id="about" class="glass p-6 mb-12" data-aos="fade-up">
-      <h2 class="category-title mb-6">About Me</h2>
+      <h2 class="category-title mb-6">Tentang Saya</h2>
       <div class="flex flex-col md:flex-row gap-6 items-center">
         <img src="/assets/profile.webp" alt="Agus Hambali" class="w-28 h-28 rounded-full shadow-md" loading="lazy">
         <div class="text-gray-700 dark:text-gray-300">
-          <p>Hi! I’m Agus Hambali — <b>Airdrop Hunter</b> & <b>Crypto Explorer</b>. Fokus di testnet dan peluang legit, biar komunitas bisa earning dengan aman.</p>
+          <p>Hai! Saya Agus Hambali — <b>Airdrop Hunter</b> & <b>Crypto Explorer</b>. Fokus di testnet dan peluang legit, biar komunitas bisa earning dengan aman.</p>
+          <div class="mt-4">
+            <p class="text-sm"><i class="fas fa-rocket mr-2"></i>Mulai hunting: 2023</p>
+            <p class="text-sm"><i class="fas fa-network-wired mr-2"></i>Ikut 50+ testnet</p>
+          </div>
           <div class="mt-4 flex gap-3">
             <a href="https://twitter.com/agushambali33" target="_blank" class="btn bg-[#1DA1F2]">Twitter</a>
             <a href="https://t.me/agushambali33" target="_blank" class="btn bg-[#0088cc]">Telegram</a>
@@ -224,89 +257,76 @@
 
     <!-- Newsletter -->
     <section id="newsletter" class="glass p-6 mb-12" data-aos="fade-up">
-      <h2 class="category-title mb-6">Stay Updated</h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-4">Subscribe untuk update airdrop & testnet terbaru.</p>
+      <h2 class="category-title mb-6">Tetap Update</h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-4">Subscribe untuk info airdrop & testnet terbaru.</p>
       <form action="https://formsubmit.co/akunpremiumaing@gmail.com" method="POST" class="flex flex-col md:flex-row gap-4 justify-center">
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_subject" value="Newsletter Signup from Airdrop Finder" />
-        <input type="email" name="email" placeholder="Enter your email" class="w-full max-w-md p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800" required />
+        <div class="relative w-full max-w-md">
+          <input type="email" name="email" placeholder="Email kamu" class="input-field w-full pr-10" required />
+          <i class="fas fa-envelope absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
         <button type="submit" class="btn">Subscribe</button>
       </form>
     </section>
 
     <!-- Contact -->
     <section id="contact" class="glass p-6 mb-16" data-aos="fade-up">
-      <h2 class="category-title mb-6">Contact Me</h2>
+      <h2 class="category-title mb-6">Kontak Saya</h2>
       <form action="https://formsubmit.co/akunpremiumaing@gmail.com" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_subject" value="Message from Airdrop Finder" />
-        <div>
-          <label class="text-sm text-gray-600 dark:text-gray-300 block mb-2">Name</label>
-          <input name="name" class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800" required />
+        <div class="relative">
+          <input name="name" class="input-field peer" placeholder=" " required />
+          <label class="absolute left-3 top-3 text-gray-600 dark:text-gray-300 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-sm">Nama</label>
         </div>
-        <div>
-          <label class="text-sm text-gray-600 dark:text-gray-300 block mb-2">Email</label>
-          <input name="email" type="email" class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800" required />
+        <div class="relative">
+          <input name="email" type="email" class="input-field peer" placeholder=" " required />
+          <label class="absolute left-3 top-3 text-gray-600 dark:text-gray-300 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-sm">Email</label>
         </div>
-        <div class="md:col-span-2">
-          <label class="text-sm text-gray-600 dark:text-gray-300 block mb-2">Message</label>
-          <textarea name="message" rows="5" class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800" required></textarea>
+        <div class="md:col-span-2 relative">
+          <textarea name="message" rows="5" class="input-field peer" placeholder=" " required></textarea>
+          <label class="absolute left-3 top-3 text-gray-600 dark:text-gray-300 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-sm">Pesan</label>
         </div>
         <div class="md:col-span-2 flex gap-4 justify-center">
-          <button type="submit" class="btn">Send</button>
+          <button type="submit" class="btn">Kirim</button>
           <a href="https://t.me/agushambali33" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Telegram</a>
         </div>
       </form>
     </section>
 
     <!-- Back to Top -->
-    <button id="back-to-top" class="shadow-lg" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" class="shadow-lg" title="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Footer -->
     <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8" data-aos="fade-up">
-      <p>© 2025 Agus Hambali — Built with ❤️</p>
+      <div class="flex justify-center gap-4 mb-4">
+        <a href="#airdrops" class="hover:text-sky-600">Airdrops</a>
+        <a href="/testnet.html" class="hover:text-sky-600">Testnet</a>
+        <a href="#prices" class="hover:text-sky-600">Harga</a>
+        <a href="#contact" class="hover:text-sky-600">Kontak</a>
+      </div>
+      <p>© 2025 Agus Hambali — Dibuat dengan ❤️</p>
       <p class="mt-3">
-        Donation 😹
+        Donasi <i class="fas fa-coins text-yellow-500"></i>
         <span class="font-mono text-sky-600 break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">
           0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae
         </span>
-        <span id="copy-message" class="text-emerald-500 hidden">Copied!</span>
+        <span id="copy-message" class="text-emerald-500 hidden">Tersalin!</span>
       </p>
       <div class="mt-4 flex justify-center gap-4">
-        <a href="https://twitter.com/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-twitter"></i></a>
-        <a href="https://discord.com/users/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-discord"></i></a>
-        <a href="https://t.me/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-telegram"></i></a>
+        <a href="https://twitter.com/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-twitter"></i></a>
+        <a href="https://discord.com/users/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-telegram"></i></a>
       </div>
     </footer>
-  </div>
-
-  <!-- Bottom Nav (Mobile) -->
-  <div class="fixed bottom-4 left-0 right-0 max-w-md mx-auto px-4 md:hidden z-50">
-    <div class="glass p-3 rounded-full flex justify-around items-center">
-      <a href="#airdrops" class="flex flex-col items-center p-2 rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
-        <i class="fas fa-gift text-sky-600 dark:text-sky-300 text-lg"></i>
-        <span class="text-xs mt-1 text-gray-600 dark:text-gray-300">Airdrops</span>
-      </a>
-      <a href="/testnet.html" class="flex flex-col items-center p-2 rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
-        <i class="fas fa-network-wired text-sky-600 dark:text-sky-300 text-lg"></i>
-        <span class="text-xs mt-1 text-gray-600 dark:text-gray-300">Testnet</span>
-      </a>
-      <a href="#prices" class="flex flex-col items-center p-2 rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
-        <i class="fas fa-chart-line text-sky-600 dark:text-sky-300 text-lg"></i>
-        <span class="text-xs mt-1 text-gray-600 dark:text-gray-300">Prices</span>
-      </a>
-      <a href="#contact" class="flex flex-col items-center p-2 rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
-        <i class="fas fa-envelope text-sky-600 dark:text-sky-300 text-lg"></i>
-        <span class="text-xs mt-1 text-gray-600 dark:text-gray-300">Contact</span>
-      </a>
-    </div>
   </div>
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 800, once: true });
 
-    // Dark Mode Toggle (match Helios style)
+    // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
     function applyThemeIcon() {
       themeToggle.innerHTML = document.body.classList.contains('dark')
@@ -325,7 +345,14 @@
     }
     applyThemeIcon();
 
-    // Copy to Clipboard (donation)
+    // Mobile Menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuClose = document.getElementById('menu-close');
+    menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    menuClose.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+
+    // Copy to Clipboard
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
         const msg = document.getElementById('copy-message');
@@ -341,7 +368,7 @@
     });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Airdrops loader
+    // Airdrops Loader
     async function loadAirdrops() {
       try {
         const res = await fetch('/airdrops.json');
@@ -354,18 +381,17 @@
       }
     }
 
-    // Render a single card (no text overlap; button pinned bottom)
+    // Render Airdrop Card
     function airdropCardTpl(a, i) {
-      const confirmed = a.confirmed ? '<span class="badge badge-green"><i class="fa-solid fa-shield-check"></i> Confirmed</span>' : '';
+      const confirmed = a.confirmed ? '<span class="badge badge-green"><i class="fa-solid fa-shield-check"></i> Terverifikasi</span>' : '';
       const statusBadge = a.status === 'Active'
-        ? '<span class="badge badge-green">Active</span>'
+        ? '<span class="badge badge-green">Aktif</span>'
         : a.status === 'Ended'
-          ? '<span class="badge badge-amber">Ended</span>'
-          : '<span class="badge badge-sky">Upcoming</span>';
+          ? '<span class="badge badge-amber">Selesai</span>'
+          : '<span class="badge badge-sky">Segera</span>';
       const img = a.image || '/assets/placeholder.webp';
       const cat = a.category ? `<span class="badge badge-sky">${a.category}</span>` : '';
       const link = a.link || '/testnet.html';
-
       return `
         <div class="card" data-aos="fade-up" data-aos-delay="${i * 80}">
           <div class="card-header">
@@ -376,8 +402,8 @@
             </div>
           </div>
           <p class="card-desc text-sm mt-1 line-clamp-2">
-  ${a.description || `${a.funding || ''} • ${a.participants || ''}` || 'No description provided.'}
-</p>
+            ${a.description || `${a.funding || ''} • ${a.participants || ''}` || 'Tidak ada deskripsi.'}
+          </p>
           <div class="card-footer">
             <a href="${link}" class="btn text-sm">Detail</a>
           </div>
@@ -385,55 +411,78 @@
       `;
     }
 
-    async function renderAirdrops() {
+    // Render Airdrops
+    async function renderAirdrops(filter = '', tab = 'all') {
       const grid = document.getElementById('airdrop-grid');
       const errorEl = document.getElementById('airdrop-error');
-
-      // skeletons
       grid.innerHTML = `
         <div class="glass rounded-xl p-5 skeleton h-40"></div>
         <div class="glass rounded-xl p-5 skeleton h-40"></div>
         <div class="glass rounded-xl p-5 skeleton h-40"></div>
       `;
-
       const items = await loadAirdrops();
       if (!items.length) {
         grid.innerHTML = '';
         errorEl.classList.remove('hidden');
         return;
       }
-
       errorEl.classList.add('hidden');
-      const latest = items.slice(0, 3); // show 6 latest
-      grid.innerHTML = latest.map(airdropCardTpl).join('');
+      let filtered = items.filter(a => {
+        const matchSearch = a.name.toLowerCase().includes(filter.toLowerCase());
+        const matchTab = tab === 'all' || a.status.toLowerCase() === tab;
+        return matchSearch && matchTab;
+      });
+      filtered = filtered.slice(0, 3); // Show 3 latest
+      grid.innerHTML = filtered.map(airdropCardTpl).join('');
     }
 
-    // Prices (simple)
+    // Tabs and Search
+    document.querySelectorAll('[data-tab]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('tab-active'));
+        btn.classList.add('tab-active');
+        renderAirdrops(document.getElementById('searchAirdrop').value, btn.dataset.tab);
+      });
+    });
+    document.getElementById('searchAirdrop').addEventListener('input', e => {
+      clearTimeout(window.db);
+      window.db = setTimeout(() => {
+        renderAirdrops(e.target.value, document.querySelector('.tab-active').dataset.tab);
+      }, 300);
+    });
+    document.getElementById('retry-airdrops').addEventListener('click', () => renderAirdrops());
+
+    // Prices
     async function loadPrices() {
       try {
         const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true');
         const d = await res.json();
-
         const set = (idP, idC, val, chg) => {
-          document.getElementById(idP).textContent = `$${val.toLocaleString()}`;
+          const elP = document.getElementById(idP);
+          elP.textContent = `$${val.toLocaleString()}`;
+          elP.classList.add('animate-pulse');
+          setTimeout(() => elP.classList.remove('animate-pulse'), 500);
           const el = document.getElementById(idC);
           el.textContent = `${chg.toFixed(2)}% (24h)`;
           el.className = (chg >= 0 ? 'text-green-600' : 'text-red-500') + ' text-sm mt-2';
         };
-
         set('btcPrice', 'btcChange', d.bitcoin.usd, d.bitcoin.usd_24h_change);
         set('ethPrice', 'ethChange', d.ethereum.usd, d.ethereum.usd_24h_change);
         set('solPrice', 'solChange', d.solana.usd, d.solana.usd_24h_change);
-
-        // tiny spark charts (mock from current)
         const mk = (ctx, base, color) => new Chart(ctx, {
           type: 'line',
-          data: { labels: Array.from({length: 10}, (_,i)=>i+1),
-            datasets: [{ data: [0.99,0.995,1,1.01,1.008,1.004,1.012,1.006,1.0,1.003].map(m=>base*m),
-              borderColor: color, borderWidth: 2, fill:false, tension:0.35 }] },
-          options: { plugins: { legend: { display:false } }, scales: { x: { display:false }, y: { display:false } }, elements:{ point:{ radius:0 } }, animation:false }
+          data: {
+            labels: Array.from({ length: 10 }, (_, i) => i + 1),
+            datasets: [{
+              data: [0.99, 0.995, 1, 1.01, 1.008, 1.004, 1.012, 1.006, 1.0, 1.003].map(m => base * m),
+              borderColor: color,
+              backgroundColor: color + '33',
+              fill: true,
+              tension: 0.35
+            }]
+          },
+          options: { plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } }, elements: { point: { radius: 0 } }, animation: false }
         });
-
         mk(document.getElementById('btcChart'), d.bitcoin.usd, '#F7931A');
         mk(document.getElementById('ethChart'), d.ethereum.usd, '#3C3C3D');
         mk(document.getElementById('solChart'), d.solana.usd, '#00FFA3');
@@ -442,7 +491,7 @@
       }
     }
 
-    // Smooth anchors
+    // Smooth Anchors
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const target = document.querySelector(a.getAttribute('href'));

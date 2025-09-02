@@ -20,15 +20,15 @@
   <style>
     :root { 
       --primary: #0EA5E9; /* Biru untuk tombol dan link */
-      --secondary: #10B981; /* Hijau untuk progress bar dan badge */
+      --secondary: #10B981; /* Hijau untuk garis kotak dan progress bar */
       --accent: #8B5CF6; /* Ungu untuk aksen */
     }
     body { 
       font-family: 'Inter', sans-serif; 
       line-height: 1.6; 
       font-size: clamp(0.875rem, 2.5vw, 1rem); 
-      background: #F8FAFC; /* Abu-abu terang */
-      color: #111827; /* Teks gelap */
+      background: #F8FAFC; 
+      color: #111827; 
     }
     h1, h2, h3 { 
       font-family: 'Poppins', sans-serif; 
@@ -95,29 +95,16 @@
     }
     .how-to-join { 
       background: #FFFFFF; 
-      border: 1px solid #D1D5DB; 
+      border: 1px solid var(--secondary); /* Garis hijau */
       border-radius: 0.75rem; 
       padding: 1rem; 
       line-height: 1.7; 
-      display: flex; 
-      align-items: center; 
-      gap: 1rem; 
+      max-width: 100%; /* Mencegah pelebaran */
+      overflow-wrap: break-word; /* Membungkus teks panjang */
+      word-break: break-word; /* Memastikan teks tidak menembus */
     }
-    .how-to-join:not(:last-child) { 
-      margin-bottom: 1rem; 
-    }
-    .step-number { 
-      width: 2.5rem; 
-      height: 2.5rem; 
-      background: var(--primary); 
-      color: #FFFFFF; 
-      border-radius: 50%; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      font-size: 1.2rem; 
-      font-weight: 600; 
-      flex-shrink: 0; 
+    .how-to-join p:not(:last-child) { 
+      margin-bottom: 0.75rem; /* Jarak antar langkah */
     }
     .progress-bar { 
       height: 12px; 
@@ -162,7 +149,6 @@
       .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .category-title { font-size: 1.5rem; }
       .how-to-join { padding: 0.75rem; }
-      .step-number { width: 2rem; height: 2rem; font-size: 1rem; }
     }
     @media (prefers-reduced-motion) {
       .btn, #back-to-top { transition: none; }
@@ -215,35 +201,14 @@
 
         <!-- How to Join -->
         <p><strong>How to Join:</strong></p>
-        <div class="space-y-4" data-aos="fade-up">
-          <div class="how-to-join">
-            <span class="step-number">1</span>
-            <p>Connect with testnet or new wallet</p>
-          </div>
-          <div class="how-to-join">
-            <span class="step-number">2</span>
-            <p>Claim <a href="https://faucet.helioschain.network" target="_blank" class="text-sky-600 hover:underline">$HLS faucet</a></p>
-          </div>
-          <div class="how-to-join">
-            <span class="step-number">3</span>
-            <p>Go to <a href="https://portal.helioschain.network/" target="_blank" class="text-sky-600 hover:underline">Helios Portal</a></p>
-          </div>
-          <div class="how-to-join">
-            <span class="step-number">4</span>
-            <p>Try to bridge HLS to Sepolia</p>
-          </div>
-          <div class="how-to-join">
-            <span class="step-number">5</span>
-            <p>Stake HLS on Validator</p>
-          </div>
-          <div class="how-to-join">
-            <span class="step-number">6</span>
-            <p>Repeat daily/weekly</p>
-          </div>
-          <div class="how-to-join">
-            <span class="step-number">7</span>
-            <p>Complete <a href="https://zealy.io/cw/heliosblockchain" target="_blank" class="text-sky-600 hover:underline">Zealy tasks</a></p>
-          </div>
+        <div class="how-to-join" data-aos="fade-up">
+          <p>Connect with testnet or new wallet, pastikan Anda menggunakan wallet yang mendukung jaringan testnet seperti MetaMask atau Trust Wallet dengan konfigurasi jaringan Helios Testnet yang telah disediakan di situs resmi.</p>
+          <p>Claim <a href="https://faucet.helioschain.network" target="_blank" class="text-sky-600 hover:underline">$HLS faucet</a></p>
+          <p>Go to <a href="https://portal.helioschain.network/" target="_blank" class="text-sky-600 hover:underline">Helios Portal</a></p>
+          <p>Try to bridge HLS to Sepolia</p>
+          <p>Stake HLS on Validator</p>
+          <p>Repeat daily/weekly</p>
+          <p>Complete <a href="https://zealy.io/cw/heliosblockchain" target="_blank" class="text-sky-600 hover:underline">Zealy tasks</a></p>
         </div>
 
         <!-- Tasks -->
@@ -284,21 +249,29 @@
     AOS.init({ duration: 800, once: true });
 
     // Copy to Clipboard
-    function copyToClipboard(text){
-      navigator.clipboard.writeText(text).then(()=>{
-        const msg=document.getElementById('copy-message');
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const msg = document.getElementById('copy-message');
         msg.classList.remove('hidden');
-        setTimeout(()=>msg.classList.add('hidden'),2000);
+        setTimeout(() => msg.classList.add('hidden'), 2000);
       });
     }
 
     // Back to Top
-    const backToTop=document.getElementById('back-to-top');
-    window.addEventListener('scroll',()=>{backToTop.style.display=window.scrollY>300?'block':'none'});
-    backToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     // Service Worker
-    if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
   </script>
 </body>
 </html>

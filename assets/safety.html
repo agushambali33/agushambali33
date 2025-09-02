@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F0F9FF" />
+  <title>Crypto Safety 101 — Agus Hambali</title>
+  <meta name="description" content="Learn how to stay safe in crypto: avoid scams, protect wallets, and secure your assets. A beginner-friendly guide by Agus Hambali." />
+  <meta property="og:title" content="Crypto Safety 101 — Agus Hambali" />
+  <meta property="og:description" content="Tips and tricks to protect your crypto journey. Avoid scams and stay safe." />
+  <meta property="og:image" content="/assets/profile.webp" />
+  <meta property="og:url" content="https://agushambali.vercel.app/safety" />
+  <meta property="og:type" content="article" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/assets/profile.webp" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    body { font-family: 'Inter', sans-serif; line-height: 1.7; font-size: 16px; background: #F9FAFB; color: #1E293B; transition: background 0.3s, color 0.3s; }
+    body.dark { background: #1E293B; color: #F0F9FF; }
+    .glass { background: rgba(255,255,255,0.95); border-radius: 1rem; box-shadow: 0 4px 20px rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.05); }
+    body.dark .glass { background: rgba(30,41,59,0.95); border: 1px solid rgba(14,165,233,0.2); }
+    .category-title { background: linear-gradient(to right,#0EA5E9,#22D3EE); -webkit-background-clip: text; color: transparent; font-size: 2rem; font-weight: 700; text-align: center; }
+    .btn { padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 500; font-size: 14px; transition: transform .2s, box-shadow .2s; background: #0EA5E9; color: #FFF; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
+    article p { margin-bottom: 1rem; }
+    article h3 { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: #0EA5E9; }
+    body.dark article h3 { color: #22D3EE; }
+    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: #0EA5E9; color: white; padding: 10px; border-radius: 50%; display: none; }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
+      <div class="flex items-center gap-4">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md">
+        <div>
+          <h1 class="text-xl font-bold">Agus Hambali</h1>
+          <p class="text-sm text-gray-700 dark:text-gray-300">Crypto Hunter & Explorer</p>
+        </div>
+      </div>
+      <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white">
+        <i class="fas fa-moon"></i>
+      </button>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="text-sm mb-4 text-gray-600 dark:text-gray-400" data-aos="fade-right">
+      <a href="/" class="hover:underline">Home</a> › Safety 101
+    </nav>
+
+    <!-- Blog Content -->
+    <article class="glass p-6" data-aos="fade-up">
+      <h2 class="category-title mb-6">Crypto Safety 101</h2>
+      <p class="text-gray-700 dark:text-gray-300 mb-4">Entering the crypto world is exciting — but also risky. Scammers are everywhere. This guide will help you protect yourself, your wallets, and your assets.</p>
+      
+      <h3>1. Always Verify Links</h3>
+      <p>Many scams use fake websites that look like the real ones. Always double-check URLs before connecting your wallet.</p>
+      
+      <h3>2. Protect Your Seed Phrase</h3>
+      <p>Never share your recovery phrase with anyone. Store it offline, preferably written down and kept safe.</p>
+      
+      <h3>3. Use Hardware Wallets</h3>
+      <p>For long-term holding, hardware wallets (like Ledger or Trezor) are the safest option.</p>
+      
+      <h3>4. Beware of Free Tokens</h3>
+      <p>Some "airdrops" are actually traps. Don’t interact with suspicious tokens in your wallet.</p>
+      
+      <h3>5. Enable 2FA</h3>
+      <p>On exchanges and accounts, always use Two-Factor Authentication (Google Authenticator, Authy).</p>
+      
+      <div class="mt-8 flex justify-center">
+        <a href="/" class="btn">← Back Home</a>
+      </div>
+    </article>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="shadow-lg"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8 mt-12" data-aos="fade-up">
+      <p>© 2025 Agus Hambali — Built with ❤️</p>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    // Dark Mode Toggle
+    const themeToggle=document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click',()=>{
+      document.body.classList.toggle('dark');
+      document.getElementById('html').classList.toggle('dark');
+      themeToggle.innerHTML=document.body.classList.contains('dark')?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
+    });
+    if(localStorage.getItem('theme')==='dark'){
+      document.body.classList.add('dark');
+      document.getElementById('html').classList.add('dark');
+      themeToggle.innerHTML='<i class="fas fa-sun"></i>';
+    }
+
+    // Back to Top
+    const backToTop=document.getElementById('back-to-top');
+    window.addEventListener('scroll',()=>{backToTop.style.display=window.scrollY>300?'block':'none'});
+    backToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
+  </script>
+</body>
+</html>

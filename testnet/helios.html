@@ -61,27 +61,18 @@
       font-size: 1.8rem;
       font-weight: 700;
       text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .category-title:hover {
-      transform: scale(1.05);
     }
     .stat-box {
       background: #E0F2FE;
       padding: 1rem;
       border-radius: 0.75rem;
       text-align: center;
-      transition: transform 0.3s ease;
     }
     body.dark .stat-box {
       background: #334155;
     }
-    .stat-box:hover {
-      transform: scale(1.03);
-    }
     .how-to-join p {
       margin: 0.5rem 0;
-      word-break: break-word;
     }
     .how-to-join a {
       color: #0EA5E9;
@@ -96,7 +87,7 @@
     .progress-bar-fill {
       height: 100%;
       background: #10B981;
-      width: 80%; /* Adjust dynamically if possible */
+      width: 80%;
     }
     #back-to-top {
       position: fixed;
@@ -108,26 +99,6 @@
       border-radius: 50%;
       display: none;
     }
-    #hamburger {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      #nav-menu {
-        display: none;
-      }
-      #nav-menu.active {
-        display: block;
-      }
-      #hamburger {
-        display: block;
-      }
-    }
-    @media (max-width: 640px) {
-      body { font-size: 14px; }
-      .container { padding-left: 1rem; padding-right: 1rem; }
-      .btn { padding: 0.6rem 1.2rem; }
-      .how-to-join { font-size: 14px; }
-    }
   </style>
 </head>
 <body class="min-h-screen">
@@ -138,24 +109,18 @@
         <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md" loading="lazy">
         <div>
           <h1 class="text-xl font-bold">Agus Hambali</h1>
-          <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Crypto Explorer</p>
+          <p class="text-sm text-gray-700 dark:text-gray-300">Crypto Hunter & Explorer</p>
         </div>
       </div>
-      <button id="hamburger" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
-      <nav id="nav-menu" class="hidden md:flex gap-6">
-        <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Home</a>
-        <a href="/testnet.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Testnet</a>
-        <a href="/prices.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Prices</a>
-        <a href="/tutorials.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Tutorials</a>
-        <a href="/contact.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Contact</a>
-      </nav>
-      <button id="theme-toggle" class="ml-4 text-xl"><i class="fas fa-moon"></i></button>
+      <div class="flex items-center gap-3">
+        <a href="/" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition" title="Back to Home">
+          <i class="fas fa-home text-xl"></i>
+        </a>
+        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
+          <i class="fas fa-moon text-xl"></i>
+        </button>
+      </div>
     </header>
-
-    <!-- Search Bar -->
-    <section class="mb-8 glass p-4 rounded-xl" data-aos="fade-up">
-      <input type="text" id="search-bar" placeholder="Search Airdrops..." class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
-    </section>
 
     <!-- Airdrop Detail Section -->
     <section class="glass p-6 mb-12" data-aos="fade-up">
@@ -172,39 +137,37 @@
           <div class="progress-bar"><div class="progress-bar-fill"></div></div>
         </div>
       </div>
-      <div class="grid gap-4">
-        <p><strong>Category:</strong> <span class="highlight">Testnet</span></p>
+      <div class="grid gap-4 text-gray-700 dark:text-gray-300">
+        <p><strong>Category:</strong> Testnet</p>
         <p><strong>Update:</strong> <span class="text-[#F59E0B]">[2025-08-11]</span></p>
-        <p><strong>Website:</strong> <a href="https://testnet.helioschain.network/?code=ZENITH-86284" target="_blank" class="text-[#0EA5E9] hover:underline">[Join Helios Testnet]</a></p>
+        <p><strong>Website:</strong> <a href="https://testnet.helioschain.network/?code=ZENITH-86284" target="_blank" class="text-[#0EA5E9] hover:underline">Join Helios Testnet</a></p>
         <p><strong>Social:</strong> 
           <a href="https://twitter.com/Helios_layer1" target="_blank" class="text-[#0EA5E9] hover:underline"><i class="fab fa-twitter"></i> @Helios_layer1</a> | 
           <a href="https://discord.gg/helios" target="_blank" class="text-[#0EA5E9] hover:underline"><i class="fab fa-discord"></i> Discord</a>
         </p>
-        <p><strong>Confirmed:</strong> <span class="text-[#10B981]">[Yes]</span></p>
+        <p><strong>Confirmed:</strong> <span class="text-[#10B981]">Yes</span></p>
         <p><strong>How to Join:</strong></p>
-        <div class="how-to-join bg-white dark:bg-gray-800 p-3 rounded-lg text-sm border border-gray-200 dark:border-gray-600" data-aos="fade-up">
+        <div class="how-to-join bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-sm leading-relaxed">
           <p>Helios Testnet is Now Live</p>
           <p>- Connect with testnet or new wallet</p>
-          <p>- Claim <a href="https://faucet.helioschain.network" target="_blank" class="text-[#0EA5E9] hover:underline">$HLS faucet</a></p>
-          <p>- Go to <a href="https://portal.helioschain.network/" target="_blank" class="text-[#0EA5E9] hover:underline">Helios Portal</a></p>
+          <p>- Claim <a href="https://faucet.helioschain.network" target="_blank">HLS faucet</a></p>
+          <p>- Go to <a href="https://portal.helioschain.network/" target="_blank">Helios Portal</a></p>
           <p>- Try to bridge HLS to Sepolia</p>
           <p>- Try to stake HLS on any Validator</p>
           <p>- Repeat it daily/weekly</p>
-          <p>Complete <a href="https://zealy.io/cw/heliosblockchain" target="_blank" class="text-[#0EA5E9] hover:underline">Zealy</a></p>
-          <p>Guide: <a href="https://helioschain.medium.com/how-to-join-the-helios-testnet-step-by-step-guide-for-early-access-250d024a1e1e" target="_blank" class="text-[#0EA5E9] hover:underline">Step-by-Step Guide</a></p>
+          <p>Complete <a href="https://zealy.io/cw/heliosblockchain" target="_blank">Zealy</a></p>
+          <p>Guide: <a href="https://helioschain.medium.com/how-to-join-the-helios-testnet-step-by-step-guide-for-early-access-250d024a1e1e" target="_blank">Step-by-Step Guide</a></p>
         </div>
-        <!-- Tasks -->
         <p><strong>Tasks ✅</strong></p>
-        <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+        <ul class="list-disc list-inside">
           <li>Join Discord community.</li>
           <li>Test dApp & swap on testnet.</li>
           <li>Refer friends for double XP.</li>
         </ul>
-        <!-- Share Buttons -->
         <p><strong>Share:</strong></p>
-        <div class="flex gap-4">
-          <a href="https://twitter.com/intent/tweet?text=Join Helios Testnet with Agus Hambali's guide!&url=https://agushambali.vercel.app/testnet/helios" target="_blank" class="btn bg-[#1DA1F2]"><i class="fab fa-twitter"></i> Share on Twitter</a>
-          <a href="https://t.me/share/url?url=https://agushambali.vercel.app/testnet/helios&text=Join Helios Testnet with Agus Hambali's guide!" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Share on Telegram</a>
+        <div class="flex flex-wrap gap-4">
+          <a href="https://twitter.com/intent/tweet?text=Join Helios Testnet with Agus Hambali's guide!&url=https://agushambali.vercel.app/testnet/helios" target="_blank" class="btn bg-[#1DA1F2]"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="https://t.me/share/url?url=https://agushambali.vercel.app/testnet/helios&text=Join Helios Testnet with Agus Hambali's guide!" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Telegram</a>
         </div>
       </div>
       <a href="/testnet.html" class="btn mt-6 block w-fit mx-auto">Back to Testnets</a>
@@ -214,7 +177,7 @@
     <button id="back-to-top" class="shadow-lg"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Footer -->
-    <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8" data-aos="fade-up">
+    <footer class="text-center text-sm text-gray-700 dark:text-gray-300 pb-8" data-aos="fade-up">
       <p>© 2025 Agus Hambali — Built with Love ❤️</p>
       <p class="mt-3">Donation 😹 <span class="font-mono text-[#0EA5E9] break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span> <span id="copy-message" class="text-[#10B981] hidden">Copied!</span></p>
       <div class="mt-4 flex justify-center gap-4">
@@ -230,26 +193,18 @@
   <script>
     AOS.init({ duration: 800, once: true });
 
-    // Hamburger Menu
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      hamburger.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
-
     // Dark Mode Toggle
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
       document.getElementById('html').classList.toggle('dark');
-      themeToggle.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      themeToggle.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun text-xl"></i>' : '<i class="fas fa-moon text-xl"></i>';
       localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
     if (localStorage.getItem('theme') === 'dark') {
       document.body.classList.add('dark');
       document.getElementById('html').classList.add('dark');
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      themeToggle.innerHTML = '<i class="fas fa-sun text-xl"></i>';
     }
 
     // Copy to Clipboard
@@ -268,12 +223,6 @@
     });
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Search Bar (Placeholder for future dynamic search)
-    const searchBar = document.getElementById('search-bar');
-    searchBar.addEventListener('input', (e) => {
-      console.log('Search:', e.target.value); // Implement dynamic search later
     });
 
     // Service Worker

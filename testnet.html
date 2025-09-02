@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#F0F9FF" />
   <title>Airdrop Testnets — Agus Hambali</title>
-  <meta name="description" content="Discover the latest verified crypto testnet airdrops with Agus Hambali." />
-  <meta name="keywords" content="airdrop testnet, crypto sharing, testnet free, crypto airdrop" />
+  <meta name="description" content="Discover the latest verified crypto testnet airdrops with Agus Hambali, your trusted airdrop hunter." />
+  <meta name="keywords" content="airdrop testnet, crypto airdrop, testnet guide, crypto indonesia, free tokens" />
   <meta property="og:title" content="Airdrop Testnets — Agus Hambali" />
-  <meta property="og:description" content="List of latest testnet airdrops for free tokens." />
+  <meta property="og:description" content="List of verified testnet airdrops for free tokens, curated by Agus Hambali." />
   <meta property="og:image" content="/assets/profile.webp" />
   <meta property="og:url" content="https://agushambali.vercel.app/testnet" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Crypto Testnet Airdrops",
+      "description": "A curated list of crypto testnet airdrops by Agus Hambali.",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Helios Testnet",
+            "url": "https://agushambali.vercel.app/testnet/helios.html"
+          }
+        }
+      ]
+    }
+  </script>
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" href="/assets/profile.webp" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -23,17 +44,22 @@
       font-size: 16px;
       background: #F0F9FF;
       color: #1E293B;
-      margin: 0;
-      padding: 0;
+      transition: background 0.3s, color 0.3s;
     }
-
+    body.dark {
+      background: #1E293B;
+      color: #F0F9FF;
+    }
     .glass {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 1rem;
       box-shadow: 0 4px 20px rgba(14, 165, 233, 0.1);
       border: 1px solid rgba(14, 165, 233, 0.05);
     }
-
+    body.dark .glass {
+      background: rgba(30, 41, 59, 0.95);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+    }
     .btn {
       padding: 0.5rem 1rem;
       border-radius: 0.75rem;
@@ -44,73 +70,105 @@
       color: #FFFFFF;
       border: none;
     }
-
     .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
     }
-
     .btn-tab {
       background: #FFFFFF;
       color: #0EA5E9;
       border: 1px solid #0EA5E9;
     }
-
+    body.dark .btn-tab {
+      background: #334155;
+      color: #0EA5E9;
+    }
     .btn-tab.tab-active {
       background: #0EA5E9;
       color: #FFFFFF;
     }
-
     .category-title {
       background: linear-gradient(to right, #0EA5E9, #22D3EE);
       -webkit-background-clip: text;
       color: transparent;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
+      text-align: center;
     }
-
-    .input-field {
+    .input-field, .select-field {
       padding: 0.75rem;
       border-radius: 0.75rem;
       border: 1px solid #D1D5DB;
       background: #FFFFFF;
       width: 100%;
     }
-
-    .select-field {
-      padding: 0.75rem;
-      border-radius: 0.75rem;
-      border: 1px solid #D1D5DB;
-      background: #FFFFFF;
-      width: 100%;
+    body.dark .input-field, body.dark .select-field {
+      background: #334155;
+      border: 1px solid #4B5563;
+      color: #F0F9FF;
     }
-
     .card {
       background: #FFFFFF;
       padding: 1rem;
       border-radius: 1rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Default shadow for separation */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       margin-bottom: 1rem;
       transition: box-shadow 0.3s ease, transform 0.2s ease;
     }
-
+    body.dark .card {
+      background: #334155;
+    }
     .card:hover {
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }
-
     .verified {
-      background: #0EA5E9;
+      background: #10B981;
       color: #FFFFFF;
       padding: 0.25rem 0.75rem;
       border-radius: 1rem;
       font-size: 0.75rem;
       margin-left: 0.5rem;
     }
-
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    #back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0EA5E9;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      display: none;
+    }
+    #hamburger {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      #nav-menu {
+        display: none;
+      }
+      #nav-menu.active {
+        display: block;
+      }
+      #hamburger {
+        display: block;
+      }
+      .filters {
+        flex-direction: column;
+      }
+    }
     @media (min-width: 640px) {
       .container {
-        max-width: 640px;
+        max-width: 1280px;
       }
       .tabs {
         flex-direction: row;
@@ -125,16 +183,27 @@
 <body class="min-h-screen p-4">
   <div class="container mx-auto">
     <!-- Header -->
-    <header class="glass p-4 rounded-xl flex items-center gap-4 mb-6">
-      <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md">
-      <div>
-        <h1 class="text-xl font-bold">Agus Hambali</h1>
-        <p class="text-sm text-gray-600">Airdrop Hunter & Crypto Explorer</p>
+    <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
+      <div class="flex items-center gap-4">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md" loading="lazy">
+        <div>
+          <h1 class="text-xl font-bold">Agus Hambali</h1>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Crypto Explorer</p>
+        </div>
       </div>
+      <button id="hamburger" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+      <nav id="nav-menu" class="hidden md:flex gap-6">
+        <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Home</a>
+        <a href="/testnet.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Testnet</a>
+        <a href="/prices.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Prices</a>
+        <a href="/tutorials.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Tutorials</a>
+        <a href="/contact.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Contact</a>
+      </nav>
+      <button id="theme-toggle" class="ml-4 text-xl"><i class="fas fa-moon"></i></button>
     </header>
 
     <!-- Testnet Section -->
-    <section class="glass p-6 mb-6 rounded-xl">
+    <section class="glass p-6 mb-6 rounded-xl" data-aos="fade-up">
       <h2 class="category-title mb-6">List Update Airdrops</h2>
       <div class="tabs flex flex-col gap-4 mb-6">
         <div class="flex gap-2">
@@ -142,7 +211,7 @@
           <button data-tab="active" class="btn btn-tab">Active</button>
           <button data-tab="ended" class="btn btn-tab">Ended</button>
         </div>
-        <div class="filters flex flex-col gap-4">
+        <div class="filters flex flex-col md:flex-row gap-4">
           <input id="searchTestnet" type="text" placeholder="Search testnets..." class="input-field">
           <select id="filterCategory" class="select-field">
             <option value="">All Categories</option>
@@ -150,42 +219,139 @@
             <option value="Social">Social</option>
             <option value="Node">Node</option>
           </select>
+          <select id="sortBy" class="select-field">
+            <option value="">Sort By</option>
+            <option value="funding">Funding</option>
+            <option value="participants">Participants</option>
+          </select>
         </div>
       </div>
-      <div id="testnetCards" class="space-y-4"></div>
+      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="shadow-lg"><i class="fas fa-arrow-up"></i></button>
+
     <!-- Footer -->
-    <footer class="text-center text-sm text-gray-600 pb-8">
+    <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8" data-aos="fade-up">
       <p>© 2025 Agus Hambali — Built with Love ❤️</p>
-      <p class="mt-3"> Donation 😹 <p><span class="font-mono text-[#0EA5E9] break-all">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span></p>
+      <p class="mt-3">Donation 😹 <span class="font-mono text-[#0EA5E9] break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span> <span id="copy-message" class="text-[#10B981] hidden">Copied!</span></p>
+      <div class="mt-4 flex justify-center gap-4">
+        <a href="https://twitter.com/agushambali" target="_blank" class="text-[#0EA5E9] hover:underline"><i class="fab fa-twitter"></i></a>
+        <a href="https://discord.gg/your-discord" target="_blank" class="text-[#0EA5E9] hover:underline"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/your-telegram" target="_blank" class="text-[#0EA5E9] hover:underline"><i class="fab fa-telegram"></i></a>
+      </div>
+      <p class="mt-2">Join my community for the latest airdrop updates!</p>
     </footer>
   </div>
 
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    // ❤️ Editable Testnet Data: Update this array with only basic info, details go in separate .html files ❤️
+    // Initialize AOS
+    AOS.init({ duration: 800, once: true });
+
+    // Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      document.getElementById('html').classList.toggle('dark');
+      themeToggle.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    });
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+      document.getElementById('html').classList.add('dark');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    // Copy to Clipboard
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const copyMessage = document.getElementById('copy-message');
+        copyMessage.classList.remove('hidden');
+        setTimeout(() => copyMessage.classList.add('hidden'), 2000);
+      });
+    }
+
+    // Back to Top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Testnet Data
     const DEFAULT_TESTNET = [
-      { name: 'Helios Testnet', category: 'Testnet', funding: '$10M', participants: '50K+', status: 'Active', verified: true, slug: 'helios' },
-      { name: 'Succinct Testnet', category: 'Testnet', funding: '$5M', participants: '30K+', status: 'Active', verified: false, slug: 'succinct-testnet' },
-      { name: 'Dill Testnet', category: 'Node', funding: '$2M', participants: '8K+', status: 'Ended', verified: false, slug: 'dill-testnet' },
-      { name: 'Quantum Testnet', category: 'Testnet', funding: '$12M', participants: '40K+', status: 'Active', verified: true, slug: 'quantum-testnet' }
+      {
+        name: 'Helios Testnet',
+        category: 'Testnet',
+        funding: '$10M',
+        participants: '50K+',
+        status: 'Active',
+        verified: true,
+        slug: 'helios',
+        image: '/assets/helioslogo.webp',
+        deadline: '2025-09-30'
+      },
+      {
+        name: 'Succinct Testnet',
+        category: 'Testnet',
+        funding: '$5M',
+        participants: '30K+',
+        status: 'Active',
+        verified: false,
+        slug: 'succinct-testnet',
+        image: '/assets/succinctlogo.webp',
+        deadline: '2025-10-15'
+      },
+      {
+        name: 'Dill Testnet',
+        category: 'Node',
+        funding: '$2M',
+        participants: '8K+',
+        status: 'Ended',
+        verified: false,
+        slug: 'dill-testnet',
+        image: '/assets/dilllogo.webp',
+        deadline: '2025-08-01'
+      },
+      {
+        name: 'Quantum Testnet',
+        category: 'Testnet',
+        funding: '$12M',
+        participants: '40K+',
+        status: 'Active',
+        verified: true,
+        slug: 'quantum-testnet',
+        image: '/assets/quantumlogo.webp',
+        deadline: '2025-11-01'
+      }
     ];
 
-    // ❤️ Editable Base URL: Change this if your website's base URL changes ❤️
     const BASE_URL = 'https://agushambali.vercel.app/testnet/';
 
-    // Function to get testnets from localStorage or use default
+    // Function to get testnets
     function getTestnets() {
       try {
         const raw = localStorage.getItem('testnet_air') || JSON.stringify(DEFAULT_TESTNET);
         return JSON.parse(raw);
       } catch (e) {
         console.error('Error parsing testnet data:', e);
-        return DEFAULT_TESTNET; // Fallback to default if error occurs
+        return DEFAULT_TESTNET;
       }
     }
 
-    // Function to save testnets to localStorage
+    // Function to save testnets
     function setTestnets(testnets) {
       try {
         localStorage.setItem('testnet_air', JSON.stringify(testnets));
@@ -195,34 +361,42 @@
     }
 
     // Function to render testnet cards
-    function renderTestnets(filter = '', tab = 'all', category = '') {
+    function renderTestnets(filter = '', tab = 'all', category = '', sortBy = '') {
       const testnets = getTestnets();
       const cardContainer = document.getElementById('testnetCards');
-      cardContainer.innerHTML = '<div class="skeleton h-24 bg-white animate-pulse rounded-xl mb-4"></div>'.repeat(3);
+      cardContainer.innerHTML = '<div class="skeleton h-32 bg-white dark:bg-gray-800 animate-pulse rounded-xl mb-4"></div>'.repeat(3);
 
       setTimeout(() => {
         cardContainer.innerHTML = '';
-        const filtered = testnets.filter(a => {
+        let filtered = testnets.filter(a => {
           const matchesSearch = a.name.toLowerCase().includes(filter.toLowerCase());
           const matchesTab = tab === 'all' || (tab === 'active' && a.status === 'Active') || (tab === 'ended' && a.status === 'Ended');
           const matchesCategory = category === '' || a.category === category;
           return matchesSearch && matchesTab && matchesCategory;
         });
 
+        if (sortBy === 'funding') {
+          filtered.sort((a, b) => parseFloat(b.funding.replace('$', '')) - parseFloat(a.funding.replace('$', '')));
+        } else if (sortBy === 'participants') {
+          filtered.sort((a, b) => parseInt(b.participants) - parseInt(a.participants));
+        }
+
         if (filtered.length === 0) {
-          cardContainer.innerHTML = '<p class="text-center text-gray-600">No testnets found.</p>';
+          cardContainer.innerHTML = '<p class="text-center text-gray-600 dark:text-gray-300">No testnets found.</p>';
           return;
         }
 
         filtered.forEach((a) => {
           const isSoon = a.deadline && new Date(a.deadline) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
           const card = document.createElement('div');
-          card.className = 'card cursor-pointer';
+          card.className = 'card cursor-pointer flex gap-4 items-center';
+          card.setAttribute('data-aos', 'fade-up');
           card.innerHTML = `
+            <img src="${a.image || '/assets/placeholder.webp'}" alt="${a.name}" class="w-16 h-16 rounded-lg" loading="lazy">
             <div class="flex flex-col gap-2">
               <h4 class="font-bold text-lg">${a.name} ${a.verified ? '<span class="verified">Confirmed</span>' : ''}</h4>
-              <p class="text-sm text-gray-600">${a.category} • ${a.status}${isSoon ? ' <span class="text-red-500 font-bold">Deadline Soon!</span>' : ''}</p>
-              <p class="text-xs text-gray-600">Funding: $${a.funding} • Participants: ${a.participants}</p>
+              <p class="text-sm text-gray-600 dark:text-gray-300">${a.category} • ${a.status}${isSoon ? ' <span class="text-red-500 font-bold">Deadline Soon!</span>' : ''}</p>
+              <p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding} • Participants: ${a.participants}</p>
             </div>
           `;
           card.addEventListener('click', () => {
@@ -242,7 +416,7 @@
       btn.addEventListener('click', () => {
         document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('tab-active'));
         btn.classList.add('tab-active');
-        renderTestnets(document.getElementById('searchTestnet').value, btn.dataset.tab, document.getElementById('filterCategory').value);
+        renderTestnets(document.getElementById('searchTestnet').value, btn.dataset.tab, document.getElementById('filterCategory').value, document.getElementById('sortBy').value);
       });
     });
 
@@ -251,13 +425,18 @@
     document.getElementById('searchTestnet').addEventListener('input', (e) => {
       clearTimeout(debounceTimeout);
       debounceTimeout = setTimeout(() => {
-        renderTestnets(e.target.value, document.querySelector('.tab-active').dataset.tab, document.getElementById('filterCategory').value);
+        renderTestnets(e.target.value, document.querySelector('.tab-active').dataset.tab, document.getElementById('filterCategory').value, document.getElementById('sortBy').value);
       }, 300);
     });
 
     // Category filter
     document.getElementById('filterCategory').addEventListener('change', (e) => {
-      renderTestnets(document.getElementById('searchTestnet').value, document.querySelector('.tab-active').dataset.tab, e.target.value);
+      renderTestnets(document.getElementById('searchTestnet').value, document.querySelector('.tab-active').dataset.tab, e.target.value, document.getElementById('sortBy').value);
+    });
+
+    // Sort filter
+    document.getElementById('sortBy').addEventListener('change', (e) => {
+      renderTestnets(document.getElementById('searchTestnet').value, document.querySelector('.tab-active').dataset.tab, document.getElementById('filterCategory').value, e.target.value);
     });
 
     // Initialize on page load

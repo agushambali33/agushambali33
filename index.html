@@ -104,9 +104,6 @@
       border-radius: 50%;
       display: none;
     }
-    #hamburger {
-      display: none;
-    }
     .bottom-nav {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 2rem;
@@ -122,15 +119,6 @@
       border-radius: 4px;
     }
     @media (max-width: 768px) {
-      #nav-menu {
-        display: none;
-      }
-      #nav-menu.active {
-        display: block;
-      }
-      #hamburger {
-        display: block;
-      }
       .grid {
         grid-template-columns: 1fr !important;
       }
@@ -160,7 +148,6 @@
           <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Crypto Explorer</p>
         </div>
       </div>
-      <button id="hamburger" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
       <nav id="nav-menu" class="hidden md:flex gap-6">
         <a href="#airdrops" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Airdrops</a>
         <a href="/testnet.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Testnet</a>
@@ -168,7 +155,7 @@
         <a href="#tutorials" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Tutorials</a>
         <a href="#contact" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Contact</a>
       </nav>
-      <button id="theme-toggle" class="ml-4 text-xl"><i class="fas fa-moon"></i></button>
+      <button id="theme-toggle" class="text-xl"><i class="fas fa-moon"></i></button>
     </header>
 
     <!-- Hero -->
@@ -180,57 +167,16 @@
         Join Agus Hambali to hunt the best airdrops and testnets in the crypto world!
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="/testnet.html" class="btn">Explore Airdrops</a>
+        <a href="#about" class="btn">About Me</a>
         <a href="https://twitter.com/intent/tweet?text=Join me to hunt crypto airdrops with Agus Hambali!&url=https://agushambali.vercel.app/" target="_blank" class="btn bg-[#1DA1F2]"><i class="fab fa-twitter"></i> Share</a>
         <a href="https://t.me/share/url?url=https://agushambali.vercel.app/&text=Join Agus Hambali for the best crypto airdrops!" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Share</a>
-        <button id="installPWA" class="btn hidden">Install App</button>
-      </div>
-    </section>
-
-    <!-- About Me -->
-    <section id="about" class="glass p-6 mb-12" data-aos="fade-up">
-      <h2 class="category-title mb-6">About Me</h2>
-      <div class="flex flex-col md:flex-row gap-6 items-center">
-        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-32 h-32 rounded-full shadow-md" loading="lazy">
-        <div>
-          <p class="text-gray-600 dark:text-gray-300">
-            Hi, I'm Agus Hambali, a passionate <strong>Airdrop Hunter</strong> and <strong>Crypto Explorer</strong> from Indonesia. I've been diving into the crypto world since 2020, hunting airdrops, participating in testnets, and sharing tips to help the community earn free tokens safely. Follow me for verified opportunities and step-by-step guides!
-          </p>
-          <div class="mt-4 flex gap-4">
-            <a href="https://twitter.com/agushambali33" target="_blank" class="btn bg-[#1DA1F2]"><i class="fab fa-twitter"></i> Twitter</a>
-            <a href="https://t.me/agushambali33" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Telegram</a>
-            <a href="https://discord.com/users/agushambali33" target="_blank" class="btn bg-[#5865F2]"><i class="fab fa-discord"></i> Discord</a>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- Airdrops Overview -->
     <section id="airdrops" class="glass p-6 mb-12" data-aos="fade-up">
       <h2 class="category-title mb-6">Latest Airdrops</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-md transition" data-aos="fade-up" data-aos-delay="100">
-          <div>
-            <h4 class="font-bold text-lg">Gensyn Testnet</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Testnet • Active <span class="text-green-500">Confirmed</span></p>
-          </div>
-          <a href="/testnet/helios.html" class="btn text-sm mt-4">Detail</a>
-        </div>
-        <div class="glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-md transition" data-aos="fade-up" data-aos-delay="200">
-          <div>
-            <h4 class="font-bold text-lg">Succinct Testnet</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Testnet • Active</p>
-          </div>
-          <a href="/testnet/succinct-testnet.html" class="btn text-sm mt-4">Detail</a>
-        </div>
-        <div class="glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-md transition" data-aos="fade-up" data-aos-delay="300">
-          <div>
-            <h4 class="font-bold text-lg">Ritual Testnet</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Testnet • Upcoming</p>
-          </div>
-          <a href="/testnet.html" class="btn text-sm mt-4">Detail</a>
-        </div>
-      </div>
+      <div id="airdrop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
       <a href="/testnet.html" class="btn mt-6 block w-fit mx-auto">View All Airdrops</a>
     </section>
 
@@ -271,6 +217,22 @@
           <h3 class="font-bold text-lg">How to Join Succinct Testnet</h3>
           <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">Tips for EVM testnets.</p>
         </a>
+      </div>
+    </section>
+
+    <!-- About Me -->
+    <section id="about" class="glass p-6 mb-12" data-aos="fade-up">
+      <h2 class="category-title mb-6">About Me</h2>
+      <div class="flex flex-col md:flex-row gap-6 items-center">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-32 h-32 rounded-full shadow-md" loading="lazy">
+        <div class="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+          <p>Hi, I'm Agus Hambali, a passionate <strong>Airdrop Hunter</strong> and <strong>Crypto Explorer</strong> from Indonesia. I've been diving into the crypto world since 2020, hunting airdrops, participating in testnets, and sharing tips to help the community earn free tokens safely. Follow me for verified opportunities and step-by-step guides!</p>
+          <div class="mt-6 flex gap-4">
+            <a href="https://twitter.com/agushambali33" target="_blank" class="btn bg-[#1DA1F2] px-4 py-2">Twitter</a>
+            <a href="https://t.me/agushambali33" target="_blank" class="btn bg-[#0088cc] px-4 py-2">Telegram</a>
+            <a href="https://discord.com/users/agushambali33" target="_blank" class="btn bg-[#5865F2] px-4 py-2">Discord</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -354,14 +316,6 @@
     // Initialize AOS
     AOS.init({ duration: 800, once: true });
 
-    // Hamburger Menu
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      hamburger.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
-
     // Dark Mode Toggle
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('click', () => {
@@ -394,20 +348,39 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // Load Airdrops Dynamically
+    async function loadAirdrops() {
+      try {
+        const response = await fetch('/airdrops.json');
+        const data = await response.json();
+        const airdropGrid = document.getElementById('airdrop-grid');
+        airdropGrid.innerHTML = ''; // Clear existing content
+
+        data.airdrops.slice(0, 3).forEach((airdrop, index) => {
+          const airdropCard = document.createElement('div');
+          airdropCard.className = `glass p-5 rounded-xl flex flex-col justify-between h-full hover:shadow-md transition ${AOS.attributes['data-aos']}`;
+          airdropCard.setAttribute('data-aos-delay', index * 100);
+          airdropCard.innerHTML = `
+            <div>
+              <h4 class="font-bold text-lg">${airdrop.name}</h4>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">${airdrop.status}${airdrop.confirmed ? ' <span class="text-green-500">Confirmed</span>' : ''}</p>
+            </div>
+            <a href="${airdrop.link}" class="btn text-sm mt-4">Detail</a>
+          `;
+          airdropGrid.appendChild(airdropCard);
+        });
+      } catch (error) {
+        console.error('Error loading airdrops:', error);
+        const airdropGrid = document.getElementById('airdrop-grid');
+        airdropGrid.innerHTML = '<p class="text-center text-red-500">Failed to load airdrops. Please try again later.</p>';
+      }
+    }
+
     // PWA Install
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      document.getElementById('installPWA').classList.remove('hidden');
-    });
-    document.getElementById('installPWA').addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') console.log('PWA installed');
-        deferredPrompt = null;
-      }
     });
 
     // Load Prices and Charts
@@ -497,6 +470,7 @@
 
     // Initial Load
     document.addEventListener('DOMContentLoaded', () => {
+      loadAirdrops();
       loadPrices();
     });
 

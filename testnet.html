@@ -18,17 +18,7 @@
       "@type": "ItemList",
       "name": "Crypto Testnet Airdrops",
       "description": "A curated list of crypto testnet airdrops by Agus Hambali.",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "CreativeWork",
-            "name": "Helios Testnet",
-            "url": "https://agushambali.vercel.app/testnet/helios.html"
-          }
-        }
-      ]
+      "itemListElement": []
     }
   </script>
   <link rel="manifest" href="/manifest.json" />
@@ -290,79 +280,21 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Testnet Data
-    const DEFAULT_TESTNET = [
-      {
-        name: 'Helios Testnet',
-        category: 'Testnet',
-        funding: '$10M',
-        participants: '50K+',
-        status: 'Active',
-        verified: true,
-        slug: 'helios',
-        image: '/assets/helioslogo.webp',
-        deadline: '2025-09-30'
-      },
-      {
-        name: 'Succinct Testnet',
-        category: 'Testnet',
-        funding: '$5M',
-        participants: '30K+',
-        status: 'Active',
-        verified: false,
-        slug: 'succinct-testnet',
-        image: '/assets/succinctlogo.webp',
-        deadline: '2025-10-15'
-      },
-      {
-        name: 'Dill Testnet',
-        category: 'Node',
-        funding: '$2M',
-        participants: '8K+',
-        status: 'Ended',
-        verified: false,
-        slug: 'dill-testnet',
-        image: '/assets/dilllogo.webp',
-        deadline: '2025-08-01'
-      },
-      {
-        name: 'Quantum Testnet',
-        category: 'Testnet',
-        funding: '$12M',
-        participants: '40K+',
-        status: 'Active',
-        verified: true,
-        slug: 'quantum-testnet',
-        image: '/assets/quantumlogo.webp',
-        deadline: '2025-11-01'
-      }
-    ];
-
-    const BASE_URL = 'https://agushambali.vercel.app/testnet/';
-
-    // Function to get testnets
-    function getTestnets() {
+    // Load Airdrops Dynamically
+    async function loadAirdrops() {
       try {
-        const raw = localStorage.getItem('testnet_air') || JSON.stringify(DEFAULT_TESTNET);
-        return JSON.parse(raw);
-      } catch (e) {
-        console.error('Error parsing testnet data:', e);
-        return DEFAULT_TESTNET;
-      }
-    }
-
-    // Function to save testnets
-    function setTestnets(testnets) {
-      try {
-        localStorage.setItem('testnet_air', JSON.stringify(testnets));
-      } catch (e) {
-        console.error('Error saving testnet data:', e);
+        const response = await fetch('/airdrops.json');
+        const data = await response.json();
+        return data.airdrops;
+      } catch (error) {
+        console.error('Error loading airdrops:', error);
+        return [];
       }
     }
 
     // Function to render testnet cards
-    function renderTestnets(filter = '', tab = 'all', category = '', sortBy = '') {
-      const testnets = getTestnets();
+    async function renderTestnets(filter = '', tab = 'all', category = '', sortBy = '') {
+      const testnets = await loadAirdrops();
       const cardContainer = document.getElementById('testnetCards');
       cardContainer.innerHTML = '<div class="skeleton h-32 bg-white dark:bg-gray-800 animate-pulse rounded-xl mb-4"></div>'.repeat(3);
 
@@ -370,7 +302,7 @@
         cardContainer.innerHTML = '';
         let filtered = testnets.filter(a => {
           const matchesSearch = a.name.toLowerCase().includes(filter.toLowerCase());
-          const matchesTab = tab === 'all' || (tab === 'active' && a.status === 'Active') || (tab === 'ended' && a.status === 'Ended');
+          const matchesTab = tab === 'all' || (tab === 'active' && a.status === 'Active') || (tab === 'ended' && a.status === 'Ended') || (tab === 'upcoming' && a.status === 'Upcoming');
           const matchesCategory = category === '' || a.category === category;
           return matchesSearch && matchesTab && matchesCategory;
         });
@@ -378,7 +310,7 @@
         if (sortBy === 'funding') {
           filtered.sort((a, b) => parseFloat(b.funding.replace('$', '')) - parseFloat(a.funding.replace('$', '')));
         } else if (sortBy === 'participants') {
-          filtered.sort((a, b) => parseInt(b.participants) - parseInt(a.participants));
+          filtered.sort((a, b) => parseInt(b.participants.replace(/\D/g, '')) - parseInt(a.participants.replace(/\D/g, '')));
         }
 
         if (filtered.length === 0) {
@@ -386,22 +318,23 @@
           return;
         }
 
-        filtered.forEach((a) => {
+        filtered.forEach((a, index) => {
           const isSoon = a.deadline && new Date(a.deadline) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
           const card = document.createElement('div');
           card.className = 'card cursor-pointer flex gap-4 items-center';
           card.setAttribute('data-aos', 'fade-up');
+          card.setAttribute('data-aos-delay', index * 100);
           card.innerHTML = `
             <img src="${a.image || '/assets/placeholder.webp'}" alt="${a.name}" class="w-16 h-16 rounded-lg" loading="lazy">
             <div class="flex flex-col gap-2">
-              <h4 class="font-bold text-lg">${a.name} ${a.verified ? '<span class="verified">Confirmed</span>' : ''}</h4>
+              <h4 class="font-bold text-lg">${a.name} ${a.confirmed ? '<span class="verified">Confirmed</span>' : ''}</h4>
               <p class="text-sm text-gray-600 dark:text-gray-300">${a.category} • ${a.status}${isSoon ? ' <span class="text-red-500 font-bold">Deadline Soon!</span>' : ''}</p>
-              <p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding} • Participants: ${a.participants}</p>
+              <p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding || 'N/A'} • Participants: ${a.participants || 'N/A'}</p>
             </div>
           `;
           card.addEventListener('click', () => {
-            if (a.slug) {
-              window.location.href = `${BASE_URL}${a.slug}.html`;
+            if (a.link) {
+              window.location.href = a.link;
             } else {
               alert('No detail page available for this testnet.');
             }

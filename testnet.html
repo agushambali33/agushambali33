@@ -139,35 +139,6 @@
       border-radius: 50%;
       display: none;
     }
-    #hamburger {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      #nav-menu {
-        display: none;
-      }
-      #nav-menu.active {
-        display: block;
-      }
-      #hamburger {
-        display: block;
-      }
-      .filters {
-        flex-direction: column;
-      }
-    }
-    @media (min-width: 640px) {
-      .container {
-        max-width: 1280px;
-      }
-      .tabs {
-        flex-direction: row;
-      }
-      .filters {
-        flex-direction: row;
-        gap: 1rem;
-      }
-    }
   </style>
 </head>
 <body class="min-h-screen p-4">
@@ -181,15 +152,18 @@
           <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Crypto Explorer</p>
         </div>
       </div>
-      <button id="hamburger" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
-      <nav id="nav-menu" class="hidden md:flex gap-6">
-        <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Home</a>
-        <a href="/testnet.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Testnet</a>
-        <a href="/prices.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Prices</a>
-        <a href="/tutorials.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Tutorials</a>
-        <a href="/contact.html" class="px-4 py-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700 transition">Contact</a>
-      </nav>
-      <button id="theme-toggle" class="ml-4 text-xl"><i class="fas fa-moon"></i></button>
+      <!-- Right Icons -->
+      <div class="flex items-center gap-3">
+        <a href="/" 
+           class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition"
+           title="Back to Home">
+          <i class="fas fa-home text-xl"></i>
+        </a>
+        <button id="theme-toggle" 
+                class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
+          <i class="fas fa-moon text-xl"></i>
+        </button>
+      </div>
     </header>
 
     <!-- Testnet Section -->
@@ -240,26 +214,20 @@
     // Initialize AOS
     AOS.init({ duration: 800, once: true });
 
-    // Hamburger Menu
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      hamburger.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
-
     // Dark Mode Toggle
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
       document.getElementById('html').classList.toggle('dark');
-      themeToggle.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      themeToggle.innerHTML = document.body.classList.contains('dark') 
+        ? '<i class="fas fa-sun text-xl"></i>' 
+        : '<i class="fas fa-moon text-xl"></i>';
       localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
     if (localStorage.getItem('theme') === 'dark') {
       document.body.classList.add('dark');
       document.getElementById('html').classList.add('dark');
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      themeToggle.innerHTML = '<i class="fas fa-sun text-xl"></i>';
     }
 
     // Copy to Clipboard
@@ -385,4 +353,4 @@
     }
   </script>
 </body>
-</html>
+</

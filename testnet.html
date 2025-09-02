@@ -20,15 +20,15 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
     :root { color-scheme: light dark; --primary: #0EA5E9; --secondary: #10B981; --accent: #8B5CF6; }
-    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 16px; background: #FFFFFF; color: #1E293B; transition: all 0.3s ease; }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: clamp(0.875rem, 2.5vw, 1rem); background: #FFFFFF; color: #1E293B; transition: all 0.3s ease; }
     body.dark { background: #0F172A; color: #F0F9FF; }
     h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; font-weight: 800; }
-    h1 { font-size: clamp(1.5rem, 4vw, 2rem); }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); }
     h2 { font-size: clamp(1.5rem, 4vw, 1.9rem); }
     .glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 1rem; border: 1px solid rgba(14,165,233,0.1); box-shadow: 0 4px 20px rgba(14,165,233,0.1); }
     body.dark .glass { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); box-shadow: 0 0 12px rgba(34,211,238,0.2); }
-    .btn { padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 600; font-size: 14px; background: var(--primary); color: #fff; transition: all 0.2s ease; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
+    .btn { padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; font-size: clamp(0.875rem, 2vw, 0.925rem); background: var(--primary); color: #fff; transition: all 0.2s ease; }
+    .btn:hover { transform: scale(1.05); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
     body.dark .btn { box-shadow: 0 0 8px rgba(34,211,238,0.4); }
     .btn-tab { background: #FFF; color: var(--primary); border: 1px solid var(--primary); }
     body.dark .btn-tab { background: #1E293B; }
@@ -41,16 +41,19 @@
     body.dark .badge-green { background: #064E3B; color: #A7F3D0; }
     body.dark .badge-amber { background: #78350F; color: #FDE68A; }
     body.dark .badge-sky { background: #0C4A6E; color: #BAE6FD; }
-    .card { background: rgba(255,255,255,0.95); padding: 1rem; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: all 0.2s ease; margin-bottom: 1rem; cursor: pointer; }
+    .card { display: flex; flex-direction: column; height: 100%; gap: 0.75rem; padding: 1rem; border-radius: 1rem; background: rgba(255,255,255,0.95); border: 1px solid #E5E7EB; transition: all 0.2s ease; }
+    .card:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(14,165,233,0.2); }
     body.dark .card { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(14,165,233,0.2); }
-    .card-img { width: 64px; height: 64px; border-radius: 0.75rem; object-fit: cover; background: #E5E7EB; flex-shrink: 0; }
+    .card-img { width: 64px; height: 64px; border-radius: 0.5rem; object-fit: cover; background: #E5E7EB; }
     body.dark .card-img { background: #334155; }
+    .card-title { font-weight: 800; font-size: clamp(1rem, 2.5vw, 1.125rem); }
+    .card-desc { color: #475569; }
+    body.dark .card-desc { color: #CBD5E1; }
     .input-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; transition: all 0.2s ease; }
     body.dark .input-field { background: #1E293B; border: 1px solid #4B5563; color: #F0F9FF; }
-    .select-field { padding: 0.75rem 2.5rem 0.75rem 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; position: relative; transition: all 0.2s ease; }
+    .select-field { padding: 0.75rem 2.5rem 0.75rem 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; transition: all 0.2s ease; appearance: none; }
     body.dark .select-field { background: #1E293B; border: 1px solid #4B5563; color: #F0F9FF; }
-    .select-field:after {
+    .select-field::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -62,10 +65,10 @@
       border-right: 5px solid transparent;
       border-top: 5px solid #475569;
     }
-    body.dark .select-field:after { border-top-color: #CBD5E1; }
-    .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e5e7eb 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    body.dark .select-field::after { border-top-color: #CBD5E1; }
+    .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e5e7eb 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; padding: 10px; border-radius: 50%; display: none; transition: all 0.2s ease; }
+    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; padding: 12px; border-radius: 50%; display: none; transition: all 0.2s ease; }
     #back-to-top:hover { transform: scale(1.1); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
     .filters .relative { position: relative; }
     .filters .fa-search, .filters .fa-filter, .filters .fa-sort {
@@ -76,34 +79,63 @@
       color: #475569;
     }
     body.dark .filters .fa-search, body.dark .filters .fa-filter, body.dark .filters .fa-sort { color: #CBD5E1; }
+    .social-icon { background-color: rgba(14,165,233,0.1); color: var(--primary); }
+    body.dark .social-icon { background-color: rgba(34,211,238,0.2); color: #22D3EE; }
+    .card-header { display: flex; gap: 1rem; align-items: center; }
+    .card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .card-footer { margin-top: auto; display: flex; justify-content: flex-end; }
     @media (max-width: 640px) {
       body { font-size: 0.875rem; }
-      .btn { padding: 0.5rem 1rem; }
+      .btn { padding: 0.65rem 1rem; }
       .card-img { width: 48px; height: 48px; }
-      .card { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-      .tabs .filters { flex-direction: column; }
+      .filters { flex-direction: column; gap: 1rem; }
+      .card { flex-direction: column; align-items: flex-start; }
+      .card-header { flex-direction: row; align-items: center; width: 100%; }
+      .card-meta { justify-content: flex-start; }
+      .card-footer { justify-content: flex-end; width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .tabs .filters { flex-direction: column; align-items: stretch; }
+      .filters .relative { width: 100%; }
+      .grid-cols-2, .grid-cols-3 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body class="min-h-screen p-4">
-  <div class="container mx-auto">
+<body class="min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-6xl">
     <!-- Header -->
-    <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
-      <div class="flex items-center gap-4">
-        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md" loading="lazy">
-        <div>
-          <h1 class="text-xl font-bold">Agus Hambali</h1>
-          <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Explorer</p>
+    <header class="sticky top-0 z-50 glass p-4 rounded-xl mb-8 flex items-center justify-between" data-aos="fade-down">
+      <div class="flex items-center gap-3">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-10 h-10 rounded-full" loading="lazy">
+        <div class="leading-tight">
+          <p class="font-bold text-base">Agus Hambali</p>
+          <p class="text-xs text-gray-600 dark:text-gray-300">Airdrop Hunter & Explorer</p>
         </div>
       </div>
-      <div class="flex items-center gap-4">
-        <a href="/" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition"><i class="fas fa-home"></i></a>
-        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fas fa-moon"></i></button>
+      <div class="flex items-center gap-3">
+        <a href="/" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition" aria-label="Back to Home">
+          <i class="fas fa-home"></i>
+        </a>
+        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition" aria-label="Toggle tema gelap/terang">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="menu-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white md:hidden" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
     </header>
 
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-40 md:hidden">
+      <div class="flex flex-col items-center justify-center h-full gap-6">
+        <button id="menu-close" class="absolute top-4 right-4 text-sky-600 dark:text-sky-300"><i class="fas fa-times text-2xl"></i></button>
+        <a href="/" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Home</a>
+        <a href="#testnets" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Testnets</a>
+      </div>
+    </nav>
+
     <!-- Testnet Section -->
-    <section class="glass p-6 mb-6 rounded-xl" data-aos="fade-up">
+    <section id="testnets" class="glass p-6 mb-12" data-aos="fade-up">
       <h2 class="category-title mb-6">List Update Airdrops</h2>
       <div class="tabs flex flex-col gap-4 mb-6">
         <div class="flex gap-2 justify-center">
@@ -136,14 +168,18 @@
           </div>
         </div>
       </div>
-      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </section>
 
     <!-- Back to Top -->
-    <button id="back-to-top" class="shadow-lg"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" class="shadow-lg" title="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Footer -->
     <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8" data-aos="fade-up">
+      <div class="flex justify-center gap-4 mb-4">
+        <a href="/" class="hover:text-sky-600">Home</a>
+        <a href="#testnets" class="hover:text-sky-600">Testnets</a>
+      </div>
       <p>© 2025 Agus Hambali — Dibuat dengan ❤️</p>
       <p class="mt-3">
         Donasi <i class="fas fa-coins text-yellow-500"></i>
@@ -153,9 +189,9 @@
         <span id="copy-message" class="text-emerald-500 hidden">Tersalin!</span>
       </p>
       <div class="mt-4 flex justify-center gap-4">
-        <a href="https://twitter.com/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-twitter"></i></a>
-        <a href="https://discord.com/users/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-discord"></i></a>
-        <a href="https://t.me/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-telegram"></i></a>
+        <a href="https://twitter.com/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full social-icon hover:scale-110 transition"><i class="fab fa-twitter"></i></a>
+        <a href="https://discord.com/users/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full social-icon hover:scale-110 transition"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full social-icon hover:scale-110 transition"><i class="fab fa-telegram"></i></a>
       </div>
     </footer>
   </div>
@@ -182,6 +218,13 @@
       document.getElementById('html').classList.add('dark');
     }
     applyThemeIcon();
+
+    // Mobile Menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuClose = document.getElementById('menu-close');
+    menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    menuClose.addEventListener('click', () => mobileMenu.classList.add('hidden'));
 
     // Copy to Clipboard
     function copyToClipboard(text) {
@@ -215,7 +258,7 @@
     // Render Testnet Cards
     async function renderTestnets(filter = '', tab = 'all', category = '', sortBy = '') {
       const grid = document.getElementById('testnetCards');
-      grid.innerHTML = '<div class="skeleton h-32 rounded-xl mb-4"></div>'.repeat(3);
+      grid.innerHTML = '<div class="skeleton h-40 rounded-xl mb-4"></div>'.repeat(3);
       const items = await loadAirdrops();
       setTimeout(() => {
         grid.innerHTML = '';
@@ -249,25 +292,24 @@
           const soonBadge = soon ? '<span class="badge badge-amber">Deadline Segera!</span>' : '';
           const cat = a.category ? `<span class="badge badge-sky">${a.category}</span>` : '';
           const img = a.image || '/assets/placeholder.webp';
+          const link = a.link || '/testnet.html';
           const card = document.createElement('div');
-          card.className = 'card cursor-pointer flex gap-4 items-center';
+          card.className = 'card';
           card.setAttribute('data-aos', 'fade-up');
-          card.setAttribute('data-aos-delay', i * 100);
+          card.setAttribute('data-aos-delay', i * 80);
           card.innerHTML = `
-            <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
-            <div class="flex flex-col gap-2">
-              <h4 class="font-bold text-lg">${a.name} ${confirmed}</h4>
-              <p class="text-sm text-gray-600 dark:text-gray-300">${cat} ${statusBadge} ${soonBadge}</p>
-              <p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding || 'N/A'} • Participants: ${a.participants || 'N/A'}</p>
+            <div class="card-header">
+              <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
+              <div class="flex-1 min-w-0">
+                <div class="card-title truncate">${a.name}</div>
+                <div class="card-meta mt-1">${statusBadge} ${confirmed} ${cat} ${soonBadge}</div>
+              </div>
+            </div>
+            <p class="card-desc text-sm mt-1 line-clamp-2">${a.description || `${a.funding || 'N/A'} • ${a.participants || 'N/A'}` || 'Tidak ada deskripsi.'}</p>
+            <div class="card-footer">
+              <a href="${link}" class="btn text-sm">Detail</a>
             </div>
           `;
-          card.addEventListener('click', () => {
-            if (a.link) {
-              window.location.href = a.link;
-            } else {
-              alert('No detail page available.');
-            }
-          });
           grid.appendChild(card);
         });
       }, 500);

@@ -12,15 +12,6 @@
   <meta property="og:image" content="/assets/profile.webp" />
   <meta property="og:url" content="https://agushambali.vercel.app/testnet" />
   <meta property="og:type" content="website" />
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "name": "Crypto Testnet Airdrops",
-      "description": "A curated list of crypto testnet airdrops by Agus Hambali.",
-      "itemListElement": []
-    }
-  </script>
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" href="/assets/profile.webp" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,117 +19,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      font-size: 16px;
-      background: #F0F9FF;
-      color: #1E293B;
-      transition: background 0.3s, color 0.3s;
-    }
-    body.dark {
-      background: #1E293B;
-      color: #F0F9FF;
-    }
-    .glass {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(14, 165, 233, 0.1);
-      border: 1px solid rgba(14, 165, 233, 0.05);
-    }
-    body.dark .glass {
-      background: rgba(30, 41, 59, 0.95);
-      border: 1px solid rgba(14, 165, 233, 0.2);
-    }
-    .btn {
-      padding: 0.5rem 1rem;
-      border-radius: 0.75rem;
-      font-weight: 500;
-      font-size: 14px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      background: #0EA5E9;
-      color: #FFFFFF;
-      border: none;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
-    }
-    .btn-tab {
-      background: #FFFFFF;
-      color: #0EA5E9;
-      border: 1px solid #0EA5E9;
-    }
-    body.dark .btn-tab {
-      background: #334155;
-      color: #0EA5E9;
-    }
-    .btn-tab.tab-active {
-      background: #0EA5E9;
-      color: #FFFFFF;
-    }
-    .category-title {
-      background: linear-gradient(to right, #0EA5E9, #22D3EE);
-      -webkit-background-clip: text;
-      color: transparent;
-      font-size: 1.8rem;
-      font-weight: 700;
-      text-align: center;
-    }
-    .input-field, .select-field {
-      padding: 0.75rem;
-      border-radius: 0.75rem;
-      border: 1px solid #D1D5DB;
-      background: #FFFFFF;
-      width: 100%;
-    }
-    body.dark .input-field, body.dark .select-field {
-      background: #334155;
-      border: 1px solid #4B5563;
-      color: #F0F9FF;
-    }
-    .card {
-      background: #FFFFFF;
-      padding: 1rem;
-      border-radius: 1rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 1rem;
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-    }
-    body.dark .card {
-      background: #334155;
-    }
-    .card:hover {
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transform: translateY(-2px);
-    }
-    .verified {
-      background: #10B981;
-      color: #FFFFFF;
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.75rem;
-      margin-left: 0.5rem;
-    }
-    .skeleton {
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    #back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #0EA5E9;
-      color: white;
-      padding: 10px;
-      border-radius: 50%;
-      display: none;
-    }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 16px; background: #F9FAFB; color: #1E293B; transition: background 0.3s, color 0.3s; }
+    body.dark { background: #1E293B; color: #F0F9FF; }
+    .glass { background: rgba(255,255,255,0.95); border-radius: 1rem; box-shadow: 0 4px 20px rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.05); }
+    body.dark .glass { background: rgba(30,41,59,0.95); border: 1px solid rgba(14,165,233,0.2); }
+    .btn { padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 500; font-size: 14px; transition: transform .2s, box-shadow .2s; background: #0EA5E9; color: #FFF; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
+    .btn-tab { background: #FFF; color: #0EA5E9; border: 1px solid #0EA5E9; }
+    body.dark .btn-tab { background: #334155; color: #0EA5E9; }
+    .btn-tab.tab-active { background: #0EA5E9; color: #FFF; }
+    .category-title { background: linear-gradient(to right,#0EA5E9,#22D3EE); -webkit-background-clip: text; color: transparent; font-size: 1.9rem; font-weight: 700; text-align: center; }
+    .input-field, .select-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; }
+    body.dark .input-field, body.dark .select-field { background: #334155; border: 1px solid #4B5563; color: #F0F9FF; }
+    .card { background: #FFF; padding: 1rem; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: .2s; margin-bottom: 1rem; }
+    body.dark .card { background: #334155; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .verified { background: #10B981; color: #FFF; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; margin-left: 0.5rem; }
+    .skeleton { background: linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: #0EA5E9; color: white; padding: 10px; border-radius: 50%; display: none; }
   </style>
 </head>
 <body class="min-h-screen p-4">
@@ -146,23 +45,15 @@
     <!-- Header -->
     <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
       <div class="flex items-center gap-4">
-        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md" loading="lazy">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md">
         <div>
           <h1 class="text-xl font-bold">Agus Hambali</h1>
-          <p class="text-sm text-gray-600 dark:text-gray-300">Crypto Hunter & Explorer </p>
+          <p class="text-sm text-gray-700 dark:text-gray-300">Crypto Hunter & Explorer</p>
         </div>
       </div>
-      <!-- Right Icons -->
-      <div class="flex items-center gap-3">
-        <a href="/" 
-           class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition"
-           title="Back to Home">
-          <i class="fas fa-home text-xl"></i>
-        </a>
-        <button id="theme-toggle" 
-                class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/50 dark:hover:bg-gray-700 transition">
-          <i class="fas fa-moon text-xl"></i>
-        </button>
+      <div class="flex items-center gap-4">
+        <a href="/" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition"><i class="fas fa-home"></i></a>
+        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fas fa-moon"></i></button>
       </div>
     </header>
 
@@ -193,163 +84,61 @@
       <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
-    <!-- Back to Top Button -->
+    <!-- Back to Top -->
     <button id="back-to-top" class="shadow-lg"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Footer -->
     <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8" data-aos="fade-up">
-      <p>© 2025 Agus Hambali — Built with Love ❤️</p>
-      <p class="mt-3">Donation 😹 <span class="font-mono text-[#0EA5E9] break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span> <span id="copy-message" class="text-[#10B981] hidden">Copied!</span></p>
+      <p>© 2025 Agus Hambali — Built with ❤️</p>
+      <p class="mt-3">Donation: <span class="font-mono text-sky-600 break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span> <span id="copy-message" class="text-emerald-500 hidden">Copied!</span></p>
       <div class="mt-4 flex justify-center gap-4">
-        <a href="https://twitter.com/agushambali" target="_blank" class="text-[#0EA5E9] hover:underline"><i class="fab fa-twitter"></i></a>
-        <a href="https://discord.gg/your-discord" target="_blank" class="text-[#0EA5E9] hover:underline"><i class="fab fa-discord"></i></a>
-        <a href="https://t.me/your-telegram" target="_blank" class="text-[#0EA5E9] hover:underline"><i class="fab fa-telegram"></i></a>
+        <a href="https://twitter.com/agushambali" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-twitter"></i></a>
+        <a href="https://discord.gg/your-discord" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/your-telegram" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-telegram"></i></a>
       </div>
-      <p class="mt-2">Join my community for the latest airdrop updates!</p>
     </footer>
   </div>
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    // Initialize AOS
     AOS.init({ duration: 800, once: true });
 
-    // Dark Mode Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    themeToggle.addEventListener('click', () => {
+    // Theme Toggle
+    const themeToggle=document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click',()=>{
       document.body.classList.toggle('dark');
       document.getElementById('html').classList.toggle('dark');
-      themeToggle.innerHTML = document.body.classList.contains('dark') 
-        ? '<i class="fas fa-sun text-xl"></i>' 
-        : '<i class="fas fa-moon text-xl"></i>';
-      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      themeToggle.innerHTML=document.body.classList.contains('dark')?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
     });
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark');
-      document.getElementById('html').classList.add('dark');
-      themeToggle.innerHTML = '<i class="fas fa-sun text-xl"></i>';
-    }
+    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark');document.getElementById('html').classList.add('dark');themeToggle.innerHTML='<i class="fas fa-sun"></i>'}
 
-    // Copy to Clipboard
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const copyMessage = document.getElementById('copy-message');
-        copyMessage.classList.remove('hidden');
-        setTimeout(() => copyMessage.classList.add('hidden'), 2000);
-      });
-    }
+    // Copy
+    function copyToClipboard(text){navigator.clipboard.writeText(text).then(()=>{const m=document.getElementById('copy-message');m.classList.remove('hidden');setTimeout(()=>m.classList.add('hidden'),2000)})}
 
     // Back to Top
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    const backToTop=document.getElementById('back-to-top');
+    window.addEventListener('scroll',()=>{backToTop.style.display=window.scrollY>300?'block':'none'});
+    backToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
 
-    // Load Airdrops Dynamically
-    async function loadAirdrops() {
-      try {
-        const response = await fetch('/airdrops.json');
-        const data = await response.json();
-        return data.airdrops;
-      } catch (error) {
-        console.error('Error loading airdrops:', error);
-        return [];
-      }
-    }
+    // Load Airdrops
+    async function loadAirdrops(){try{const r=await fetch('/airdrops.json');const d=await r.json();return d.airdrops}catch(e){console.error('Error:',e);return[]}}
 
-    // Function to render testnet cards
-    async function renderTestnets(filter = '', tab = 'all', category = '', sortBy = '') {
-      const testnets = await loadAirdrops();
-      const cardContainer = document.getElementById('testnetCards');
-      cardContainer.innerHTML = '<div class="skeleton h-32 bg-white dark:bg-gray-800 animate-pulse rounded-xl mb-4"></div>'.repeat(3);
+    // Render Cards
+    async function renderTestnets(filter='',tab='all',category='',sortBy=''){const t=await loadAirdrops();const c=document.getElementById('testnetCards');c.innerHTML='<div class="skeleton h-32 rounded-xl mb-4"></div>'.repeat(3);
+      setTimeout(()=>{c.innerHTML='';let f=t.filter(a=>{const mS=a.name.toLowerCase().includes(filter.toLowerCase());const mT=tab==='all'||(tab==='active'&&a.status==='Active')||(tab==='ended'&&a.status==='Ended')||(tab==='upcoming'&&a.status==='Upcoming');const mC=category===''||a.category===category;return mS&&mT&&mC});
+        if(sortBy==='funding'){f.sort((a,b)=>parseFloat(b.funding.replace(/\$|M/g,''))-parseFloat(a.funding.replace(/\$|M/g,'')))}else if(sortBy==='participants'){f.sort((a,b)=>parseInt(b.participants.replace(/\D/g,''))-parseInt(a.participants.replace(/\D/g,'')))}if(f.length===0){c.innerHTML='<p class="text-center text-gray-600 dark:text-gray-300">No testnets found.</p>';return;}
+        f.forEach((a,i)=>{const soon=a.deadline&&new Date(a.deadline)<=new Date(Date.now()+3*24*60*60*1000);const card=document.createElement('div');card.className='card cursor-pointer flex gap-4 items-center';card.setAttribute('data-aos','fade-up');card.setAttribute('data-aos-delay',i*100);card.innerHTML=`<img src="${a.image||'/assets/placeholder.webp'}" alt="${a.name}" class="w-16 h-16 rounded-lg"><div class="flex flex-col gap-2"><h4 class="font-bold text-lg">${a.name} ${a.confirmed?'<span class="verified">Confirmed</span>':''}</h4><p class="text-sm text-gray-600 dark:text-gray-300">${a.category} • ${a.status}${soon?' <span class="text-red-500 font-bold">Deadline Soon!</span>':''}</p><p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding||'N/A'} • Participants: ${a.participants||'N/A'}</p></div>`;card.addEventListener('click',()=>{if(a.link){window.location.href=a.link}else{alert('No detail page available.')}});c.appendChild(card)});},500)}
 
-      setTimeout(() => {
-        cardContainer.innerHTML = '';
-        let filtered = testnets.filter(a => {
-          const matchesSearch = a.name.toLowerCase().includes(filter.toLowerCase());
-          const matchesTab = tab === 'all' || (tab === 'active' && a.status === 'Active') || (tab === 'ended' && a.status === 'Ended') || (tab === 'upcoming' && a.status === 'Upcoming');
-          const matchesCategory = category === '' || a.category === category;
-          return matchesSearch && matchesTab && matchesCategory;
-        });
+    // Tabs, Filters
+    document.querySelectorAll('[data-tab]').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(b=>b.classList.remove('tab-active'));btn.classList.add('tab-active');renderTestnets(document.getElementById('searchTestnet').value,btn.dataset.tab,document.getElementById('filterCategory').value,document.getElementById('sortBy').value)})});
+    document.getElementById('searchTestnet').addEventListener('input',e=>{clearTimeout(window.db);window.db=setTimeout(()=>{renderTestnets(e.target.value,document.querySelector('.tab-active').dataset.tab,document.getElementById('filterCategory').value,document.getElementById('sortBy').value)},300)});
+    document.getElementById('filterCategory').addEventListener('change',e=>{renderTestnets(document.getElementById('searchTestnet').value,document.querySelector('.tab-active').dataset.tab,e.target.value,document.getElementById('sortBy').value)});
+    document.getElementById('sortBy').addEventListener('change',e=>{renderTestnets(document.getElementById('searchTestnet').value,document.querySelector('.tab-active').dataset.tab,document.getElementById('filterCategory').value,e.target.value)});
+    document.addEventListener('DOMContentLoaded',()=>{renderTestnets()});
 
-        if (sortBy === 'funding') {
-          filtered.sort((a, b) => parseFloat(b.funding.replace('$', '')) - parseFloat(a.funding.replace('$', '')));
-        } else if (sortBy === 'participants') {
-          filtered.sort((a, b) => parseInt(b.participants.replace(/\D/g, '')) - parseInt(a.participants.replace(/\D/g, '')));
-        }
-
-        if (filtered.length === 0) {
-          cardContainer.innerHTML = '<p class="text-center text-gray-600 dark:text-gray-300">No testnets found.</p>';
-          return;
-        }
-
-        filtered.forEach((a, index) => {
-          const isSoon = a.deadline && new Date(a.deadline) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
-          const card = document.createElement('div');
-          card.className = 'card cursor-pointer flex gap-4 items-center';
-          card.setAttribute('data-aos', 'fade-up');
-          card.setAttribute('data-aos-delay', index * 100);
-          card.innerHTML = `
-            <img src="${a.image || '/assets/placeholder.webp'}" alt="${a.name}" class="w-16 h-16 rounded-lg" loading="lazy">
-            <div class="flex flex-col gap-2">
-              <h4 class="font-bold text-lg">${a.name} ${a.confirmed ? '<span class="verified">Confirmed</span>' : ''}</h4>
-              <p class="text-sm text-gray-600 dark:text-gray-300">${a.category} • ${a.status}${isSoon ? ' <span class="text-red-500 font-bold">Deadline Soon!</span>' : ''}</p>
-              <p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding || 'N/A'} • Participants: ${a.participants || 'N/A'}</p>
-            </div>
-          `;
-          card.addEventListener('click', () => {
-            if (a.link) {
-              window.location.href = a.link;
-            } else {
-              alert('No detail page available for this testnet.');
-            }
-          });
-          cardContainer.appendChild(card);
-        });
-      }, 500);
-    }
-
-    // Tab switching
-    document.querySelectorAll('[data-tab]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('tab-active'));
-        btn.classList.add('tab-active');
-        renderTestnets(document.getElementById('searchTestnet').value, btn.dataset.tab, document.getElementById('filterCategory').value, document.getElementById('sortBy').value);
-      });
-    });
-
-    // Search input with debounce
-    let debounceTimeout;
-    document.getElementById('searchTestnet').addEventListener('input', (e) => {
-      clearTimeout(debounceTimeout);
-      debounceTimeout = setTimeout(() => {
-        renderTestnets(e.target.value, document.querySelector('.tab-active').dataset.tab, document.getElementById('filterCategory').value, document.getElementById('sortBy').value);
-      }, 300);
-    });
-
-    // Category filter
-    document.getElementById('filterCategory').addEventListener('change', (e) => {
-      renderTestnets(document.getElementById('searchTestnet').value, document.querySelector('.tab-active').dataset.tab, e.target.value, document.getElementById('sortBy').value);
-    });
-
-    // Sort filter
-    document.getElementById('sortBy').addEventListener('change', (e) => {
-      renderTestnets(document.getElementById('searchTestnet').value, document.querySelector('.tab-active').dataset.tab, document.getElementById('filterCategory').value, e.target.value);
-    });
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      renderTestnets();
-    });
-
-    // Register service worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => console.error('Service Worker registration failed:', err));
-      });
-    }
+    // Service Worker
+    if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}
   </script>
 </body>
+</html>

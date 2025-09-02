@@ -20,15 +20,15 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
     :root { color-scheme: light dark; --primary: #0EA5E9; --secondary: #10B981; --accent: #8B5CF6; }
-    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: clamp(0.875rem, 2.5vw, 1rem); background: #FFFFFF; color: #1E293B; transition: all 0.3s ease; }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 16px; background: #FFFFFF; color: #1E293B; transition: all 0.3s ease; }
     body.dark { background: #0F172A; color: #F0F9FF; }
     h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; font-weight: 800; }
     h1 { font-size: clamp(1.5rem, 4vw, 2rem); }
     h2 { font-size: clamp(1.5rem, 4vw, 1.9rem); }
     .glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 1rem; border: 1px solid rgba(14,165,233,0.1); box-shadow: 0 4px 20px rgba(14,165,233,0.1); }
     body.dark .glass { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); box-shadow: 0 0 12px rgba(34,211,238,0.2); }
-    .btn { padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; font-size: clamp(0.875rem, 2vw, 0.925rem); background: var(--primary); color: #fff; transition: all 0.2s ease; }
-    .btn:hover { transform: scale(1.05); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
+    .btn { padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 600; font-size: 14px; background: var(--primary); color: #fff; transition: all 0.2s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
     body.dark .btn { box-shadow: 0 0 8px rgba(34,211,238,0.4); }
     .btn-tab { background: #FFF; color: var(--primary); border: 1px solid var(--primary); }
     body.dark .btn-tab { background: #1E293B; }
@@ -41,34 +41,30 @@
     body.dark .badge-green { background: #064E3B; color: #A7F3D0; }
     body.dark .badge-amber { background: #78350F; color: #FDE68A; }
     body.dark .badge-sky { background: #0C4A6E; color: #BAE6FD; }
-    .card { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 1rem; background: rgba(255,255,255,0.95); border: 1px solid #E5E7EB; transition: all 0.2s ease; cursor: pointer; }
-    .card:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(14,165,233,0.2); }
+    .card { background: rgba(255,255,255,0.95); padding: 1rem; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: all 0.2s ease; margin-bottom: 1rem; cursor: pointer; }
     body.dark .card { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(14,165,233,0.2); }
     .card-img { width: 64px; height: 64px; border-radius: 0.75rem; object-fit: cover; background: #E5E7EB; flex-shrink: 0; }
     body.dark .card-img { background: #334155; }
-    .card-content { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
-    .card-title { font-weight: 800; font-size: clamp(1rem, 2.5vw, 1.125rem); }
     .input-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; transition: all 0.2s ease; }
     body.dark .input-field { background: #1E293B; border: 1px solid #4B5563; color: #F0F9FF; }
     .select-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path fill="%23475569" d="M0 0h10L5 6z"/></svg>'); background-repeat: no-repeat; background-position: right 0.75rem center; transition: all 0.2s ease; }
     body.dark .select-field { background: #1E293B; border: 1px solid #4B5563; color: #F0F9FF; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path fill="%23CBD5E1" d="M0 0h10L5 6z"/></svg>'); }
-    .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e5e7eb 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+    .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e5e7eb 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; padding: 12px; border-radius: 50%; display: none; transition: all 0.2s ease; }
+    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; padding: 10px; border-radius: 50%; display: none; transition: all 0.2s ease; }
     #back-to-top:hover { transform: scale(1.1); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
-    @media (prefers-reduced-motion) { .btn, .card, #back-to-top { transition: none; } }
     @media (max-width: 640px) {
       body { font-size: 0.875rem; }
-      .btn { padding: 0.65rem 1rem; }
+      .btn { padding: 0.5rem 1rem; }
       .card-img { width: 48px; height: 48px; }
       .card { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-      .card-content { width: 100%; }
       .tabs .filters { flex-direction: column; }
     }
   </style>
 </head>
-<body class="min-h-screen">
-  <div class="container mx-auto px-4 py-8 max-w-6xl">
+<body class="min-h-screen p-4">
+  <div class="container mx-auto">
     <!-- Header -->
     <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
       <div class="flex items-center gap-4">
@@ -78,30 +74,14 @@
           <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Explorer</p>
         </div>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="/" class="btn bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition">Home</a>
-        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition" aria-label="Toggle tema gelap/terang">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button id="menu-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white md:hidden" aria-label="Toggle menu">
-          <i class="fas fa-bars"></i>
-        </button>
+      <div class="flex items-center gap-4">
+        <a href="/" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition"><i class="fas fa-home"></i></a>
+        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fas fa-moon"></i></button>
       </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <nav id="mobile-menu" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-40 md:hidden">
-      <div class="flex flex-col items-center justify-center h-full gap-6">
-        <button id="menu-close" class="absolute top-4 right-4 text-sky-600 dark:text-sky-300"><i class="fas fa-times text-2xl"></i></button>
-        <a href="/" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Home</a>
-        <a href="#testnets" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Testnets</a>
-        <a href="/#prices" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Harga</a>
-        <a href="/#contact" class="text-xl text-gray-600 dark:text-gray-300 hover:text-sky-600">Kontak</a>
-      </div>
-    </nav>
-
     <!-- Testnet Section -->
-    <section id="testnets" class="glass p-6 mb-12" data-aos="fade-up">
+    <section class="glass p-6 mb-6 rounded-xl" data-aos="fade-up">
       <h2 class="category-title mb-6">List Update Airdrops</h2>
       <div class="tabs flex flex-col gap-4 mb-6">
         <div class="flex gap-2 justify-center">
@@ -112,8 +92,7 @@
         </div>
         <div class="filters flex flex-col md:flex-row gap-4">
           <div class="relative w-full max-w-md">
-            <input id="searchTestnet" type="text" class="input-field peer w-full pr-10" placeholder=" " />
-            <label class="absolute left-3 top-3 text-gray-600 dark:text-gray-300 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-sm">Cari testnet...</label>
+            <input id="searchTestnet" type="text" class="input-field w-full pr-10" placeholder="Cari testnet..." />
             <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
           </div>
           <div class="relative w-full max-w-md">
@@ -135,23 +114,17 @@
           </div>
         </div>
       </div>
-      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center"></div>
+      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center"></div>
       <p id="testnet-error" class="text-center text-red-500 hidden mt-4">
         Oops, gagal muat testnet. <button id="retry-testnets" class="underline">Coba lagi</button>
       </p>
     </section>
 
     <!-- Back to Top -->
-    <button id="back-to-top" class="shadow-lg" title="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" class="shadow-lg"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Footer -->
     <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8" data-aos="fade-up">
-      <div class="flex justify-center gap-4 mb-4">
-        <a href="/#airdrops" class="hover:text-sky-600">Airdrops</a>
-        <a href="/testnet.html" class="hover:text-sky-600">Testnet</a>
-        <a href="/#prices" class="hover:text-sky-600">Harga</a>
-        <a href="/#contact" class="hover:text-sky-600">Kontak</a>
-      </div>
       <p>© 2025 Agus Hambali — Dibuat dengan ❤️</p>
       <p class="mt-3">
         Donasi <i class="fas fa-coins text-yellow-500"></i>
@@ -191,13 +164,6 @@
     }
     applyThemeIcon();
 
-    // Mobile Menu
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuClose = document.getElementById('menu-close');
-    menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    menuClose.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-
     // Copy to Clipboard
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
@@ -227,60 +193,67 @@
       }
     }
 
-    // Render Testnet Card
-    function testnetCardTpl(a, i) {
-      const confirmed = a.confirmed ? '<span class="badge badge-green"><i class="fa-solid fa-shield-check"></i> Terverifikasi</span>' : '';
-      const statusBadge = a.status === 'Active'
-        ? '<span class="badge badge-green">Aktif</span>'
-        : a.status === 'Ended'
-          ? '<span class="badge badge-amber">Selesai</span>'
-          : '<span class="badge badge-sky">Segera</span>';
-      const soon = a.deadline && new Date(a.deadline) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
-        ? '<span class="badge badge-amber">Deadline Segera!</span>'
-        : '';
-      const img = a.image || '/assets/placeholder.webp';
-      const cat = a.category ? `<span class="badge badge-sky">${a.category}</span>` : '';
-      const link = a.link || '/testnet.html';
-      return `
-        <div class="card max-w-md cursor-pointer flex gap-4 items-center" data-aos="fade-up" data-aos-delay="${i * 100}" onclick="window.location.href='${link}'">
-          <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
-          <div class="flex flex-col gap-2">
-            <h4 class="font-bold text-lg">${a.name} ${confirmed}</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-300">${cat} ${statusBadge} ${soon}</p>
-            <p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding || 'N/A'} • Participants: ${a.participants || 'N/A'}</p>
-          </div>
-        </div>
-      `;
-    }
-
-    // Render Testnets
+    // Render Testnet Cards
     async function renderTestnets(filter = '', tab = 'all', category = '', sortBy = '') {
       const grid = document.getElementById('testnetCards');
       const errorEl = document.getElementById('testnet-error');
-      grid.innerHTML = `
-        <div class="glass rounded-xl p-5 skeleton h-40"></div>
-        <div class="glass rounded-xl p-5 skeleton h-40"></div>
-        <div class="glass rounded-xl p-5 skeleton h-40"></div>
-      `;
+      grid.innerHTML = '<div class="skeleton h-32 rounded-xl mb-4"></div>'.repeat(3);
       const items = await loadAirdrops();
-      if (!items.length) {
+      setTimeout(() => {
         grid.innerHTML = '';
-        errorEl.classList.remove('hidden');
-        return;
-      }
-      errorEl.classList.add('hidden');
-      let filtered = items.filter(a => {
-        const matchSearch = a.name.toLowerCase().includes(filter.toLowerCase());
-        const matchTab = tab === 'all' || a.status.toLowerCase() === tab;
-        const matchCategory = category === '' || a.category === category;
-        return matchSearch && matchTab && matchCategory;
-      });
-      if (sortBy === 'funding') {
-        filtered.sort((a, b) => parseFloat(b.funding?.replace(/\$|M/g, '') || 0) - parseFloat(a.funding?.replace(/\$|M/g, '') || 0));
-      } else if (sortBy === 'participants') {
-        filtered.sort((a, b) => parseInt(b.participants?.replace(/\D/g, '') || 0) - parseInt(a.participants?.replace(/\D/g, '') || 0));
-      }
-      grid.innerHTML = filtered.map(testnetCardTpl).join('');
+        if (!items.length) {
+          errorEl.classList.remove('hidden');
+          return;
+        }
+        errorEl.classList.add('hidden');
+        let filtered = items.filter(a => {
+          const matchSearch = a.name.toLowerCase().includes(filter.toLowerCase());
+          const matchTab = tab === 'all' || (tab === 'active' && a.status === 'Active') || (tab === 'ended' && a.status === 'Ended') || (tab === 'upcoming' && a.status === 'Upcoming');
+          const matchCategory = category === '' || a.category === category;
+          return matchSearch && matchTab && matchCategory;
+        });
+        if (sortBy === 'funding') {
+          filtered.sort((a, b) => parseFloat(b.funding?.replace(/\$|M/g, '') || 0) - parseFloat(a.funding?.replace(/\$|M/g, '') || 0));
+        } else if (sortBy === 'participants') {
+          filtered.sort((a, b) => parseInt(b.participants?.replace(/\D/g, '') || 0) - parseInt(a.participants?.replace(/\D/g, '') || 0));
+        }
+        if (filtered.length === 0) {
+          grid.innerHTML = '<p class="text-center text-gray-600 dark:text-gray-300">Tidak ada testnet ditemukan.</p>';
+          return;
+        }
+        filtered.forEach((a, i) => {
+          const soon = a.deadline && new Date(a.deadline) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+          const confirmed = a.confirmed ? '<span class="badge badge-green"><i class="fa-solid fa-shield-check"></i> Terverifikasi</span>' : '';
+          const statusBadge = a.status === 'Active'
+            ? '<span class="badge badge-green">Aktif</span>'
+            : a.status === 'Ended'
+              ? '<span class="badge badge-amber">Selesai</span>'
+              : '<span class="badge badge-sky">Segera</span>';
+          const soonBadge = soon ? '<span class="badge badge-amber">Deadline Segera!</span>' : '';
+          const cat = a.category ? `<span class="badge badge-sky">${a.category}</span>` : '';
+          const img = a.image || '/assets/placeholder.webp';
+          const card = document.createElement('div');
+          card.className = 'card cursor-pointer flex gap-4 items-center';
+          card.setAttribute('data-aos', 'fade-up');
+          card.setAttribute('data-aos-delay', i * 100);
+          card.innerHTML = `
+            <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
+            <div class="flex flex-col gap-2">
+              <h4 class="font-bold text-lg">${a.name} ${confirmed}</h4>
+              <p class="text-sm text-gray-600 dark:text-gray-300">${cat} ${statusBadge} ${soonBadge}</p>
+              <p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding || 'N/A'} • Participants: ${a.participants || 'N/A'}</p>
+            </div>
+          `;
+          card.addEventListener('click', () => {
+            if (a.link) {
+              window.location.href = a.link;
+            } else {
+              alert('No detail page available.');
+            }
+          });
+          grid.appendChild(card);
+        });
+      }, 500);
     }
 
     // Tabs and Filters
@@ -323,24 +296,13 @@
         e.target.value
       );
     });
-    document.getElementById('retry-testnets').addEventListener('click', () => {
+    document.getElementById('retry-testnets')?.addEventListener('click', () => {
       renderTestnets(
         document.getElementById('searchTestnet').value,
         document.querySelector('.tab-active').dataset.tab,
         document.getElementById('filterCategory').value,
         document.getElementById('sortBy').value
       );
-    });
-
-    // Smooth Anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
     });
 
     // Init

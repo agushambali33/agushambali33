@@ -110,7 +110,7 @@
         Discover Airdrops
       </h1>
       <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-        Hunt verified airdrops & testnets. Belajar cepat, aman, dan untung lebih.
+        Hunt verified airdrops & testnets. Sambil belajar bareng !
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
         <a href="#about" class="btn">Tentang Saya</a>
@@ -221,21 +221,8 @@
             <span class="badge badge-green">Keamanan</span>
           </div>
           <div class="card-footer"><span class="btn">Baca</span></div>
-        </a>
-        <a href="/blog/testnet-checklist.html" class="card">
-          <div class="card-header">
-            <img src="/assets/placeholder.webp" class="card-img" alt="Checklist">
-            <div>
-              <div class="card-title">Checklist Harian Testnet</div>
-              <div class="text-sm card-desc">Rutinitas hemat waktu.</div>
-            </div>
-          </div>
-          <div class="card-meta">
-            <span class="badge badge-sky"><i class="fa-regular fa-clock"></i> 4 menit</span>
-            <span class="badge badge-amber">Panduan</span>
-          </div>
-          <div class="card-footer"><span class="btn">Baca</span></div>
-        </a>
+        
+       </a>
       </div>
     </section>
 
@@ -245,10 +232,10 @@
       <div class="flex flex-col md:flex-row gap-6 items-center">
         <img src="/assets/profile.webp" alt="Agus Hambali" class="w-28 h-28 rounded-full shadow-md" loading="lazy">
         <div class="text-gray-700 dark:text-gray-300">
-          <p>Hai! Saya Agus Hambali — <b>Airdrop Hunter</b> & <b>Crypto Explorer</b>. Fokus di testnet dan peluang legit, biar komunitas bisa earning dengan aman.</p>
+          <p>Hai! Saya Agus Hambali — <b>Airdrop Hunter</b> & <b>Crypto Explorer</b>. Fokus di berbagai type Airdrop Khususnya testnet.</p>
           <div class="mt-4">
-            <p class="text-sm"><i class="fas fa-rocket mr-2"></i>Mulai hunting: 2023</p>
-            <p class="text-sm"><i class="fas fa-network-wired mr-2"></i>Ikut 50+ testnet</p>
+            <p class="text-sm"><i class="fas fa-rocket mr-2"></i>Mulai Aktip: 2019</p>
+            <p class="text-sm"><i class="fas fa-network-wired mr-2"></i>Mengikuti 99+ testnet & Airdrop </p>
           </div>
           <div class="mt-4 flex gap-3">
             <a href="https://twitter.com/agushambali33" target="_blank" class="btn bg-[#1DA1F2]">Twitter</a>
@@ -436,7 +423,7 @@
         const matchTab = tab === 'all' || a.status.toLowerCase() === tab;
         return matchSearch && matchTab;
       });
-      filtered = filtered.slice(0, 3); // Show 3 latest
+      filtered = filtered.slice(0, 2); // Show 3 latest
       grid.innerHTML = filtered.map(airdropCardTpl).join('');
     }
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" id="html">
 <head>
@@ -15,52 +16,29 @@
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" href="/assets/profile.webp" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
-    :root { color-scheme: light dark; --primary: #0EA5E9; --secondary: #10B981; --accent: #8B5CF6; }
-    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 16px; background: #FFFFFF; color: #1E293B; transition: all 0.3s ease; }
-    body.dark { background: #0F172A; color: #F0F9FF; }
-    h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; font-weight: 800; }
-    h1 { font-size: clamp(1.5rem, 4vw, 2rem); }
-    h2 { font-size: clamp(1.5rem, 4vw, 1.9rem); }
-    .glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 1rem; border: 1px solid rgba(14,165,233,0.1); box-shadow: 0 4px 20px rgba(14,165,233,0.1); }
-    body.dark .glass { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); box-shadow: 0 0 12px rgba(34,211,238,0.2); }
-    .btn { padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 600; font-size: 14px; background: var(--primary); color: #fff; transition: all 0.2s ease; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
-    body.dark .btn { box-shadow: 0 0 8px rgba(34,211,238,0.4); }
-    .btn-tab { background: #FFF; color: var(--primary); border: 1px solid var(--primary); }
-    body.dark .btn-tab { background: #1E293B; }
-    .btn-tab.tab-active { background: var(--primary); color: #FFF; }
-    .category-title { background: linear-gradient(135deg, var(--primary), #22D3EE); -webkit-background-clip: text; color: transparent; font-size: clamp(1.5rem, 4vw, 1.9rem); font-weight: 800; text-align: center; }
-    .badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
-    .badge-green { background: #DCFCE7; color: #047857; }
-    .badge-amber { background: #FEF3C7; color: #B45309; }
-    .badge-sky { background: #E0F2FE; color: #0369A1; }
-    body.dark .badge-green { background: #064E3B; color: #A7F3D0; }
-    body.dark .badge-amber { background: #78350F; color: #FDE68A; }
-    body.dark .badge-sky { background: #0C4A6E; color: #BAE6FD; }
-    .card { background: rgba(255,255,255,0.95); padding: 1rem; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: all 0.2s ease; margin-bottom: 1rem; cursor: pointer; }
-    body.dark .card { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(14,165,233,0.2); }
-    .card-img { width: 64px; height: 64px; border-radius: 0.75rem; object-fit: cover; background: #E5E7EB; flex-shrink: 0; }
-    body.dark .card-img { background: #334155; }
-    .input-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; transition: all 0.2s ease; }
-    body.dark .input-field { background: #1E293B; border: 1px solid #4B5563; color: #F0F9FF; }
-    .select-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path fill="%23475569" d="M0 0h10L5 6z"/></svg>'); background-repeat: no-repeat; background-position: right 0.75rem center; transition: all 0.2s ease; }
-    body.dark .select-field { background: #1E293B; border: 1px solid #4B5563; color: #F0F9FF; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path fill="%23CBD5E1" d="M0 0h10L5 6z"/></svg>'); }
-    .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e5e7eb 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; padding: 10px; border-radius: 50%; display: none; transition: all 0.2s ease; }
-    #back-to-top:hover { transform: scale(1.1); box-shadow: 0 0 12px rgba(14,165,233,0.5); }
-    @media (max-width: 640px) {
-      body { font-size: 0.875rem; }
-      .btn { padding: 0.5rem 1rem; }
-      .card-img { width: 48px; height: 48px; }
-      .card { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-      .tabs .filters { flex-direction: column; }
-    }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 16px; background: #F9FAFB; color: #1E293B; transition: background 0.3s, color 0.3s; }
+    body.dark { background: #1E293B; color: #F0F9FF; }
+    .glass { background: rgba(255,255,255,0.95); border-radius: 1rem; box-shadow: 0 4px 20px rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.05); }
+    body.dark .glass { background: rgba(30,41,59,0.95); border: 1px solid rgba(14,165,233,0.2); }
+    .btn { padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 500; font-size: 14px; transition: transform .2s, box-shadow .2s; background: #0EA5E9; color: #FFF; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
+    .btn-tab { background: #FFF; color: #0EA5E9; border: 1px solid #0EA5E9; }
+    body.dark .btn-tab { background: #334155; color: #0EA5E9; }
+    .btn-tab.tab-active { background: #0EA5E9; color: #FFF; }
+    .category-title { background: linear-gradient(to right,#0EA5E9,#22D3EE); -webkit-background-clip: text; color: transparent; font-size: 1.9rem; font-weight: 700; text-align: center; }
+    .input-field, .select-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; }
+    body.dark .input-field, body.dark .select-field { background: #334155; border: 1px solid #4B5563; color: #F0F9FF; }
+    .card { background: #FFF; padding: 1rem; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: .2s; margin-bottom: 1rem; }
+    body.dark .card { background: #334155; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .verified { background: #10B981; color: #FFF; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; margin-left: 0.5rem; }
+    .skeleton { background: linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    #back-to-top { position: fixed; bottom: 20px; right: 20px; background: #0EA5E9; color: white; padding: 10px; border-radius: 50%; display: none; }
   </style>
 </head>
 <body class="min-h-screen p-4">
@@ -68,10 +46,10 @@
     <!-- Header -->
     <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
       <div class="flex items-center gap-4">
-        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md" loading="lazy">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md">
         <div>
           <h1 class="text-xl font-bold">Agus Hambali</h1>
-          <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Explorer</p>
+          <p class="text-sm text-gray-700 dark:text-gray-300">Crypto Hunter & Explorer</p>
         </div>
       </div>
       <div class="flex items-center gap-4">
@@ -84,40 +62,27 @@
     <section class="glass p-6 mb-6 rounded-xl" data-aos="fade-up">
       <h2 class="category-title mb-6">List Update Airdrops</h2>
       <div class="tabs flex flex-col gap-4 mb-6">
-        <div class="flex gap-2 justify-center">
-          <button data-tab="all" class="btn btn-tab tab-active">Semua</button>
-          <button data-tab="active" class="btn btn-tab">Aktif</button>
-          <button data-tab="upcoming" class="btn btn-tab">Segera</button>
-          <button data-tab="ended" class="btn btn-tab">Selesai</button>
+        <div class="flex gap-2">
+          <button data-tab="all" class="btn btn-tab tab-active">All</button>
+          <button data-tab="active" class="btn btn-tab">Active</button>
+          <button data-tab="ended" class="btn btn-tab">Ended</button>
         </div>
         <div class="filters flex flex-col md:flex-row gap-4">
-          <div class="relative w-full max-w-md">
-            <input id="searchTestnet" type="text" class="input-field w-full pr-10" placeholder="Cari testnet..." />
-            <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-          </div>
-          <div class="relative w-full max-w-md">
-            <select id="filterCategory" class="select-field w-full pr-10">
-              <option value="">Semua Kategori</option>
-              <option value="Testnet">Testnet</option>
-              <option value="Social">Social</option>
-              <option value="Node">Node</option>
-            </select>
-            <i class="fas fa-filter absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-          </div>
-          <div class="relative w-full max-w-md">
-            <select id="sortBy" class="select-field w-full pr-10">
-              <option value="">Urutkan</option>
-              <option value="funding">Funding</option>
-              <option value="participants">Participants</option>
-            </select>
-            <i class="fas fa-sort absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-          </div>
+          <input id="searchTestnet" type="text" placeholder="Search testnets..." class="input-field">
+          <select id="filterCategory" class="select-field">
+            <option value="">All Categories</option>
+            <option value="Testnet">Testnet</option>
+            <option value="Social">Social</option>
+            <option value="Node">Node</option>
+          </select>
+          <select id="sortBy" class="select-field">
+            <option value="">Sort By</option>
+            <option value="funding">Funding</option>
+            <option value="participants">Participants</option>
+          </select>
         </div>
       </div>
-      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center"></div>
-      <p id="testnet-error" class="text-center text-red-500 hidden mt-4">
-        Oops, gagal muat testnet. <button id="retry-testnets" class="underline">Coba lagi</button>
-      </p>
+      <div id="testnetCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
     <!-- Back to Top -->
@@ -125,18 +90,12 @@
 
     <!-- Footer -->
     <footer class="text-center text-sm text-gray-600 dark:text-gray-300 pb-8" data-aos="fade-up">
-      <p>© 2025 Agus Hambali — Dibuat dengan ❤️</p>
-      <p class="mt-3">
-        Donasi <i class="fas fa-coins text-yellow-500"></i>
-        <span class="font-mono text-sky-600 break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">
-          0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae
-        </span>
-        <span id="copy-message" class="text-emerald-500 hidden">Tersalin!</span>
-      </p>
+      <p>© 2025 Agus Hambali — Built with ❤️</p>
+      <p class="mt-3">Donation: <span class="font-mono text-sky-600 break-all cursor-pointer" id="donation-address" onclick="copyToClipboard('0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae')">0x18Def71C218664fafb1BBA9d0e8b123425CF0Dae</span> <span id="copy-message" class="text-emerald-500 hidden">Copied!</span></p>
       <div class="mt-4 flex justify-center gap-4">
-        <a href="https://twitter.com/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-twitter"></i></a>
-        <a href="https://discord.com/users/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-discord"></i></a>
-        <a href="https://t.me/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-telegram"></i></a>
+        <a href="https://twitter.com/agushambali" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-twitter"></i></a>
+        <a href="https://discord.gg/your-discord" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/your-telegram" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white"><i class="fab fa-telegram"></i></a>
       </div>
     </footer>
   </div>
@@ -146,176 +105,41 @@
     AOS.init({ duration: 800, once: true });
 
     // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    function applyThemeIcon() {
-      themeToggle.innerHTML = document.body.classList.contains('dark')
-        ? '<i class="fas fa-sun"></i>'
-        : '<i class="fas fa-moon"></i>';
-    }
-    themeToggle.addEventListener('click', () => {
+    const themeToggle=document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click',()=>{
       document.body.classList.toggle('dark');
       document.getElementById('html').classList.toggle('dark');
-      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-      applyThemeIcon();
+      themeToggle.innerHTML=document.body.classList.contains('dark')?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
     });
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark');
-      document.getElementById('html').classList.add('dark');
-    }
-    applyThemeIcon();
+    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark');document.getElementById('html').classList.add('dark');themeToggle.innerHTML='<i class="fas fa-sun"></i>'}
 
-    // Copy to Clipboard
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const msg = document.getElementById('copy-message');
-        msg.classList.remove('hidden');
-        setTimeout(() => msg.classList.add('hidden'), 2000);
-      });
-    }
+    // Copy
+    function copyToClipboard(text){navigator.clipboard.writeText(text).then(()=>{const m=document.getElementById('copy-message');m.classList.remove('hidden');setTimeout(()=>m.classList.add('hidden'),2000)})}
 
     // Back to Top
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-    });
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    const backToTop=document.getElementById('back-to-top');
+    window.addEventListener('scroll',()=>{backToTop.style.display=window.scrollY>300?'block':'none'});
+    backToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
 
     // Load Airdrops
-    async function loadAirdrops() {
-      try {
-        const res = await fetch('/airdrops.json');
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        return Array.isArray(data.airdrops) ? data.airdrops : [];
-      } catch (e) {
-        console.error('Load airdrops failed:', e);
-        return [];
-      }
-    }
+    async function loadAirdrops(){try{const r=await fetch('/airdrops.json');const d=await r.json();return d.airdrops}catch(e){console.error('Error:',e);return[]}}
 
-    // Render Testnet Cards
-    async function renderTestnets(filter = '', tab = 'all', category = '', sortBy = '') {
-      const grid = document.getElementById('testnetCards');
-      const errorEl = document.getElementById('testnet-error');
-      grid.innerHTML = '<div class="skeleton h-32 rounded-xl mb-4"></div>'.repeat(3);
-      const items = await loadAirdrops();
-      setTimeout(() => {
-        grid.innerHTML = '';
-        if (!items.length) {
-          errorEl.classList.remove('hidden');
-          return;
-        }
-        errorEl.classList.add('hidden');
-        let filtered = items.filter(a => {
-          const matchSearch = a.name.toLowerCase().includes(filter.toLowerCase());
-          const matchTab = tab === 'all' || (tab === 'active' && a.status === 'Active') || (tab === 'ended' && a.status === 'Ended') || (tab === 'upcoming' && a.status === 'Upcoming');
-          const matchCategory = category === '' || a.category === category;
-          return matchSearch && matchTab && matchCategory;
-        });
-        if (sortBy === 'funding') {
-          filtered.sort((a, b) => parseFloat(b.funding?.replace(/\$|M/g, '') || 0) - parseFloat(a.funding?.replace(/\$|M/g, '') || 0));
-        } else if (sortBy === 'participants') {
-          filtered.sort((a, b) => parseInt(b.participants?.replace(/\D/g, '') || 0) - parseInt(a.participants?.replace(/\D/g, '') || 0));
-        }
-        if (filtered.length === 0) {
-          grid.innerHTML = '<p class="text-center text-gray-600 dark:text-gray-300">Tidak ada testnet ditemukan.</p>';
-          return;
-        }
-        filtered.forEach((a, i) => {
-          const soon = a.deadline && new Date(a.deadline) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
-          const confirmed = a.confirmed ? '<span class="badge badge-green"><i class="fa-solid fa-shield-check"></i> Terverifikasi</span>' : '';
-          const statusBadge = a.status === 'Active'
-            ? '<span class="badge badge-green">Aktif</span>'
-            : a.status === 'Ended'
-              ? '<span class="badge badge-amber">Selesai</span>'
-              : '<span class="badge badge-sky">Segera</span>';
-          const soonBadge = soon ? '<span class="badge badge-amber">Deadline Segera!</span>' : '';
-          const cat = a.category ? `<span class="badge badge-sky">${a.category}</span>` : '';
-          const img = a.image || '/assets/placeholder.webp';
-          const card = document.createElement('div');
-          card.className = 'card cursor-pointer flex gap-4 items-center';
-          card.setAttribute('data-aos', 'fade-up');
-          card.setAttribute('data-aos-delay', i * 100);
-          card.innerHTML = `
-            <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
-            <div class="flex flex-col gap-2">
-              <h4 class="font-bold text-lg">${a.name} ${confirmed}</h4>
-              <p class="text-sm text-gray-600 dark:text-gray-300">${cat} ${statusBadge} ${soonBadge}</p>
-              <p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding || 'N/A'} • Participants: ${a.participants || 'N/A'}</p>
-            </div>
-          `;
-          card.addEventListener('click', () => {
-            if (a.link) {
-              window.location.href = a.link;
-            } else {
-              alert('No detail page available.');
-            }
-          });
-          grid.appendChild(card);
-        });
-      }, 500);
-    }
+    // Render Cards
+    async function renderTestnets(filter='',tab='all',category='',sortBy=''){const t=await loadAirdrops();const c=document.getElementById('testnetCards');c.innerHTML='<div class="skeleton h-32 rounded-xl mb-4"></div>'.repeat(3);
+      setTimeout(()=>{c.innerHTML='';let f=t.filter(a=>{const mS=a.name.toLowerCase().includes(filter.toLowerCase());const mT=tab==='all'||(tab==='active'&&a.status==='Active')||(tab==='ended'&&a.status==='Ended')||(tab==='upcoming'&&a.status==='Upcoming');const mC=category===''||a.category===category;return mS&&mT&&mC});
+        if(sortBy==='funding'){f.sort((a,b)=>parseFloat(b.funding.replace(/\$|M/g,''))-parseFloat(a.funding.replace(/\$|M/g,'')))}else if(sortBy==='participants'){f.sort((a,b)=>parseInt(b.participants.replace(/\D/g,''))-parseInt(a.participants.replace(/\D/g,'')))}if(f.length===0){c.innerHTML='<p class="text-center text-gray-600 dark:text-gray-300">No testnets found.</p>';return;}
+        f.forEach((a,i)=>{const soon=a.deadline&&new Date(a.deadline)<=new Date(Date.now()+3*24*60*60*1000);const card=document.createElement('div');card.className='card cursor-pointer flex gap-4 items-center';card.setAttribute('data-aos','fade-up');card.setAttribute('data-aos-delay',i*100);card.innerHTML=`<img src="${a.image||'/assets/placeholder.webp'}" alt="${a.name}" class="w-16 h-16 rounded-lg"><div class="flex flex-col gap-2"><h4 class="font-bold text-lg">${a.name} ${a.confirmed?'<span class="verified">Confirmed</span>':''}</h4><p class="text-sm text-gray-600 dark:text-gray-300">${a.category} • ${a.status}${soon?' <span class="text-red-500 font-bold">Deadline Soon!</span>':''}</p><p class="text-xs text-gray-600 dark:text-gray-300">Funding: ${a.funding||'N/A'} • Participants: ${a.participants||'N/A'}</p></div>`;card.addEventListener('click',()=>{if(a.link){window.location.href=a.link}else{alert('No detail page available.')}});c.appendChild(card)});},500)}
 
-    // Tabs and Filters
-    document.querySelectorAll('[data-tab]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('tab-active'));
-        btn.classList.add('tab-active');
-        renderTestnets(
-          document.getElementById('searchTestnet').value,
-          btn.dataset.tab,
-          document.getElementById('filterCategory').value,
-          document.getElementById('sortBy').value
-        );
-      });
-    });
-    document.getElementById('searchTestnet').addEventListener('input', e => {
-      clearTimeout(window.db);
-      window.db = setTimeout(() => {
-        renderTestnets(
-          e.target.value,
-          document.querySelector('.tab-active').dataset.tab,
-          document.getElementById('filterCategory').value,
-          document.getElementById('sortBy').value
-        );
-      }, 300);
-    });
-    document.getElementById('filterCategory').addEventListener('change', e => {
-      renderTestnets(
-        document.getElementById('searchTestnet').value,
-        document.querySelector('.tab-active').dataset.tab,
-        e.target.value,
-        document.getElementById('sortBy').value
-      );
-    });
-    document.getElementById('sortBy').addEventListener('change', e => {
-      renderTestnets(
-        document.getElementById('searchTestnet').value,
-        document.querySelector('.tab-active').dataset.tab,
-        document.getElementById('filterCategory').value,
-        e.target.value
-      );
-    });
-    document.getElementById('retry-testnets')?.addEventListener('click', () => {
-      renderTestnets(
-        document.getElementById('searchTestnet').value,
-        document.querySelector('.tab-active').dataset.tab,
-        document.getElementById('filterCategory').value,
-        document.getElementById('sortBy').value
-      );
-    });
-
-    // Init
-    document.addEventListener('DOMContentLoaded', () => {
-      renderTestnets();
-    });
+    // Tabs, Filters
+    document.querySelectorAll('[data-tab]').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(b=>b.classList.remove('tab-active'));btn.classList.add('tab-active');renderTestnets(document.getElementById('searchTestnet').value,btn.dataset.tab,document.getElementById('filterCategory').value,document.getElementById('sortBy').value)})});
+    document.getElementById('searchTestnet').addEventListener('input',e=>{clearTimeout(window.db);window.db=setTimeout(()=>{renderTestnets(e.target.value,document.querySelector('.tab-active').dataset.tab,document.getElementById('filterCategory').value,document.getElementById('sortBy').value)},300)});
+    document.getElementById('filterCategory').addEventListener('change',e=>{renderTestnets(document.getElementById('searchTestnet').value,document.querySelector('.tab-active').dataset.tab,e.target.value,document.getElementById('sortBy').value)});
+    document.getElementById('sortBy').addEventListener('change',e=>{renderTestnets(document.getElementById('searchTestnet').value,document.querySelector('.tab-active').dataset.tab,document.getElementById('filterCategory').value,e.target.value)});
+    document.addEventListener('DOMContentLoaded',()=>{renderTestnets()});
 
     // Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => console.error('SW registration failed:', err));
-      });
-    }
+    if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}
   </script>
 </body>
 </html>

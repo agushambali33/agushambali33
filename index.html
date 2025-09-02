@@ -65,6 +65,11 @@
       .btn { padding: 0.65rem 1rem; }
       .card-img { width: 48px; height: 48px; }
     }
+    .card-header { display: flex; gap: 1rem; align-items: center; }
+    .card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .card-footer { margin-top: auto; display: flex; justify-content: flex-end; }
+    .social-icon { background-color: rgba(14,165,233,0.1); color: var(--primary); }
+    body.dark .social-icon { background-color: rgba(34,211,238,0.2); color: #22D3EE; }
   </style>
 </head>
 <body class="min-h-screen">
@@ -79,7 +84,6 @@
         </div>
       </div>
       <div class="flex items-center gap-3">
-        <input id="searchAirdrop" type="text" placeholder="Cari airdrop..." class="input-field max-w-xs" aria-label="Cari airdrop">
         <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition" aria-label="Toggle tema gelap/terang">
           <i class="fas fa-moon"></i>
         </button>
@@ -315,9 +319,9 @@
         <span id="copy-message" class="text-emerald-500 hidden">Tersalin!</span>
       </p>
       <div class="mt-4 flex justify-center gap-4">
-        <a href="https://twitter.com/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-twitter"></i></a>
-        <a href="https://discord.com/users/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-discord"></i></a>
-        <a href="https://t.me/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-110 transition"><i class="fab fa-telegram"></i></a>
+        <a href="https://twitter.com/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full social-icon hover:scale-110 transition"><i class="fab fa-twitter"></i></a>
+        <a href="https://discord.com/users/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full social-icon hover:scale-110 transition"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/agushambali33" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full social-icon hover:scale-110 transition"><i class="fab fa-telegram"></i></a>
       </div>
     </footer>
   </div>
@@ -441,14 +445,8 @@
       btn.addEventListener('click', () => {
         document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('tab-active'));
         btn.classList.add('tab-active');
-        renderAirdrops(document.getElementById('searchAirdrop').value, btn.dataset.tab);
+        renderAirdrops('', btn.dataset.tab); // No search input now
       });
-    });
-    document.getElementById('searchAirdrop').addEventListener('input', e => {
-      clearTimeout(window.db);
-      window.db = setTimeout(() => {
-        renderAirdrops(e.target.value, document.querySelector('.tab-active').dataset.tab);
-      }, 300);
     });
     document.getElementById('retry-airdrops').addEventListener('click', () => renderAirdrops());
 

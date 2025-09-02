@@ -9,7 +9,7 @@
   <meta property="og:title" content="Helios Testnet — Agus Hambali" />
   <meta property="og:description" content="Join Helios Testnet for funding, rewards, and more. Step-by-step guide by Agus Hambali." />
   <meta property="og:image" content="/assets/helioslogo.webp" />
-  <meta property="og:url" content="https://agushambali.vercel.app/testnet/helios" />
+  <meta property="og:url" content="https://agushambali.vercel.app/testnet/helios.html" />
   <meta property="og:type" content="website" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" href="/assets/profile.webp" />
@@ -19,16 +19,16 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
     :root { 
-      --primary: #0EA5E9; /* Biru dari index/testnet */
-      --secondary: #10B981; /* Hijau dari index/testnet */
-      --accent: #8B5CF6; /* Ungu dari index/testnet */
+      --primary: #0EA5E9; /* Biru untuk tombol dan link */
+      --secondary: #10B981; /* Hijau untuk progress bar dan badge */
+      --accent: #8B5CF6; /* Ungu untuk aksen */
     }
     body { 
       font-family: 'Inter', sans-serif; 
       line-height: 1.6; 
       font-size: clamp(0.875rem, 2.5vw, 1rem); 
-      background: #F8FAFC; /* Abu-abu terang untuk kontras lembut */
-      color: #111827; /* Teks gelap untuk keterbacaan */
+      background: #F8FAFC; /* Abu-abu terang */
+      color: #111827; /* Teks gelap */
     }
     h1, h2, h3 { 
       font-family: 'Poppins', sans-serif; 
@@ -37,11 +37,11 @@
     h1 { font-size: clamp(2rem, 5vw, 3rem); }
     h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
     .glass { 
-      background: #FFFFFF; /* Solid putih untuk kontras */
+      background: #FFFFFF; 
       backdrop-filter: blur(10px); 
       border-radius: 1rem; 
-      border: 1px solid #D1D5DB; /* Border jelas */
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Bayangan lembut */
+      border: 1px solid #D1D5DB; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
     }
     .btn { 
       padding: 0.75rem 1.5rem; 
@@ -60,7 +60,7 @@
       box-shadow: 0 0 12px rgba(14,165,233,0.5); 
     }
     .category-title { 
-      background: linear-gradient(135deg, var(--primary), #22D3EE); /* Gradien biru */
+      background: linear-gradient(135deg, var(--primary), #22D3EE); 
       -webkit-background-clip: text; 
       color: transparent; 
       font-size: clamp(1.5rem, 4vw, 1.9rem); 
@@ -77,12 +77,12 @@
       font-weight: 600; 
     }
     .badge-green { 
-      background: #BBF7D0; /* Hijau cerah */
-      color: #065F46; /* Teks hijau tua */
+      background: #BBF7D0; 
+      color: #065F46; 
     }
     .badge-amber { 
-      background: #F9E79F; /* Kuning cerah */
-      color: #854D0E; /* Teks cokelat tua */
+      background: #F9E79F; 
+      color: #854D0E; 
     }
     .stat-box { 
       background: #FFFFFF; 
@@ -97,8 +97,27 @@
       background: #FFFFFF; 
       border: 1px solid #D1D5DB; 
       border-radius: 0.75rem; 
-      padding: 1.25rem; 
+      padding: 1rem; 
       line-height: 1.7; 
+      display: flex; 
+      align-items: center; 
+      gap: 1rem; 
+    }
+    .how-to-join:not(:last-child) { 
+      margin-bottom: 1rem; 
+    }
+    .step-number { 
+      width: 2.5rem; 
+      height: 2.5rem; 
+      background: var(--primary); 
+      color: #FFFFFF; 
+      border-radius: 50%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 1.2rem; 
+      font-weight: 600; 
+      flex-shrink: 0; 
     }
     .progress-bar { 
       height: 12px; 
@@ -134,7 +153,7 @@
       color: var(--primary); 
     }
     a.text-sky-600:hover { 
-      color: #0284C7; /* Hover biru lebih gelap */
+      color: #0284C7; 
     }
     @media (max-width: 640px) {
       body { font-size: 0.875rem; }
@@ -142,7 +161,8 @@
       .stat-box { padding: 0.75rem; }
       .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .category-title { font-size: 1.5rem; }
-      .how-to-join { padding: 1rem; }
+      .how-to-join { padding: 0.75rem; }
+      .step-number { width: 2rem; height: 2rem; font-size: 1rem; }
     }
     @media (prefers-reduced-motion) {
       .btn, #back-to-top { transition: none; }
@@ -195,14 +215,35 @@
 
         <!-- How to Join -->
         <p><strong>How to Join:</strong></p>
-        <div class="how-to-join text-sm" data-aos="fade-up">
-          <p>- Connect with testnet or new wallet</p>
-          <p>- Claim <a href="https://faucet.helioschain.network" target="_blank">$HLS faucet</a></p>
-          <p>- Go to <a href="https://portal.helioschain.network/" target="_blank">Helios Portal</a></p>
-          <p>- Try to bridge HLS to Sepolia</p>
-          <p>- Stake HLS on Validator</p>
-          <p>- Repeat daily/weekly</p>
-          <p>- Complete <a href="https://zealy.io/cw/heliosblockchain" target="_blank">Zealy tasks</a></p>
+        <div class="space-y-4" data-aos="fade-up">
+          <div class="how-to-join">
+            <span class="step-number">1</span>
+            <p>Connect with testnet or new wallet</p>
+          </div>
+          <div class="how-to-join">
+            <span class="step-number">2</span>
+            <p>Claim <a href="https://faucet.helioschain.network" target="_blank" class="text-sky-600 hover:underline">$HLS faucet</a></p>
+          </div>
+          <div class="how-to-join">
+            <span class="step-number">3</span>
+            <p>Go to <a href="https://portal.helioschain.network/" target="_blank" class="text-sky-600 hover:underline">Helios Portal</a></p>
+          </div>
+          <div class="how-to-join">
+            <span class="step-number">4</span>
+            <p>Try to bridge HLS to Sepolia</p>
+          </div>
+          <div class="how-to-join">
+            <span class="step-number">5</span>
+            <p>Stake HLS on Validator</p>
+          </div>
+          <div class="how-to-join">
+            <span class="step-number">6</span>
+            <p>Repeat daily/weekly</p>
+          </div>
+          <div class="how-to-join">
+            <span class="step-number">7</span>
+            <p>Complete <a href="https://zealy.io/cw/heliosblockchain" target="_blank" class="text-sky-600 hover:underline">Zealy tasks</a></p>
+          </div>
         </div>
 
         <!-- Tasks -->
@@ -216,8 +257,8 @@
         <!-- Share -->
         <p><strong>Share:</strong></p>
         <div class="flex flex-wrap gap-3">
-          <a href="https://twitter.com/intent/tweet?text=Join Helios Testnet with Agus Hambali's guide!&url=https://agushambali.vercel.app/testnet/helios" target="_blank" class="btn bg-[#1DA1F2]"><i class="fab fa-twitter"></i> Twitter</a>
-          <a href="https://t.me/share/url?url=https://agushambali.vercel.app/testnet/helios&text=Join Helios Testnet with Agus Hambali's guide!" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Telegram</a>
+          <a href="https://twitter.com/intent/tweet?text=Join Helios Testnet with Agus Hambali's guide!&url=https://agushambali.vercel.app/testnet/helios.html" target="_blank" class="btn bg-[#1DA1F2]"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="https://t.me/share/url?url=https://agushambali.vercel.app/testnet/helios.html&text=Join Helios Testnet with Agus Hambali's guide!" target="_blank" class="btn bg-[#0088cc]"><i class="fab fa-telegram"></i> Telegram</a>
         </div>
       </div>
 

@@ -22,9 +22,9 @@
     :root { color-scheme: light dark; --primary: #0EA5E9; --secondary: #10B981; --accent: #8B5CF6; }
     body { font-family: 'Inter', sans-serif; line-height: 1.6; font-size: clamp(0.875rem, 2.5vw, 1rem); background: #FFFFFF; color: #1E293B; transition: all 0.3s ease; }
     body.dark { background: #0F172A; color: #F0F9FF; }
-    h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 800; }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); }
-    h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+    h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; font-weight: 800; }
+    h1 { font-size: clamp(1.5rem, 4vw, 2rem); }
+    h2 { font-size: clamp(1.5rem, 4vw, 1.9rem); }
     .glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 1rem; border: 1px solid rgba(14,165,233,0.1); box-shadow: 0 4px 20px rgba(14,165,233,0.1); }
     body.dark .glass { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); box-shadow: 0 0 12px rgba(34,211,238,0.2); }
     .btn { padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; font-size: clamp(0.875rem, 2vw, 0.925rem); background: var(--primary); color: #fff; transition: all 0.2s ease; }
@@ -41,18 +41,13 @@
     body.dark .badge-green { background: #064E3B; color: #A7F3D0; }
     body.dark .badge-amber { background: #78350F; color: #FDE68A; }
     body.dark .badge-sky { background: #0C4A6E; color: #BAE6FD; }
-    .card { display: flex; flex-direction: column; height: 100%; gap: 1rem; padding: 1.5rem; border-radius: 1rem; background: rgba(255,255,255,0.95); border: 1px solid #E5E7EB; transition: all 0.2s ease; }
+    .card { display: flex; align-items: center; gap: 1rem; padding: 1.5rem; border-radius: 1rem; background: rgba(255,255,255,0.95); border: 1px solid #E5E7EB; transition: all 0.2s ease; cursor: pointer; }
     .card:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(14,165,233,0.2); }
     body.dark .card { background: rgba(15,23,42,0.9); border: 1px solid rgba(34,211,238,0.3); }
-    .card-header { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
     .card-img { width: 64px; height: 64px; border-radius: 0.75rem; object-fit: cover; background: #E5E7EB; flex-shrink: 0; }
     body.dark .card-img { background: #334155; }
     .card-content { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
     .card-title { font-weight: 800; font-size: clamp(1rem, 2.5vw, 1.125rem); }
-    .card-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .card-desc { color: #475569; font-size: 0.875rem; line-clamp: 2; overflow: hidden; text-overflow: ellipsis; }
-    body.dark .card-desc { color: #CBD5E1; }
-    .card-footer { margin-top: auto; display: flex; justify-content: flex-end; }
     .input-field, .select-field { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #D1D5DB; background: #FFF; width: 100%; transition: all 0.2s ease; }
     body.dark .input-field, body.dark .select-field { background: #1E293B; border: 1px solid #4B5563; color: #F0F9FF; }
     .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e5e7eb 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
@@ -64,7 +59,7 @@
       body { font-size: 0.875rem; }
       .btn { padding: 0.65rem 1rem; }
       .card-img { width: 48px; height: 48px; }
-      .card-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .card { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
       .card-content { width: 100%; }
       .tabs .filters { flex-direction: column; }
     }
@@ -73,12 +68,12 @@
 <body class="min-h-screen">
   <div class="container mx-auto px-4 py-8 max-w-6xl">
     <!-- Header -->
-    <header class="sticky top-0 z-50 glass p-4 rounded-xl mb-8 flex items-center justify-between" data-aos="fade-down">
-      <div class="header-brand flex items-center gap-3 justify-center flex-1">
-        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-10 h-10 rounded-full" loading="lazy">
-        <div class="leading-tight">
-          <p class="font-bold text-base">Agus Hambali</p>
-          <p class="text-xs text-gray-600 dark:text-gray-300">Airdrop Hunter & Explorer</p>
+    <header class="sticky top-0 z-50 glass p-4 rounded-xl flex items-center justify-between mb-8" data-aos="fade-down">
+      <div class="flex items-center gap-4">
+        <img src="/assets/profile.webp" alt="Agus Hambali" class="w-12 h-12 rounded-full shadow-md" loading="lazy">
+        <div>
+          <h1 class="text-xl font-bold">Agus Hambali</h1>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Airdrop Hunter & Explorer</p>
         </div>
       </div>
       <div class="flex items-center gap-3">
@@ -245,19 +240,12 @@
       const cat = a.category ? `<span class="badge badge-sky">${a.category}</span>` : '';
       const link = a.link || '/testnet.html';
       return `
-        <div class="card max-w-md" data-aos="fade-up" data-aos-delay="${i * 80}">
-          <div class="card-header">
-            <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
-            <div class="card-content">
-              <div class="card-title">${a.name}</div>
-              <div class="card-meta">${statusBadge} ${confirmed} ${cat} ${soon}</div>
-            </div>
-          </div>
-          <p class="card-desc">
-            Funding: ${a.funding || 'N/A'} • Participants: ${a.participants || 'N/A'}
-          </p>
-          <div class="card-footer">
-            <a href="${link}" class="btn text-sm">Lihat Detail <i class="fas fa-arrow-right ml-1"></i></a>
+        <div class="card max-w-md" data-aos="fade-up" data-aos-delay="${i * 80}" onclick="window.location.href='${link}'">
+          <img src="${img}" alt="${a.name}" class="card-img" loading="lazy" onerror="this.src='/assets/placeholder.webp'">
+          <div class="card-content">
+            <h4 class="card-title">${a.name} ${confirmed}</h4>
+            <div class="card-meta">${statusBadge} ${cat} ${soon}</div>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Funding: ${a.funding || 'N/A'} • Participants: ${a.participants || 'N/A'}</p>
           </div>
         </div>
       `;
@@ -333,7 +321,7 @@
         e.target.value
       );
     });
-    document.getElementById('retry-testnets')?.addEventListener('click', () => {
+    document.getElementById('retry-testnets').addEventListener('click', () => {
       renderTestnets(
         document.getElementById('searchTestnet').value,
         document.querySelector('.tab-active').dataset.tab,

@@ -64,6 +64,8 @@
       body { font-size: 0.875rem; }
       .btn { padding: 0.65rem 1rem; }
       .card-img { width: 48px; height: 48px; }
+      header { justify-content: space-between; }
+      .header-brand { flex: 1; text-align: center; }
     }
   </style>
 </head>
@@ -71,7 +73,7 @@
   <div class="container mx-auto px-4 py-8 max-w-6xl">
     <!-- Header -->
     <header class="sticky top-0 z-50 glass p-4 rounded-xl mb-8 flex items-center justify-between" data-aos="fade-down">
-      <div class="flex items-center gap-3">
+      <div class="header-brand flex items-center gap-3 justify-center flex-1">
         <img src="/assets/profile.webp" alt="Agus Hambali" class="w-10 h-10 rounded-full" loading="lazy">
         <div class="leading-tight">
           <p class="font-bold text-base">Agus Hambali</p>
@@ -79,7 +81,6 @@
         </div>
       </div>
       <div class="flex items-center gap-3">
-        <input id="searchAirdrop" type="text" placeholder="Cari airdrop..." class="input-field max-w-xs" aria-label="Cari airdrop">
         <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-sky-100 dark:bg-gray-700 text-sky-600 dark:text-white hover:scale-105 transition" aria-label="Toggle tema gelap/terang">
           <i class="fas fa-moon"></i>
         </button>
@@ -118,7 +119,7 @@
     <section id="airdrops" class="glass p-6 mb-12" data-aos="fade-up">
       <h2 class="category-title mb-6">Airdrop Terbaru</h2>
       <div class="flex flex-col gap-4 mb-6">
-        <div class="flex gap-2">
+        <div class="flex gap-2 justify-center">
           <button data-tab="all" class="btn btn-tab tab-active">Semua</button>
           <button data-tab="active" class="btn btn-tab">Aktif</button>
           <button data-tab="upcoming" class="btn btn-tab">Segera</button>
@@ -412,7 +413,7 @@
     }
 
     // Render Airdrops
-    async function renderAirdrops(filter = '', tab = 'all') {
+    async function renderAirdrops(tab = 'all') {
       const grid = document.getElementById('airdrop-grid');
       const errorEl = document.getElementById('airdrop-error');
       grid.innerHTML = `
@@ -427,30 +428,20 @@
         return;
       }
       errorEl.classList.add('hidden');
-      let filtered = items.filter(a => {
-        const matchSearch = a.name.toLowerCase().includes(filter.toLowerCase());
-        const matchTab = tab === 'all' || a.status.toLowerCase() === tab;
-        return matchSearch && matchTab;
-      });
+      let filtered = items.filter(a => tab === 'all' || a.status.toLowerCase() === tab);
       filtered = filtered.slice(0, 3); // Show 3 latest
       grid.innerHTML = filtered.map(airdropCardTpl).join('');
     }
 
-    // Tabs and Search
+    // Tabs
     document.querySelectorAll('[data-tab]').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('tab-active'));
         btn.classList.add('tab-active');
-        renderAirdrops(document.getElementById('searchAirdrop').value, btn.dataset.tab);
+        renderAirdrops(btn.dataset.tab);
       });
     });
-    document.getElementById('searchAirdrop').addEventListener('input', e => {
-      clearTimeout(window.db);
-      window.db = setTimeout(() => {
-        renderAirdrops(e.target.value, document.querySelector('.tab-active').dataset.tab);
-      }, 300);
-    });
-    document.getElementById('retry-airdrops').addEventListener('click', () => renderAirdrops());
+    document.getElementById('retry-airdrops').addEventListener('click', () => renderAirdrops(document.querySelector('.tab-active').dataset.tab));
 
     // Prices
     async function loadPrices() {
@@ -503,7 +494,7 @@
     });
 
     // Init
-    document.addEventListener('DOMContentLoaded', async () => {
+    document.addEventNameListener('DOMContentLoaded', async () => {
       await renderAirdrops();
       loadPrices();
     });

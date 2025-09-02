@@ -1,52 +1,54 @@
-{
-  "airdrops": [
-    {
-      "name": "Gensyn Testnet",
-      "status": "Active",
-      "confirmed": true,
-      "link": "/testnet/helios.html",
-      "category": "Testnet",
-      "funding": "$10M",
-      "participants": "50K+",
-      "slug": "helios",
-      "image": "/assets/helioslogo.webp",
-      "deadline": "2025-09-30"
-    },
-    {
-      "name": "Succinct Testnet",
-      "status": "Active",
-      "confirmed": false,
-      "link": "/testnet/succinct-testnet.html",
-      "category": "Testnet",
-      "funding": "$5M",
-      "participants": "30K+",
-      "slug": "succinct-testnet",
-      "image": "/assets/succinctlogo.webp",
-      "deadline": "2025-10-15"
-    },
-    {
-      "name": "Ritual Testnet",
-      "status": "Upcoming",
-      "confirmed": false,
-      "link": "/testnet.html",
-      "category": "Testnet",
-      "funding": "$2M",
-      "participants": "8K+",
-      "slug": "ritual-testnet",
-      "image": "/assets/rituallogo.webp",
-      "deadline": "2025-11-01"
-    },
-    {
-      "name": "Dill Testnet",
-      "status": "Ended",
-      "confirmed": false,
-      "link": "/testnet/dill-testnet.html",
-      "category": "Node",
-      "funding": "$1M",
-      "participants": "5K+",
-      "slug": "dill-testnet",
-      "image": "/assets/dilllogo.webp",
-      "deadline": "2025-08-01"
-    }
-  ]
-}
+[
+  {
+    "name": "Gensyn Testnet",
+    "status": "Active",
+    "confirmed": true,
+    "link": "/testnet/helios.html",
+    "category": "Testnet",
+    "funding": "$10M",
+    "participants": "50K+",
+    "slug": "helios",
+    "image": "/assets/helioslogo.webp",
+    "deadline": "2025-09-30",
+    "description": "Test description for Gensyn Testnet, join and earn rewards."
+  },
+  {
+    "name": "Monad Mole",
+    "status": "Upcoming",
+    "confirmed": false,
+    "link": "/testnet/monadmole.html",
+    "category": "Testnet",
+    "funding": "$5M",
+    "participants": "20K+",
+    "slug": "monadmole",
+    "image": "/assets/monadmole.png",
+    "deadline": "2025-12-15",
+    "description": "Sample description for Monad Mole, community-driven meme project."
+  },
+  {
+    "name": "Helios Protocol",
+    "status": "Ended",
+    "confirmed": true,
+    "link": "/testnet/helios2.html",
+    "category": "Incentivized",
+    "funding": "$2M",
+    "participants": "10K+",
+    "slug": "helios2",
+    "image": "/assets/helios2.png",
+    "deadline": "2025-07-20",
+    "description": "Placeholder description for Helios Protocol incentivized testnet."
+  },
+  {
+    "name": "Confidential Layer",
+    "status": "Active",
+    "confirmed": false,
+    "link": "/testnet/confidential.html",
+    "category": "Testnet",
+    "funding": "$8M",
+    "participants": "30K+",
+    "slug": "confidential",
+    "image": "/assets/confidential.png",
+    "deadline": "2025-10-05",
+    "description": "Temporary description for Confidential Layer testnet activity."
+  }
+]

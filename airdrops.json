@@ -1,30 +1,30 @@
 {
   "airdrops": [
     {
-      "name": "Gensyn Testnet",
+      "name": "Helios Network's",
       "status": "Active",
       "confirmed": true,
       "link": "/testnet/helios.html",
       "category": "Testnet",
-      "funding": "$10M",
-      "participants": "50K+",
+      "funding": "$TBA",
+      "participants": "30K+",
       "slug": "helios",
       "image": "/assets/helioslogo.webp",
-      "deadline": "2025-09-30",
-      "description": "Test description for Gensyn Testnet, placeholder only."
+      "deadline": "-",
+      "description": "Helios unifies leading blockchains into one evolving intelligent multi-consensus architecture."
     },
     {
-      "name": "Succinct Testnet",
+      "name": "Umi Network's ",
       "status": "Active",
-      "confirmed": false,
-      "link": "/testnet/succinct-testnet.html",
+      "confirmed": true,
+      "link": "/testnet/umi.html",
       "category": "Testnet",
       "funding": "$5M",
-      "participants": "30K+",
-      "slug": "succinct-testnet",
-      "image": "/assets/succinctlogo.webp",
+      "participants": "20K+",
+      "slug": "umi",
+      "image": "/assets/umi.webp",
       "deadline": "2025-10-15",
-      "description": "Sample description for Succinct Testnet, for testing only."
+      "description": "Built-in safety, faster time-to-market, and full access to Ethereum's users and infrastructure — all in one chain"
     },
     {
       "name": "Ritual Testnet",

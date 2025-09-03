@@ -1,6 +1,20 @@
 {
   "airdrops": [
     {
+      "name": "Paxi hub",
+      "status": "Active",
+      "confirmed": true,
+      "link": "/paxi.html",
+      "category": "App",
+      "funding": "$TBA",
+      "participants": "10K+",
+      "slug": "paxi",
+      "image": "/assets/paxi.webp",
+      "deadline": "2026-01-01",
+      "description": "PAXI is a next-gen Layer 1 blockchain where everyone can be a validator."
+    },
+
+    {
       "name": "Helios Network's",
       "status": "Active",
       "confirmed": true,
@@ -13,6 +27,7 @@
       "deadline": "-",
       "description": "Helios unifies leading blockchains into one evolving intelligent multi-consensus architecture."
     },
+
     {
       "name": "Umi Network's ",
       "status": "Active",
@@ -26,19 +41,7 @@
       "deadline": "2025-10-15",
       "description": "Built-in safety, faster time-to-market, and full access to Ethereum's users and infrastructure — all in one chain"
     },
-    {
-      "name": "Paxi hub",
-      "status": "Aktive",
-      "confirmed": true,
-      "link": "/testnet.html",
-      "category": "App",
-      "funding": "$TBA",
-      "participants": "10K+",
-      "slug": "paxi",
-      "image": "/assets/paxi.webp",
-      "deadline": "2026-01-01",
-      "description": "PAXI is a next-gen Layer 1 blockchain where everyone can be a validator."
-    },
+
     {
       "name": "Dill Testnet",
       "status": "Ended",

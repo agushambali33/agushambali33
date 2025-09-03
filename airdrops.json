@@ -27,17 +27,17 @@
       "description": "Built-in safety, faster time-to-market, and full access to Ethereum's users and infrastructure — all in one chain"
     },
     {
-      "name": "Ritual Testnet",
-      "status": "Upcoming",
-      "confirmed": false,
+      "name": "Paxi hub",
+      "status": "Aktive",
+      "confirmed": true,
       "link": "/testnet.html",
-      "category": "Testnet",
-      "funding": "$2M",
-      "participants": "8K+",
-      "slug": "ritual-testnet",
-      "image": "/assets/rituallogo.webp",
-      "deadline": "2025-11-01",
-      "description": "Placeholder description for Ritual Testnet, demo purposes."
+      "category": "App",
+      "funding": "$TBA",
+      "participants": "10K+",
+      "slug": "paxi",
+      "image": "/assets/paxi.webp",
+      "deadline": "2026-01-01",
+      "description": "PAXI is a next-gen Layer 1 blockchain where everyone can be a validator."
     },
     {
       "name": "Dill Testnet",

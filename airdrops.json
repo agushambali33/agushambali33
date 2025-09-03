@@ -4,7 +4,7 @@
       "name": "Paxi hub",
       "status": "Active",
       "confirmed": true,
-      "link": "/paxi.html",
+      "link": "testnet/paxi.html",
       "category": "App",
       "funding": "$TBA",
       "participants": "10K+",

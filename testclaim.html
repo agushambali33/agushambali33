@@ -2,65 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Wallet Test</title>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.0/dist/ethers.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test Claim</title>
+  <script src="https://unpkg.com/@thirdweb-dev/wallets@latest/dist/browser.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f5f5f5;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #4CAF50;
+      color: white;
+    }
+    button:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+    #walletAddress {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
 </head>
-<body style="background:#111; color:white; text-align:center; padding:50px;">
-  <h2>Wallet Integration Test</h2>
-
-  <button id="connectBtn" style="padding:10px 20px; margin:10px; background:#2d72d9; color:white;">Connect Wallet</button>
-  <p id="address"></p>
-
-  <button id="claimBtn" style="padding:10px 20px; margin:10px; background:#e63946; color:white;">Claim Reward</button>
+<body>
+  <h2>Test Claim Page</h2>
+  <button id="connectBtn">Connect Wallet</button>
+  <p id="walletAddress"></p>
 
   <script>
-    const CONTRACT_ADDRESS = "0x21D994934c35310e3C356Baac7d723159cA28Cab";
-    const CONTRACT_ABI = [
-      "function claimReward(uint256 score,uint256 nonce,uint256 expiry,bytes signature) external returns (bool)"
-    ];
+    const connectBtn = document.getElementById("connectBtn");
+    const walletAddress = document.getElementById("walletAddress");
 
-    let provider, signer, contract;
+    // Thirdweb Wallet Connector (MetaMask)
+    const metamask = new window.ThirdwebWallets.MetamaskWallet();
 
-    async function connectWallet() {
-      if (!window.ethereum) {
-        alert("MetaMask not found!");
-        return;
-      }
-
-      provider = new ethers.BrowserProvider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      signer = await provider.getSigner();
-      const address = await signer.getAddress();
-
-      document.getElementById("address").innerText = "Connected: " + address;
-
-      contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-    }
-
-    async function claimReward() {
-      if (!contract) {
-        alert("Connect wallet dulu!");
-        return;
-      }
-
-      // data voucher yang lo generate
-      const score = 10;
-      const nonce = 1;
-      const expiry = 1757926743;
-      const signature = "0xdc84858b204223b44135b979a16a80e903d244c5ee02c878f2f925d238fdb5645fc86ba12e52c7e7cdfc795811404ae4c290506057be91ce851f698f3d3c06381";
-
+    connectBtn.onclick = async () => {
       try {
-        const tx = await contract.claimReward(score, nonce, expiry, signature);
-        const receipt = await tx.wait();
-        alert("Claim sukses! TX: " + receipt.hash);
+        const address = await metamask.connect();
+        walletAddress.textContent = "Connected: " + address;
+        connectBtn.textContent = "Connected";
+        connectBtn.disabled = true;
       } catch (err) {
-        console.error(err);
-        alert("Claim gagal!");
+        console.error("Connection failed:", err);
+        walletAddress.textContent = "❌ Connection failed";
       }
-    }
-
-    document.getElementById("connectBtn").onclick = connectWallet;
-    document.getElementById("claimBtn").onclick = claimReward;
+    };
   </script>
 </body>
 </html>

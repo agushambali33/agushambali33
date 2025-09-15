@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wallet Test</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.0/dist/ethers.min.js"></script>
+</head>
+<body style="background:#111; color:white; text-align:center; padding:50px;">
+  <h2>Wallet Integration Test</h2>
+
+  <button id="connectBtn" style="padding:10px 20px; margin:10px; background:#2d72d9; color:white;">Connect Wallet</button>
+  <p id="address"></p>
+
+  <button id="claimBtn" style="padding:10px 20px; margin:10px; background:#e63946; color:white;">Claim Reward</button>
+
+  <script>
+    const CONTRACT_ADDRESS = "0x21D994934c35310e3C356Baac7d723159cA28Cab";
+    const CONTRACT_ABI = [
+      "function claimReward(uint256 score,uint256 nonce,uint256 expiry,bytes signature) external returns (bool)"
+    ];
+
+    let provider, signer, contract;
+
+    async function connectWallet() {
+      if (!window.ethereum) {
+        alert("MetaMask not found!");
+        return;
+      }
+
+      provider = new ethers.BrowserProvider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      signer = await provider.getSigner();
+      const address = await signer.getAddress();
+
+      document.getElementById("address").innerText = "Connected: " + address;
+
+      contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+    }
+
+    async function claimReward() {
+      if (!contract) {
+        alert("Connect wallet dulu!");
+        return;
+      }
+
+      // data voucher yang lo generate
+      const score = 10;
+      const nonce = 1;
+      const expiry = 1757926743;
+      const signature = "0xdc84858b204223b44135b979a16a80e903d244c5ee02c878f2f925d238fdb5645fc86ba12e52c7e7cdfc795811404ae4c290506057be91ce851f698f3d3c06381";
+
+      try {
+        const tx = await contract.claimReward(score, nonce, expiry, signature);
+        const receipt = await tx.wait();
+        alert("Claim sukses! TX: " + receipt.hash);
+      } catch (err) {
+        console.error(err);
+        alert("Claim gagal!");
+      }
+    }
+
+    document.getElementById("connectBtn").onclick = connectWallet;
+    document.getElementById("claimBtn").onclick = claimReward;
+  </script>
+</body>
+</html>

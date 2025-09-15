@@ -1,121 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta name="theme-color" content="#272b30">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>FlappyBird + Wallet</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlappyBird Reward</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 </head>
-<body style="background:#111; color:white; font-family:sans-serif;">
-  <div class="container" style="text-align:center; margin-top:50px;">
-    <h2>FlappyBird + Sepolia Reward</h2>
+<body style="background:#111; color:white; text-align:center; padding:20px;">
 
-    <!-- tempat game -->
-    <div id="Game" style="margin:20px auto;"></div>
+  <h2>🎮 FlappyBird Reward (Sepolia)</h2>
 
-    <!-- tombol connect -->
-    <button id="connectWalletBtn" 
-      style="padding:10px 20px; border-radius:8px; border:none; background:#2d72d9; color:white; font-weight:bold; cursor:pointer;">
-      Connect Wallet
-    </button>
-    <p id="walletInfo" style="margin-top:10px; font-size:14px;"></p>
+  <!-- Connect Button -->
+  <button id="connectWalletBtn" style="padding:10px 20px; margin:10px; background:#2d72d9; color:white; border:none; border-radius:6px; cursor:pointer;">
+    Connect Wallet
+  </button>
+  <p id="walletInfo"></p>
 
-    <!-- tombol claim -->
-    <button id="claimBtn" 
-      style="margin-top:15px; padding:10px 20px; border-radius:8px; border:none; background:#e63946; color:white; font-weight:bold; cursor:pointer;">
-      Claim Reward
-    </button>
-  </div>
+  <!-- Claim Button -->
+  <button id="claimBtn" style="padding:10px 20px; margin:10px; background:green; color:white; border:none; border-radius:6px; cursor:pointer;" disabled>
+    Claim Reward
+  </button>
+  <p id="status"></p>
 
   <script>
     const connectBtn = document.getElementById("connectWalletBtn");
-    const walletInfo = document.getElementById("walletInfo");
     const claimBtn = document.getElementById("claimBtn");
+    const walletInfo = document.getElementById("walletInfo");
+    const status = document.getElementById("status");
 
-    let provider, signer, userAccount;
+    let provider, signer, contract;
 
-    // kontrak & voucher
-    const rewardContractAddress = "0x21D994934c35310e3C356Baac7d723159cA28Cab";
-    const rewardAbi = [
-      "function claim(uint256 score, uint256 nonce, uint256 expiry, bytes signature) external"
+    // === Kontrak Reward ===
+    const CONTRACT_ADDRESS = "0x21D994934c35310e3C356Baac7d723159cA28Cab";
+    const CONTRACT_ABI = [
+      // sesuaikan ABI claim function
+      "function claim() public returns (bool)"
     ];
 
-    const voucher = {
-      score: 10,
-      nonce: 1,
-      expiry: 1757926743,
-      signature: "0xdc84858b204223b44135b979a16a80e903d244c5ee02c878f2f925d238fdb5645fc86ba12e52c7e7cdfc795811404ae4c290506057be91ce851f698f3d3c06381c"
-    };
-
+    // Connect Wallet
     async function connectWallet() {
       if (!window.ethereum) {
-        alert("Metamask / Web3 Wallet not found!");
+        alert("Install Metamask / WalletConnect dulu!");
         return;
       }
-      try {
-        // request accounts
-        await window.ethereum.request({ method: "eth_requestAccounts" });
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      signer = provider.getSigner();
 
-        // switch / add Sepolia chain
-        await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-            chainId: "0xaa36a7", // 11155111 decimal
-            chainName: "Sepolia Testnet",
-            nativeCurrency: { name: "SepoliaETH", symbol: "ETH", decimals: 18 },
-            rpcUrls: ["https://rpc.sepolia.org"],
-            blockExplorerUrls: ["https://sepolia.etherscan.io"]
-          }]
-        });
+      const account = await signer.getAddress();
+      walletInfo.innerText = "✅ Connected: " + account;
 
-        // re-init provider biar gak nyangkut ke mainnet
-        provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-        signer = provider.getSigner();
-        userAccount = await signer.getAddress();
+      connectBtn.innerText = "Connected";
+      connectBtn.disabled = true;
+      connectBtn.style.background = "gray";
 
-        connectBtn.innerText = "Connected";
-        connectBtn.disabled = true;
-        connectBtn.style.background = "green";
-        walletInfo.innerText = `Connected: ${userAccount}`;
-      } catch (err) {
-        console.error("Wallet connect error", err);
-        alert("Wallet connect error: " + err.message);
+      claimBtn.disabled = false;
+
+      // init kontrak
+      contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+
+      // optional: cek jaringan → Sepolia
+      const { chainId } = await provider.getNetwork();
+      if (chainId !== 11155111) {
+        alert("⛔ Please switch to Sepolia network in your wallet!");
       }
     }
 
+    // Claim Reward
     async function claimReward() {
-      if (!signer) {
-        alert("Connect wallet dulu!");
-        return;
-      }
       try {
-        const contract = new ethers.Contract(rewardContractAddress, rewardAbi, signer);
-        const tx = await contract.claim(
-          voucher.score,
-          voucher.nonce,
-          voucher.expiry,
-          voucher.signature
-        );
-        alert("Claim TX submitted: " + tx.hash);
-        console.log("TX detail:", tx);
+        status.innerText = "⏳ Sending claim transaction...";
+        const tx = await contract.claim();
+        await tx.wait();
+        status.innerText = "✅ Reward claimed! Tx Hash: " + tx.hash;
       } catch (err) {
-        console.error("Claim failed:", err);
-        alert("Claim gagal: " + err.message);
+        console.error(err);
+        status.innerText = "❌ Error: " + (err.message || err);
       }
     }
 
-    connectBtn.addEventListener("click", connectWallet);
-    claimBtn.addEventListener("click", claimReward);
-
-    // auto perbaiki provider kalau user ganti network manual
-    if (window.ethereum) {
-      window.ethereum.on("chainChanged", () => {
-        provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-        signer = provider.getSigner();
-      });
-    }
+    connectBtn.onclick = connectWallet;
+    claimBtn.onclick = claimReward;
   </script>
 </body>
 </html>

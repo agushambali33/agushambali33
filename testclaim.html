@@ -2,24 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="theme-color" content="#272b30">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>FlappyBird + Wallet (Sepolia)</title>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <title>FlappyBird + Wallet</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
 </head>
-<body style="background:#111; color:white; text-align:center; padding:30px;">
+<body style="background:#111; color:white; font-family:sans-serif;">
+  <div class="container" style="text-align:center; margin-top:50px;">
+    <h2>FlappyBird + Sepolia Reward</h2>
 
-  <h2>FlappyBird + Wallet</h2>
+    <!-- tempat game -->
+    <div id="Game" style="margin:20px auto;"></div>
 
-  <!-- Connect Wallet -->
-  <button id="connectWalletBtn" style="padding:10px 20px; border-radius:8px; border:none; background:#2d72d9; color:white; font-weight:bold; cursor:pointer;">
-    Connect Wallet
-  </button>
-  <p id="walletInfo" style="margin-top:10px; font-size:14px;"></p>
+    <!-- tombol connect -->
+    <button id="connectWalletBtn" 
+      style="padding:10px 20px; border-radius:8px; border:none; background:#2d72d9; color:white; font-weight:bold; cursor:pointer;">
+      Connect Wallet
+    </button>
+    <p id="walletInfo" style="margin-top:10px; font-size:14px;"></p>
 
-  <!-- Claim Reward -->
-  <button id="claimBtn" style="margin-top:15px; padding:10px 20px; border-radius:8px; border:none; background:#e63946; color:white; font-weight:bold; cursor:pointer;">
-    Claim Reward
-  </button>
+    <!-- tombol claim -->
+    <button id="claimBtn" 
+      style="margin-top:15px; padding:10px 20px; border-radius:8px; border:none; background:#e63946; color:white; font-weight:bold; cursor:pointer;">
+      Claim Reward
+    </button>
+  </div>
 
   <script>
     const connectBtn = document.getElementById("connectWalletBtn");
@@ -27,14 +35,13 @@
     const claimBtn = document.getElementById("claimBtn");
 
     let provider, signer, userAccount;
-    const rewardContractAddress = "0x21D994934c35310e3C356Baac7d723159cA28Cab"; // contract lo
 
-    // === ABI minimal buat claim ===
+    // kontrak & voucher
+    const rewardContractAddress = "0x21D994934c35310e3C356Baac7d723159cA28Cab";
     const rewardAbi = [
       "function claim(uint256 score, uint256 nonce, uint256 expiry, bytes signature) external"
     ];
 
-    // === Hardcode voucher hasil generate (buat test manual) ===
     const voucher = {
       score: 10,
       nonce: 1,
@@ -50,25 +57,23 @@
       try {
         // request accounts
         await window.ethereum.request({ method: "eth_requestAccounts" });
-        provider = new ethers.providers.Web3Provider(window.ethereum);
-        signer = provider.getSigner();
-        userAccount = await signer.getAddress();
 
-        // add Sepolia chain
+        // switch / add Sepolia chain
         await window.ethereum.request({
           method: "wallet_addEthereumChain",
           params: [{
-            chainId: "0xaa36a7", // Sepolia
+            chainId: "0xaa36a7", // 11155111 decimal
             chainName: "Sepolia Testnet",
-            nativeCurrency: {
-              name: "SepoliaETH",
-              symbol: "ETH",
-              decimals: 18
-            },
-            rpcUrls: ["https://sepolia.infura.io/v3/"], // bisa ganti RPC lain
+            nativeCurrency: { name: "SepoliaETH", symbol: "ETH", decimals: 18 },
+            rpcUrls: ["https://rpc.sepolia.org"],
             blockExplorerUrls: ["https://sepolia.etherscan.io"]
           }]
         });
+
+        // re-init provider biar gak nyangkut ke mainnet
+        provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        signer = provider.getSigner();
+        userAccount = await signer.getAddress();
 
         connectBtn.innerText = "Connected";
         connectBtn.disabled = true;
@@ -87,14 +92,12 @@
       }
       try {
         const contract = new ethers.Contract(rewardContractAddress, rewardAbi, signer);
-
         const tx = await contract.claim(
           voucher.score,
           voucher.nonce,
           voucher.expiry,
           voucher.signature
         );
-
         alert("Claim TX submitted: " + tx.hash);
         console.log("TX detail:", tx);
       } catch (err) {
@@ -105,6 +108,14 @@
 
     connectBtn.addEventListener("click", connectWallet);
     claimBtn.addEventListener("click", claimReward);
+
+    // auto perbaiki provider kalau user ganti network manual
+    if (window.ethereum) {
+      window.ethereum.on("chainChanged", () => {
+        provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        signer = provider.getSigner();
+      });
+    }
   </script>
 </body>
 </html>

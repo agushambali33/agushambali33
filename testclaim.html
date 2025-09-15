@@ -2,59 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Test Claim</title>
-  <script src="https://unpkg.com/@thirdweb-dev/wallets@latest/dist/browser.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-      background: #f5f5f5;
-    }
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #4CAF50;
-      color: white;
-    }
-    button:disabled {
-      background: gray;
-      cursor: not-allowed;
-    }
-    #walletAddress {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #333;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <title>FlappyBird + Wallet (Sepolia)</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 </head>
-<body>
-  <h2>Test Claim Page</h2>
-  <button id="connectBtn">Connect Wallet</button>
-  <p id="walletAddress"></p>
+<body style="background:#111; color:white; text-align:center; padding:30px;">
+
+  <h2>FlappyBird + Wallet</h2>
+
+  <!-- Connect Wallet -->
+  <button id="connectWalletBtn" style="padding:10px 20px; border-radius:8px; border:none; background:#2d72d9; color:white; font-weight:bold; cursor:pointer;">
+    Connect Wallet
+  </button>
+  <p id="walletInfo" style="margin-top:10px; font-size:14px;"></p>
+
+  <!-- Claim Reward -->
+  <button id="claimBtn" style="margin-top:15px; padding:10px 20px; border-radius:8px; border:none; background:#e63946; color:white; font-weight:bold; cursor:pointer;">
+    Claim Reward
+  </button>
 
   <script>
-    const connectBtn = document.getElementById("connectBtn");
-    const walletAddress = document.getElementById("walletAddress");
+    const connectBtn = document.getElementById("connectWalletBtn");
+    const walletInfo = document.getElementById("walletInfo");
+    const claimBtn = document.getElementById("claimBtn");
 
-    // Thirdweb Wallet Connector (MetaMask)
-    const metamask = new window.ThirdwebWallets.MetamaskWallet();
+    let provider, signer, userAccount;
+    const rewardContractAddress = "0x21D994934c35310e3C356Baac7d723159cA28Cab"; // contract lo
 
-    connectBtn.onclick = async () => {
-      try {
-        const address = await metamask.connect();
-        walletAddress.textContent = "Connected: " + address;
-        connectBtn.textContent = "Connected";
-        connectBtn.disabled = true;
-      } catch (err) {
-        console.error("Connection failed:", err);
-        walletAddress.textContent = "❌ Connection failed";
-      }
+    // === ABI minimal buat claim ===
+    const rewardAbi = [
+      "function claim(uint256 score, uint256 nonce, uint256 expiry, bytes signature) external"
+    ];
+
+    // === Hardcode voucher hasil generate (buat test manual) ===
+    const voucher = {
+      score: 10,
+      nonce: 1,
+      expiry: 1757926743,
+      signature: "0xdc84858b204223b44135b979a16a80e903d244c5ee02c878f2f925d238fdb5645fc86ba12e52c7e7cdfc795811404ae4c290506057be91ce851f698f3d3c06381c"
     };
+
+    async function connectWallet() {
+      if (!window.ethereum) {
+        alert("Metamask / Web3 Wallet not found!");
+        return;
+      }
+      try {
+        // request accounts
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        signer = provider.getSigner();
+        userAccount = await signer.getAddress();
+
+        // add Sepolia chain
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+            chainId: "0xaa36a7", // Sepolia
+            chainName: "Sepolia Testnet",
+            nativeCurrency: {
+              name: "SepoliaETH",
+              symbol: "ETH",
+              decimals: 18
+            },
+            rpcUrls: ["https://sepolia.infura.io/v3/"], // bisa ganti RPC lain
+            blockExplorerUrls: ["https://sepolia.etherscan.io"]
+          }]
+        });
+
+        connectBtn.innerText = "Connected";
+        connectBtn.disabled = true;
+        connectBtn.style.background = "green";
+        walletInfo.innerText = `Connected: ${userAccount}`;
+      } catch (err) {
+        console.error("Wallet connect error", err);
+        alert("Wallet connect error: " + err.message);
+      }
+    }
+
+    async function claimReward() {
+      if (!signer) {
+        alert("Connect wallet dulu!");
+        return;
+      }
+      try {
+        const contract = new ethers.Contract(rewardContractAddress, rewardAbi, signer);
+
+        const tx = await contract.claim(
+          voucher.score,
+          voucher.nonce,
+          voucher.expiry,
+          voucher.signature
+        );
+
+        alert("Claim TX submitted: " + tx.hash);
+        console.log("TX detail:", tx);
+      } catch (err) {
+        console.error("Claim failed:", err);
+        alert("Claim gagal: " + err.message);
+      }
+    }
+
+    connectBtn.addEventListener("click", connectWallet);
+    claimBtn.addEventListener("click", claimReward);
   </script>
 </body>
 </html>
